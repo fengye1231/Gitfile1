@@ -1,0 +1,18 @@
+<!--{template @wap/header1}-->
+<title>南雅帐号余额页面-wap</title>
+</head>
+<body width: 320px; style="
+    width: 340px">
+<!--{template @wap/header2_nm}-->
+<div class="lanmu" style="
+    width: 335px">账户余额</div>
+<div class="address">
+  <div class="llf"><div class="nleftL">
+<table border="1" width="100%" bordercolor="#89B4D4" background="/tp/dollor4.jpg">
+		<td width="981" height="36">
+		香港币HKC余额：{~user()->get('hkc')}元<br>
+		
+		HKC币息宝余额：{if $uid!=347}  {~user()->get('lcb_hkc_money')}   {/if} {if $uid==347} {$lcb_hkc_total}   {/if}元</td>
+	</tr>
+	    </table>
+</div>

@@ -1,0 +1,119 @@
+<style type="text/css">
+.List .item .at_buy{
+	background-size: 47%;
+	top:10px;
+}
+.List {
+   width: 1000px;
+}
+.List .item{
+   width: 295px;
+   float: left;
+}
+#imageslider a img.lazy{
+  width: 280px !important;
+}
+.List .item .t_deal{
+  width: 280px !important;
+}
+.List .item .at_shuzi li span {
+  width: 40px !important;
+}
+.at_shuzi{
+  margin-right: 4px !important;
+}
+.t_deal_1 .at_buy .price{
+    width: 40px !important;
+}
+</style>
+
+<div class="m960">
+<div class="t_l List">
+{loop $product $item}
+{eval $icc++}
+<div class="t_area_out item m_item" >
+<div class="rc_t m_rc_t" ></div>
+<div class="t_area_in m_t_area_in" >
+<table class="at_jrat">
+<tbody>
+<tr>
+<td>
+<div class="at_jrat_title"><a href="?view={$item['id']}">{$item['name']}</a></div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="t_deal_r">
+<div class="t_deal_r_img">
+{eval ui('iimager')->single($item['id'], $item['imgs'][0])}
+</div>
+</div>
+<div style="position: relative;" class="t_deal">
+<div class="t_deal_l">
+<div class="at_buy">
+<div class="price" style="font-size:18px;width:250px;">最新价:HKC:{$item['nowprice']}元/<span style="font-size:13px;">{$item['danwei']}</span></div>
+<div class="deal_b"><a href="?view={$item['id']}"  style="width:100%; height:50px; display: block;"></a></div>
+</div>
+<div class="at_shuzi">
+<p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+</div>
+</div>
+
+
+</div>
+<div style="clear: both; height: 0px; overflow:hidden;">&nbsp;</div>
+</div>
+<div class="rc_t1 m_rc_t1"></div>
+</div>
+{/loop}
+<div class="product_list_pager">{~page_moyo()}</div>
+</div>
+<div class="t_r">
+<!--{~ui('widget')->load('index_home')}-->
+</div>
+</div>
+{~ui('ad')->load('dbgg')}
+{~ui('ad')->load('gg3')}
+{~ui('ad')->load('gg2')}
+
+
+<script>
+  function myfun(){
+
+    const pricesWs = new WebSocket('wss://ws.coincap.io/prices?assets=bitcoin,ethereum');
+    pricesWs.onmessage = function (msg) {
+      console.log(msg.data);
+      var aaa=msg.data;
+      var bbb=aaa.search("bitcoin");
+      var ccc=aaa.search("ethereum");
+
+      if ("{$product['danwei']}"=="BTC"){
+        if(bbb>-1){
+          var ddd_str=aaa.substring(bbb+10);
+          var eee=ddd_str.indexOf('"');
+          var fff_str=aaa.substring(bbb+10,bbb+10+eee);
+          console.log(fff_str);
+          document.getElementById('mynowprice').innerHTML=fff_str;
+
+          //$("#productNowPrice").attr("value",fff_str);
+        }
+      }
+
+      if ("{$product['danwei']}"=="ETH"){
+        if(ccc>-1){
+          var ggg_str=aaa.substring(ccc+11);
+          var hhh=ggg_str.indexOf('"');
+          var iii_str=aaa.substring(ccc+11,ccc+11+hhh);
+          console.log(iii_str);
+          document.getElementById('mynowprice').innerHTML=iii_str;
+          //$("#productNowPrice1").attr("value",iii_str);
+        }
+      }
+
+    }
+  }
+  window.onload = myfun;
+</script>

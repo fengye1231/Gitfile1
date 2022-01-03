@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21475776"></script>
+<meta property="qc:admins" content="26771731006014006375" />
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KGXD6B2');</script>
+<!-- End Google Tag Manager -->
+    <meta charset='utf-8'>
+{~'<base h'.'ref="'.ini('settings.site_url').'/" />'}
+<meta http-equiv="Content-Type" content="text/html; charset={ini:settings.charset}" />
+<title>{echo ($this->Title != '') ? $this->Title.' - ' : ''}{ini:settings.site_name}{conf page_title}</title>
+<meta name="Keywords" content="{~ini('settings.'.(mocod()=='index.main'?'index_':'').'meta_keywords')}" />
+<meta name="Description" content="{~ini('settings.'.(mocod()=='index.main'?'index_':'').'meta_description')}" />
+<script type="text/javascript">
+var thisSiteURL = '{ini:settings.site_url}/';
+</script>
+<link rel="shortcut icon" href="favicon.ico" />
+<div style="clear:both;height: auto !important;margin: 0 auto; width:960px;">
+<div style="background-color: #008000">
+{~ui('ad')->load('gg1')}
+<p align="left">
+
+</div>
+<!--{~ui('loader')->css('main')}-->
+<!--{~ui('loader')->js('@jquery')}-->
+<!--{~ui('loader')->js('@common')}-->
+{echo '<!-'.'-[if IE 6]>'}
+<!--{~ui('loader')->js('DD_belatedPNG')}-->
+<script type="text/javascript">
+DD_belatedPNG.fix('*');
+</script>
+{echo '<![endif]-'.'->'}
+<script type="text/javascript">
+$(document).ready(function(){
+if ($(".m960").height()<400)
+{
+$(".m960").height(400);
+}
+});
+</script>
+{if false==DEBUG}
+{~ui('loader')->js('@error.clear')}
+{/if}
+</head>
+<script type="text/javascript">
+function over(){
+	document.getElementById('user-edc').style.display ='block';
+	}
+function out(){
+	document.getElementById('user-edc').style.display ='none';
+	}
+</script>
+
+
+<style>
+
+img{ border:none}
+
+
+.fr {
+    float: right; position:relative; width:100px;
+}
+.user-msg .user-login .user-edc {
+    background: none repeat scroll 0 0 #FFFFFF; display:none;
+    border: 1px solid #DEDEDE;
+    line-height: 1.6;
+    padding: 0;
+    position: absolute; margin-top:-1px;
+    right: 0;
+    text-align: left;
+    width: 350px;
+    z-index: 1;
+}
+.user-msg .user-login .morelogin a {
+    color: #666666;
+    padding: 5px 10px 3px;
+	display:block;
+	width:85px;
+}
+.user-msg .user-login .morelogin a:hover {
+    color: #FF6600;
+    text-decoration: none;
+    width:85px;
+}
+
+              
+.user-msg .user-login a.name {
+    background: url(static/images/hd-search.gif) repeat scroll right -148px transparent;
+    display:block;
+    height: 21px;
+    padding-right: 25px;
+}
+.user-msg .user-login .fr:hover a.name{
+    background-position: right -173px;
+    position: relative;
+    z-index: 2;
+}
+
+.guanggao{
+	height:60px; width:700px; overflow:hidden; margin-left:-16px;
+}
+.guanggao img { height:50px; width:700px;}
+.vcoupon font{
+    margin-top:0 !important;
+    margin-left:0 !important;
+    float:none !important;
+}
+</style>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGXD6B2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="m_bg">
+<a name="htop" id="htop"></a>
+<div class="header" style=" position:relative; z-index:9999;">
+<div class="h960">
+<div class="at_logo"> 
+<div class="vcoupon" style="width: 690px;z-index: 20000;margin-top: -12px;background: rgba(0,136,226,0);height: 82px;">
+<div class="user-msg"  style="float:right;">
+<div class="user-login">
+<div class=" zbj-eduser" onmouseover="over()" onmouseout="out()">
+
+<div style="z-index:30000;display: none;margin-top:21px;" id="user-edc" class="user-edc morelogin">
+
+</div>
+</div>
+</div>
+</div>
+<div style="float: left;line-height:37px;">
+
+</div>
+{~ui('ad')->load('gg6')}
+</div>
+<div class="logo" style="height:86px;margin-top: 0px;margin-left:-210px;
+" ><a target="_blank" href="./"><img src="templates/default/images/logo.png"width="245" height="90"/></a>
+</div>
+
+<div id="change_city" > 
+<div id="show_provinces" >
+<div class="city_close" id="close">[关闭]</div>
+<div style="margin-bottom:0.75em; font-weight:bolder;" class="city_chose"></div>
+<ul class="scity">
+<!--{loop logic('misc')->CityList() $i $value}-->
+<li><span class="sub_title"><a href="?city={$value['shorthand']}">{$value['cityname']}</a></span></li>
+<!--{/loop}-->
+</ul>
+</div>
+</div>
+{eval $unms = ui('style')->allowMulti() ? false : true}
+<div class="t_nav2">
+
+<div class="sign" >
+<!--{if MEMBER_ID > 0}-->
+<script type="text/javascript">
+$(document).ready(function(){
+if ($(".sp_member").width()>75){
+$(".sp_member").width(75) ;    }
+});
+</script>
+<div class="menu" style=" margin-left:1px;padding-top:50px"><em><span style="float:left;padding-top:50px;"></span><span class="sp_member" style="max-width:75px; height:40px; overflow:hidden; display:block; float:left; ">|{eval echo substr(MEMBER_IDNAME,0,($t=strpos(MEMBER_IDNAME,"@"))?$t:12);}|</span><a style="margin-left:10px;" href="?mod=account&code=logout">退出</a></em></div>
+{if MEMBER_ROLE_ID==2}<div class="menu" style=" margin-left:1px;padding-top:50px"><a href="admin.php">管理后台</a></div>{/if} 
+{if MEMBER_ROLE_ID==6}<div class="menu" style=" margin-left:1px;padding-top:50px"><a href="?mod=seller">商家管理</a></div>{/if} 
+<div class="menu" style="padding-top:50px;"> <div class="menu_tq"><a href="?mod=me&code=yzhk">帐号管理</a></div></div></div>
+<!--{else}-->
+<div class="menu" style=" margin-left:1px;padding-top:50px;">
+<a href="?mod=account&code=login">登录</a> | <a href="?mod=account&code=register">开户</a>
+</div>
+<!--{/if}-->
+</div>
+</div>
+ 
+{~ui('style')->loadCSS()}
+</div>
+</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+$(".menu_tq").mouseover(function(){$(".menu_tqb").show();$(".menu_tq").addClass("menu_tqs");});
+$(".menu_tq").mouseout(function(){$(".menu_tqb").hide();$(".menu_tq").removeClass("menu_tqs");});
+});
+</script>
+<div class="t_nav t_nav1">
+<div class="h960">	
+<div class="headernav_list" style="width:678px;">
+{loop $this->Config['__navs'] $i $nav}
+<a href="{$nav['url']}" title="{$nav['title']}" target="{$nav['target']}" class="{$nav['class']}"><span>{$nav['name']}</span></a>
+{/loop}
+</div>
+</div>
+</div>
+{~ui('loader')->js('@jquery.min')}
+<p align="center">{~ui('ad')->load('gg4')}</p>
+
+<!--{eval echo ui('loader')->css($this->Module.'.'.$this->Code)}-->
+<div  style="margin: 0 auto;width: 960px;">
+<ul>
+{loop $this->Config['__navs_two'] $i $nav}
+<li class="{$nav['class']}" style="float:left"><a href="{$nav['url']}" title="{$nav['title']}" target="{$nav['target']}" ><span>{$nav['name']}</span></a></li>
+{/loop}
+</ul>
+<div class="clear"></div>
+</div>

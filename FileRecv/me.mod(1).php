@@ -128,36 +128,12 @@ class ModuleObject extends MasterObject
     {
         $this->Title = __('我的订单');
         $pay = $this->Get['pay'];
-        if ($pay == ''or $pay == NULL) {
+        if ($pay == '') {
             $pay = -1;
         } else {
             $pay = (int)$pay;
         }
-
-
-        //GetList1是卖家
-
-        $order_all = logic('order')->GetList1(user()->get('id'), -1, $pay);
-
-        if (empty($order_all)) {
-            //var_dump('为空');
-
-            $order_all = logic('order')->GetList(user()->get('id'), -1, $pay);
-            //不为空
-
-            //为空
-        }
-
-        /*
-        $order_all_1 = logic('order')->GetList1(user()->get('id'), -1, $pay);
-
-        $order_all=array_merge($order_all,$order_all_1);
-        */
-
-
-
-
-
+        $order_all = logic('order')->GetList(user()->get('id'), -1, $pay);
 
         $_s1 = $_s2 = $_s3 = 3;
         if ($pay == -1) $_s1 = 2;
@@ -826,32 +802,9 @@ class ModuleObject extends MasterObject
 
 						";
                 $usermoney[$key]['name'] = "卖出商品";
-            }elseif (($value['name'] == '卖出BTC') or ($value['name'] == '卖出ETH')){
-                //$usermoney[$key]['name'] = "卖出团购券";
-
-
-
+            } elseif ($value['name'] == 'djq') {
+                $usermoney[$key]['name'] = "卖出团购券";
                 $orderinfo = logic('order')->GetOne($value['intro']);
-
-                /*
-
-                                if($orderinfo['product']['flag']=='BTC' or  $orderinfo['product']['flag']=='btc')
-                                {
-                                    $usermoney[$key]['name'] = "卖出BTC";
-                                }elseif ($orderinfo['product']['flag']=='ETH' or  $orderinfo['product']['flag']=='eth')
-                                {
-                                    $usermoney[$key]['name'] = "卖出ETH";
-                                }
-            */
-
-                if ($value['name'] == '卖出BTC'){
-                    $usermoney[$key]['name'] = "卖出BTC";
-
-                }else if($value['name'] == '卖出ETH'){
-                    $usermoney[$key]['name'] = "卖出ETH";
-
-                }
-
 
                 $usermoney[$key]['intro'] = "
 	        	  	   <b>到账时间：</b>" . date("Y-m-d:H:i:s", $orderinfo[paytime]) . "
@@ -898,7 +851,6 @@ class ModuleObject extends MasterObject
                         "<br/><b>状态：</b>" . ($zhanzhuanginfo['statue'] == 1 ? '转账中' : ($zhanzhuanginfo['statue'] == 3 ? '转账失败' : '转账成功'));
                 }
             } elseif ($value['name'] == '国际转账' || $value['name'] == '港币汇款' || $value['name'] == '欧元汇款' || $value['name'] == '日元汇款' || $value['name'] == '韩元汇款' || $value['name'] == '英镑汇款' || $value['name'] == '澳元汇款' || $value['name'] == '加元汇款' || $value['name'] == '瑞郎汇款' || $value['name'] == '新西兰元汇款' || $value['name'] == '新加坡元汇款' || $value['name'] == '香港币汇款' || $value['name'] == '比特币汇款' || $value['name'] == '以太币汇款' || $value['name'] == '人民币汇款' || $value['name'] == '美元汇款') {
-
 
                 $zhanzhuanginfo = logic('zhuanzhanglist')->GetOne2($value['intro']);
                 $yinhangkainfo = logic('yinhangka')->GetOne2($zhanzhuanginfo['yhkid']);

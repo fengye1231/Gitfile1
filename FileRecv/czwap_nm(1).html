@@ -1,0 +1,65 @@
+<!--{template @wap/header1}-->
+<title>南雅账户充值</title>
+</head>
+<body style="
+    width: 340px">
+<!--{template @wap/header2_nm}-->
+<script type="text/javascript">
+	function checkRecharge()
+	{
+		var money = Math.round($('#recharge_money').val()*100)/100;
+		if (isNaN(money))
+		{
+			foundError('充值金额必须是一个有效数字！');
+			return false;
+		}
+		if (money <= 0)
+		{
+			foundError('充值金额必须大于0！');
+			return false;
+		}
+		return true;
+	}
+	function foundError(msg)
+	{
+		$('#error_msg').html(msg).css('color', 'red');
+		setTimeout(function(){$('#error_msg').css('color', '')}, 2000);
+	}
+</script>
+<div class="lanmu" style="
+    width: 335px">账户充值</div>
+<form action="?mod=wapcz&code=order&op=save" method="post" onSubmit="return checkRecharge();" >
+{if  $yanzheng['statue']==2}
+<p>请输入充值金额</p>
+<div id="error_msg"></div>
+<input id="recharge_money" name="money" type="text" class="f_input l_input" />&nbsp;
+<input type="submit" class="bu"  value="下一步" />
+</form><br>
+<div class="lanmu"></div>
+<table border="0" width="100%" class="ke-zeroborder" id="cen">
+<tr>
+  <td>
+	<b>支持比特币、以太币的充值:</b></td>
+</tr>
+<tr>
+</table>
+<hr color="#008000">
+{elseif $yanzheng['statue']==1}
+<h1 style="font-size:16px;">
+您的个人信息正在审核中.... 审核通过后就可以转账
+<a href="?mod=me&code=yanzheng" style="margin-left:20px;color:red">>>修改个人资料</a>
+</h1>
+<div>
+{elseif $yanzheng['statue']==0}
+
+<h1 style="font-size:16px;">
+您还未提交个人资料，审核通过后才可以转账
+</h1><a href="?mod=me&code=yanzheng" style="margin-left:20px;color:red">>>提交个人资料</a>
+<div>
+{elseif $yanzheng['statue']==3}
+
+<h1 style="font-size:16px;">
+您的资料没有审核通过，请重新提交
+</h1><a href="?mod=me&code=yanzheng" style="margin-left:20px;color:red">>>重新提交个人资料</a>
+<div>
+{/if}

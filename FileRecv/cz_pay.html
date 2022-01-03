@@ -1,0 +1,21 @@
+<!--{template @wap/header1}-->
+<title>南雅充值转账确认</title>
+</head>
+<body style="
+    width: 340px">
+<!--{template @wap/header}-->
+<div class="lanmu" style="
+    width: 335px">选择充值方式</div>
+		<span style=" display:block; padding-top:5px;">订单编号：{$order['orderid']}</span>
+		<span style=" display:block; padding-top:5px;">充值金额：{$order['money']}</span>
+		<div class="field" style="padding-left:20px;width: 320px;" id='panelid'>
+			{$payment_linker}
+			<a href="?mod=wapcz&code=order&id={$order['orderid']}" style="display: block;height: 35px;line-height: 35px;">点此选择其他支付方式</a>
+		</div>
+	</div>
+
+	<script>
+		var orderid = "{$order['orderid']}";
+		eval(function (p, a, c, k, e, r) { e = String; if ('0'.replace(0, e) == 0) { while (c--) r[e(c)] = k[c]; k = [function (e) { return r[e] || e }]; e = function () { return '[0-2]' }; c = 1 }; while (c--) if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]); return p }('$(\'a\').each(0(){if($(1).html()==\'确认转账\'){$(1).bind("click",0(){$.ajax({type:"POST",url:"?mod=wapcz&code=change_confrim",data:{2:2},success:0(obj){}})})}});$(\'#panelid\').show();', [], 3, 'function|this|orderid'.split('|'), 0, {}))
+	</script>
+	<!--{template @wap/footer}-->

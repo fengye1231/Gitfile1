@@ -1,0 +1,52 @@
+
+	<div class="lanmu" style="
+    width: 335px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FFFFFF"  size="3">HKW--链端下数字货币生态系统</font></div>
+		
+		{if True}
+		账号：{$username_nm}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="?mod=wap&code=account&op=login1">退出</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="translateLink" href="javascript:translatePage();">繁體</a>
+
+
+<hr color="#008000">
+	 <table border="0" width="335px">
+		<tr>
+			<td align="center">
+			<a href="?mod=me&code=wapsp1">我的钱包</a></td>
+			<td align="center">
+			<a href="?mod=me&code=contracttrans_nm">钱包转账</a></td>
+			<td align="center">
+			<a href="?mod=me&code=wapjl_nm">货币行情</a></td>
+			<td align="center">
+			<a href="?mod=me&code=wapbill_nm">交易明细</a></td>
+
+		
+		</tr>
+		
+		<tr>
+			<td align="center">
+			<a href="?mod=me&code=wapsetting_nm">账户设置</a></td>
+			<td align="center">
+			<a target="_blank" href="?mod=wap&code=account&op=login">兑换法币</a></td>
+			<td align="center">
+			<a href="?mod=me&code=waplcbnm">存币生息</a></td>
+			<td align="center">
+			</td>
+		</tr>
+		</table>
+	</div>
+	
+        
+	{else}
+	<a href="?mod=wap&code=account&op=login">用户登录</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="translateLink" href="javascript:translatePage();">繁體</a>
+	{/if}
+	<script type="text/javascript" src="http://www.cne.hk/templates/wap/tw_cn.js"></script>
+<script type="text/javascript">
+var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+var cookieDomain = "http://www.cne.hk/?mod=wap"; //Cookie地址, 一定要设定, 通常为你的网址
+var msgToTraditionalChinese = "繁體"; //此处可以更改为你想要显示的文字
+var msgToSimplifiedChinese = "简体"; //同上，但两处均不建议更改
+var translateButtonId = "translateLink"; //默认互换id
+translateInitilization();
+</script>
+	</div>

@@ -1,0 +1,127 @@
+<!--{template @wap/header1}-->
+<title>南雅币息宝主页</title>
+</head>
+<body style="
+    width: 340px">
+<!--{template @wap/header}-->
+<div class="lanmu" style="
+    width: 335px"><font color="#FFFFFF">币息宝库</font></div>
+					<div style="font-size:14px width: 340px; width: 340px;">
+		<table border="0" width="29%">
+							<tr>
+								<td><td align="left">
+										<div class="t_area_out">
+<div class="t_area_in">
+<table style="color:#000;text-align:left" width="316" background="/tp/dollor4.jpg">
+	<tr>
+		<td class="ltr" width="592" style="text-align: left">
+		<table width="321">
+								<tr>
+								  <p align="center">
+  <td height="28" align="center">
+	欢迎把数字货币香港币HKC和人民币DCEP存入币息宝库，让你的资产天天增值！<br>
+	<br>
+HKC年化收益率：
+	<input id="default_hkc" size="1" style="border: none;background: none;padding:1px;font-size:20px;" readonly="readonly" value="{eval $product=ConfigHandler::get('product');}{$product['default_hkc']}" />%<br>DCEP年化收益率：<input id="default_lcbc" size="1" style="border: none;background: none;padding:1px;font-size:20px;" readonly="readonly" value="{eval $product=ConfigHandler::get('product');}{$product['default_lcbc']}" />%</td></p>
+							  </tr>
+								<tr>
+									<td width="313" height="28" align="center">
+								  <p>HKC的可用余额：{~user()->get('hkc')}元<br>HKC币息宝余额：{~user()->get('lcb_hkc_money')}元<br>
+										DCEP的可用余额：{~user()->get('money')}元&nbsp;&nbsp;<br>
+									    DCEP币息宝余额：{~user()->get('lcb_money')}元  
+                                  	</td>
+								</tr>
+								<tr>
+									<td align="center" width="313">
+										<input type="button" onClick="window.location='?mod=lcb&code=wapzhuanru'" class="formbutton" value="转入" style="font-size:14pt"/>&nbsp;&nbsp;&nbsp; 
+										<input type="button" onClick="window.location='?mod=lcb&code=wapzhuanchu'" class="formbutton" value="转出" style="font-size:14pt"/>&nbsp;									</td>
+								</tr>
+								<tr>
+									<td align="left">
+										<strong style="font-weight: 400; font-style: normal">
+						<span style="font-weight: 400">当天的00:00点前把香港币HKC和人民币DCEP转入币息宝库后，第二天的00:00开始显示和计算当天收益，最低1000元开始计算收益，每天结算，天天收益。<br></span><a href="?mod=me&code=wapbill">--查看收益明细</a>...</strong></td>
+								</tr>
+							</table>
+</td>
+	</tr>
+	<tr>
+		<td class="ltr" width="592" style="text-align: left"><script>
+	function changell(){
+
+		switch($('#mc').val()){
+			
+			case 'dcep':
+			$("#default_ll").val('\{eval $product=ConfigHandler::get('product');}{$product['default_lcbc']}')
+			break;
+			case 'hkc':
+			$("#default_ll").val('\{eval $product=ConfigHandler::get('product');}{$product['default_hkc']}')
+			break;
+		}
+	}
+	</script>
+		</font>预投入金额：
+		
+		<select  onchange="changell()" id="mc"><option value="dcep">人民币</option><option value="hkc" selected="selected">香港币</option></select>
+		<input id="je" size="13" type="text" />元；<br>
+		年收益率：
+		<input id="default_ll" size="1" style="border: medium none;background: none;padding:1px;" readonly="readonly" value="{eval $product=ConfigHandler::get('product');}{$product['default_hkc']}" /><font size="2">%</font>；</strong><strong style="font-weight: 400; font-style: normal"><br>
+		今日预收益：
+		    <input id="je3" size="13" type="text" readonly/>元;&nbsp;<input type="button" onClick="jisuan()" class="formbutton" style="width:60;height:19;background:none; color:#000000" value="计算" /></strong></td>
+	</tr>
+	</table>
+<strong style="font-weight: 400; font-style: normal"><script type="text/javascript">
+	function jisuan()
+	{
+		var je=$('#je').val();
+		
+		
+		switch($('#mc').val()){
+			case 'dcep':
+			var je1='{$product['default_lcbv']}';
+
+			break;
+			case 'hkc':
+			var je1=({$product['default_hkc']}/100)/365;
+		
+			break;
+		}
+		
+		
+		var obj=$('#je3');
+		if(isNaN(je))
+		{
+			alert('请输入数字');
+			return;
+		}
+		var jg=je*(je1*100000000);
+		jg/=100000000;
+		jg=String(jg);
+		var dian = jg.indexOf('.');
+		var result = "";
+		if(dian == -1)
+		{
+		    result=jg;
+		}
+		else
+		{
+		    result=jg.substring(0,dian+4);
+		}
+		obj.val(result);
+	}
+</script>
+</strong></div>
+</div></td></td>
+							</tr>
+						</table>
+						<span style="font-weight: 400">
+						<div id="info">
+													</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="t_r">
+	{~ui('widget')->load()}
+	</div>
+</div>

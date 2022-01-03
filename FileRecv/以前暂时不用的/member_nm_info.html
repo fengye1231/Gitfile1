@@ -1,0 +1,308 @@
+<!--{template @admin/header}--> <form method="post" action="{$action}"> <INPUT TYPE="hidden" name='uid' value={$this->ID}> <INPUT TYPE="hidden" name='old_username' value={$username}> <a name="{$this->Title} - {$username}"></a><table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder">
+  <tr>
+    <td class='header'><table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder">
+      <tr class="header">
+        <td colspan="2">{$this->Title} - {$encrypt_public} &nbsp;&nbsp;&nbsp; <a href='admin.php?mod=member&code=showyanzheng&id={$this->ID}' style='color:blue;'>用户验证</a></td>
+      </tr>
+      <tr>
+        <td width="40%" bgcolor="#F4F8FC"><b>用户名:</b><br />
+          <span class="smalltxt">如不是特别需要，请不要修改用户名</span></td>
+		  
+		  
+		  
+		  <td> <input type="text" size="30" name="username" value="{$encrypt_public}" readonly />             </td>
+ 
+      </tr>
+      <tr>
+        <td width="40%" bgcolor="#F4F8FC"><b>账户余额:</b><br />
+          <span class="smalltxt">可通过充值、扣费来修改账户余额</span></td>
+        <td>人民币：
+          <input type="text" size="10" name="money" value="{$money}" disabled readonly="true"/>
+          <select name="moneyOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="moneyMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$money_zaitu}<br/>
+          美&nbsp;&nbsp;&nbsp;&nbsp;元：
+          <input type="text" size="10" name="dollar" value="{$dollar}" disabled readonly="true"/>
+          <select name="dollarOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="dollarMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$dollar_zaitu}<br/>
+          港&nbsp;&nbsp;&nbsp;&nbsp;币：
+          <input type="text" size="10" name="hkdollar" value="{$hkdollar}" disabled readonly="true"/>
+          <select name="hkdollarOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="hkdollarMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$hkdollar_zaitu}<br/>
+          欧&nbsp;&nbsp;&nbsp;&nbsp;元：
+          <input type="text" size="10" name="euro" value="{$euro}" disabled readonly="true"/>
+          <select name="euroOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="euroMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$euro_zaitu}<br/>
+          日&nbsp;&nbsp;&nbsp;&nbsp;元：
+          <input type="text" size="10" name="jpy" value="{$jpy}" disabled readonly="true"/>
+          <select name="jpyOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="jpyMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$jpy_zaitu}<br/>
+          韩&nbsp;&nbsp;&nbsp;&nbsp;元：
+          <input type="text" size="10" name="krw" value="{$krw}" disabled readonly="true"/>
+          <select name="krwOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="krwMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$krw_zaitu}<br/>
+          英&nbsp;&nbsp;&nbsp;&nbsp;镑：
+          <input type="text" size="10" name="gbp" value="{$gbp}" disabled readonly="true"/>
+          <select name="gbpOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="gbpMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$gbp_zaitu}<br/>
+          澳&nbsp;&nbsp;&nbsp;&nbsp;元：
+		  <input type="text" size="10" name="aud" value="{$aud}" disabled readonly="true"/>
+          <select name="audOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="audMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$aud_zaitu}<br/>
+		  加&nbsp;&nbsp;&nbsp;&nbsp;元：
+		  <input type="text" size="10" name="cad" value="{$cad}" disabled readonly="true"/>
+          <select name="cadOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="cadMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$cad_zaitu}<br/>
+          瑞&nbsp;&nbsp;&nbsp;&nbsp;郎：
+		  <input type="text" size="10" name="chf" value="{$chf}" disabled readonly="true"/>
+          <select name="chfOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="chfMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$chf_zaitu}<br/>
+          新西兰：
+		  <input type="text" size="10" name="nzd" value="{$nzd}" disabled readonly="true"/>
+          <select name="nzdOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="nzdMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$nzd_zaitu}<br/>
+          新加坡：
+		  <input type="text" size="10" name="sgd" value="{$sgd}" disabled readonly="true"/>
+          <select name="sgdOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="sgdMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$sgd_zaitu}<br/>
+		  香港币：
+		  <input type="text" size="10" name="hkc" value="{$hkc}" disabled readonly="true"/>
+          <select name="hkcOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="hkcMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$hkc_zaitu}<br/>
+		  比特币：
+		  <input type="text" size="10" name="btc" value="{$btc}" disabled readonly="true"/>
+          <select name="btcOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="btcMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$btc_zaitu}<br/>
+		  以太币：
+		  <input type="text" size="10" name="eth" value="{$eth}" disabled readonly="true"/>
+          <select name="ethOps">
+            <option value="plus">充值</option>
+            <option value="less">扣费</option>
+          </select>
+          <input type="text" size="10" name="ethMoved" value="" />
+          元&nbsp;&nbsp;在途资金：{$eth_zaitu}<br/>
+          
+		  {if $uid==347}
+		  币息宝DCEP：
+          <input type="text" size="10" name="money_lcb" value="{$lcb_dcep_total}" disabled readonly="true"/>
+		  <br/>
+          币息宝HKC：
+          <input type="text" size="10" name="money_lcb_hkc" value="{$lcb_hkc_total}" disabled readonly="true"/>
+          <br/>
+		  {/if}
+		    {if $uid!=347}
+			币息宝DCEP：
+          <input type="text" size="10" name="money_lcb" value="{$lcb_money}" disabled readonly="true"/>
+		  <br/>
+          币息宝HKC：
+          <input type="text" size="10" name="money_lcb_hkc" value="{$lcb_hkc_money}" disabled readonly="true"/>
+          <br/>
+		  {/if}
+		  
+		
+          
+		  
+		  
+		  <input type="submit" class="abutton" name="editsubmit2" value="提 交" />
+          <br /></td>
+      </tr>
+      <tr>
+        <td class="header">人民币转出账扣率</td>
+        <td><input name="brate" value="{$yzinfo['brate']}" />
+          %</td>
+      </tr>
+      <tr>
+        <td class="header">站内人民币转账扣率</td>
+        <td><input name="wrate" value="{$yzinfo['wrate']}" />
+          %
+          <input type='hidden' name='yzid' value="{$yzinfo['id']}"/></td>
+      </tr>
+      <tr>
+        <td class="header">国际汇款扣率</td>
+        <td><input name="gjrate" value="{$yzinfo['gjrate']}" />
+          % </td>
+      </tr>
+      <tr>
+        <td class="header">贝宝转入扣率</td>
+        <td><input name="paypal_rate" value="{$yzinfo['paypal_rate']}" />
+          % </td>
+      </tr>
+      <tr>
+        <td class="header">美元转入扣率</td>
+        <td><input name="dollar_rate" value="{$yzinfo['dollar_rate']}" />
+           </td>
+      </tr>
+      <tr>
+        <td class="header">港币转入扣率</td>
+        <td><input name="hkdollar_rate" value="{$yzinfo['hkdollar_rate']}" />
+           </td>
+      </tr>
+      <tr>
+        <td class="header">欧元转入扣率</td>
+        <td><input name="euro_rate" value="{$yzinfo['euro_rate']}" />
+           </td>
+      </tr>
+      <tr>
+        <td class='header'>日元转入扣率</td>
+        <td><input name="jpy_rate" value="{$yzinfo['jpy_rate']}" />
+           </td>
+      </tr>
+      <tr>
+        <td class='header'>韩元转入扣率</td>
+        <td><input name="krw_rate" value="{$yzinfo['krw_rate']}" />
+           </td>
+      </tr>
+      <tr>
+        <td class='header'>英镑转入扣率</td>
+        <td><input name="gbp_rate" value="{$yzinfo['gbp_rate']}" />
+           </td>
+      </tr>
+      <tr>
+        <td class='header'>澳元转入扣率</td>
+        <td><input name="aud_rate" value="{$yzinfo['aud_rate']}" />
+           </td>
+      </tr>
+	   <tr>
+        <td class='header'>加元转入扣率</td>
+        <td><input name="cad_rate" value="{$yzinfo['cad_rate']}" />
+           </td>
+      </tr>
+	   <tr>
+        <td class='header'>瑞郎转入扣率</td>
+        <td><input name="chf_rate" value="{$yzinfo['chf_rate']}" />
+           </td>
+      </tr>
+	   <tr>
+        <td class='header'>新西兰元转入扣率</td>
+        <td><input name="nzd_rate" value="{$yzinfo['nzd_rate']}" />
+           </td>
+      </tr>
+	   <tr>
+        <td class='header'>新加坡元转入扣率</td>
+        <td><input name="sgd_rate" value="{$yzinfo['sgd_rate']}" />
+           </td>
+      </tr>
+      <tr>
+        <td class='header'>信用卡还款扣率</td>
+        <td><input name="xyk_rate" value="{$yzinfo['xyk_rate']}" />
+          %</td>
+      </tr>
+      <tr>
+        <td class='header'>比特币转入扣率</td>
+        <td><input name="btc_rate" value="{$yzinfo['btc_rate']}" />
+           </td>
+      </tr>
+	  <tr>
+        <td class='header'>以太币转入扣率</td>
+        <td><input name="eth_rate" value="{$yzinfo['eth_rate']}" />
+           </td>
+      </tr>
+      <tr>
+        <td width="40%" bgcolor="#F4F8FC"><b>新密码:</b><br />
+          <span class="smalltxt">如果不更改密码此处请留空</span></td>
+        <td><input type="text" size="30" name="password" value /></td>
+      </tr>
+      <tr>
+        <td width="40%" bgcolor="#F4F8FC"><b>用户角色:</b><br />
+          <span class="smalltxt">用户在网站里属于哪种角色</span></td>
+        <td><!--{if $uid < 2}-->
+          {$role_name}
+          <!--{else}-->
+          {$role_select}
+          <!--{/if}--></td>
+      </tr>
+      <tr>
+        <td width="40%" bgcolor="#F4F8FC"><b>性别:</b></td>
+        <td> {$gender_radio}</td>
+      </tr>
+      <tr>
+        <td width="40%" bgcolor="#F4F8FC"><b>Email:</b></td>
+        <td><input type="text" size="30" name="email" value="{$email}" /></td>
+      </tr>
+      <tr>
+        <td width="40%" bgcolor="#F4F8FC"><b>手机:</b></td>
+        <td><input type="text" size="30" name="phone" value="{$phone}" /></td>
+      </tr>
+      <tr>
+        <td width="40%" bgcolor="#F4F8FC"><b>QQ:</b></td>
+        <td><input type="text" size="30" name="qq" value="{$qq}" /></td>
+      </tr>
+      <tr>
+        <td width="40%" bgcolor="#F4F8FC"><b>注册 IP:</b></td>
+        <td><input type="text" size="30" name="regip" value="{$regip}" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table><center> <input type="submit" class="abutton" name="editsubmit" value="提 交"> </center> </form> <br/> <table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> <tr class="header"> <td colspan="4">该用户消费明细(人民币余额：￥{$money}，美元余额：${$dollar})</td> </tr> 
+
+
+<tr class="tr_nav"> 
+<td width="12%">项目</td> <td width="12%">金额</td> <td width="12%">时间</td> <td>详细</td> </tr>
+{loop $log $i $value}
+<tr{if $value['class']!='usr'} style="background:#FF9999;" title="特殊资金异动"{/if}>
+
+
+
+<td><b> {if $value['name']=='zz'}站内转出{elseif $value['name']=='zn'}站内转入{elseif $value['name']=='cp'}银行转账{else}{$value['name']}{/if}</b></td> 
+
+<td><font style="font-size:12pt;font-weight:bold;color:{if $value['type']=='plus'}blue;">+{else}red;">-{/if}</font>{if $value['is_dollar']==1}USD{elseif $value['is_hkdollar']==1}HKD{elseif $value['is_euro']==1}EUR{elseif $value['is_jpy']==1}JPY{elseif $value['is_krw']==1}KRW{elseif $value['is_gbp']==1}GBP{elseif $value['is_aud']==1}AUD{elseif $value['is_cad']==1}CAD{elseif $value['is_chf']==1}CHF{elseif $value['is_nzd']==1}NZD{elseif $value['is_sgd']==1}SGD{elseif $value['is_hkc']==1}HKC{elseif $value['is_btc']==1}BTC{elseif $value['is_eth']==1}ETH{else}￥{/if} {$value['money']}</td> <td>{eval echo date('Y-m-d H:i:s',$value['time']);}</td> <td>{$value['intro']}</td> </tr>
+{/loop}
+<tr> 
+
+<td colspan="4">{~page_moyo()}</td> </tr> </table>
+{template @admin/footer}

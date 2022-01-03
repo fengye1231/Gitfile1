@@ -1,0 +1,43 @@
+<!--{template @admin/header}--> 
+<table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> 
+<tr class="header"> <td>技巧提示</td> </tr> 
+<tr bgcolor="#F4F8FC"> <td> <ul> <li>系统角色为<b>粗体</b>显示，自定义角色为普通。</li> </ul> </td> </tr>
+ </table> <br> 
+ 
+ <table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> 
+<tr class=""> <td style="padding-left:0" colspan="4">
+<div class="is_button"><a href="?mod=member&code=uschongzhi&show=1">待处理</a></div>
+<div class="is_button"><a href="?mod=member&code=uschongzhi&show=2">已处理</a></div>
+<div class="is_button"><a href="?mod=member&code=uschongzhi&show=3">所有</a></div> </td> </tr>
+ <tr align="center" class="header"> 
+
+ <td>申请用户名</td> 
+ <td>姓名</td>
+<td>流水号</td> 
+ <td>金额</td>
+ <td>手续费</td>
+ <td>实际到账金额</td> 
+ <td>申请日期</td> 
+ <td>操作到账日期</td>
+ <td>操作</td> 
+ <td>通道</td> </tr>
+ <!--{loop $member_list $member}-->
+  <tr onmouseover="this.className='tr_hover'" onmouseout="this.className='tr_normal'"> 
+  <td><a href="admin.php?mod=member&code=modify&id={$member[uid]}"> {$member['username']}</a></td>
+  <td>{$member['yanzheng']['idname']}</td>
+   <td>{$member['orderid']}</td> 
+   <td>{if $member['tongdao']=="美元支付" or $member['tongdao']=="wap美元支付"}USD{elseif $member['tongdao']=="港币汇款" or $member['tongdao']=="wap港币汇款"}HKD{elseif $member['tongdao']=="日元汇款" or $member['tongdao']=="wap日元汇款"}JPY{elseif $member['tongdao']=="韩元汇款" or $member['tongdao']=="wap韩元汇款"}KRW{elseif $member['tongdao']=="英镑汇款" or $member['tongdao']=="wap英镑汇款"}GBP{elseif $member['tongdao']=="澳元汇款" or $member['tongdao']=="wap澳元汇款"}AUD{elseif $member['tongdao']=="加元汇款" or $member['tongdao']=="wap加元汇款"}CAD{elseif $member['tongdao']=="瑞郎汇款" or $member['tongdao']=="wap瑞郎汇款"}CHF{elseif $member['tongdao']=="新西兰元汇款" or $member['tongdao']=="wap新西兰元汇款"}NZD{elseif $member['tongdao']=="新加坡元汇款" or $member['tongdao']=="wap新加坡元汇款"}SGD{elseif $member['tongdao']=="香港币汇款" or $member['tongdao']=="wap香港币汇款"}HKC{elseif $member['tongdao']=="比特币汇款" or $member['tongdao']=="wap比特币汇款"}BTC{elseif $member['tongdao']=="以太币汇款" or $member['tongdao']=="wap以太币汇款"}ETH{else}EUR{/if}{$member['money']}</td> 
+   <td>{if $member['tongdao']=="美元支付" or $member['tongdao']=="wap美元支付"}USD{elseif $member['tongdao']=="港币汇款" or $member['tongdao']=="wap港币汇款"}HKD{elseif $member['tongdao']=="日元汇款" or $member['tongdao']=="wap日元汇款"}JPY{elseif $member['tongdao']=="韩元汇款" or $member['tongdao']=="wap韩元汇款"}KRW{elseif $member['tongdao']=="英镑汇款" or $member['tongdao']=="wap英镑汇款"}GBP{elseif $member['tongdao']=="澳元汇款" or $member['tongdao']=="wap澳元汇款"}AUD{elseif $member['tongdao']=="加元汇款" or $member['tongdao']=="wap加元汇款"}CAD{elseif $member['tongdao']=="瑞郎汇款" or $member['tongdao']=="wap瑞郎汇款"}CHF{elseif $member['tongdao']=="新西兰元汇款" or $member['tongdao']=="wap新西兰元汇款"}NZD{elseif $member['tongdao']=="新加坡元汇款" or $member['tongdao']=="wap新加坡元汇款"}SGD{elseif $member['tongdao']=="香港币汇款" or $member['tongdao']=="wap香港币汇款"}HKC{elseif $member['tongdao']=="比特币汇款" or $member['tongdao']=="wap比特币汇款"}BTC{elseif $member['tongdao']=="以太币汇款" or $member['tongdao']=="wap以太币汇款"}ETH{else}EUR{/if}{$member['sxf']}</td> 
+   <td>{if $member['tongdao']=="美元支付" or $member['tongdao']=="wap美元支付"}USD{elseif $member['tongdao']=="港币汇款" or $member['tongdao']=="wap港币汇款"}HKD{elseif $member['tongdao']=="日元汇款" or $member['tongdao']=="wap日元汇款"}JPY{elseif $member['tongdao']=="韩元汇款" or $member['tongdao']=="wap韩元汇款"}KRW{elseif $member['tongdao']=="英镑汇款" or $member['tongdao']=="wap英镑汇款"}GBP{elseif $member['tongdao']=="澳元汇款" or $member['tongdao']=="wap澳元汇款"}AUD{elseif $member['tongdao']=="加元汇款" or $member['tongdao']=="wap加元汇款"}CAD{elseif $member['tongdao']=="瑞郎汇款" or $member['tongdao']=="wap瑞郎汇款"}CHF{elseif $member['tongdao']=="新西兰元汇款" or $member['tongdao']=="wap新西兰元汇款"}NZD{elseif $member['tongdao']=="新加坡元汇款" or $member['tongdao']=="wap新加坡元汇款"}SGD{elseif $member['tongdao']=="香港币汇款" or $member['tongdao']=="wap香港币汇款"}HKC{elseif $member['tongdao']=="比特币汇款" or $member['tongdao']=="wap比特币汇款"}BTC{elseif $member['tongdao']=="以太币汇款" or $member['tongdao']=="wap以太币汇款"}ETH{else}EUR{/if}{$member['sjje']}</td> 
+    <td>{eval echo date("Y-m-d H:i",$member[createtime]);}</td>
+   <td>{eval echo $member[paytime]?date("Y-m-d H:i",$member[paytime]):'';}</td>
+    <td> {if $member[statue]==1}<a href="admin.php?mod=member&code=showzzchongzhi&id={$member[orderid]}&rflag=1">到账</a>/<a href="admin.php?mod=member&code=showzzchongzhi&id={$member[orderid]}&de=1&rflag=1" style="color:red">删除</a> 
+    {elseif  $member[statue]==2}
+    已到账
+    {elseif  $member[statue]==3}
+    
+    {/if}
+    </td> 
+    <td>{$member['tongdao']}{if $member['tongdao']=="美元支付" or $member['tongdao']=="港币汇款" or $member['tongdao']=="欧元汇款" or $member['tongdao']=="转账付款" or $member['tongdao']=="日元汇款" or $member['tongdao']=="韩元汇款" or $member['tongdao']=="英镑汇款" or $member['tongdao']=="澳元汇款" or $member['tongdao']=="加元汇款" or $member['tongdao']=="瑞郎汇款" or $member['tongdao']=="新西兰元汇款" or $member['tongdao']=="新加坡元汇款" or $member['tongdao']=="香港币汇款"  or $member['tongdao']=="以太币汇款" or $member['tongdao']=="比特币汇款"  or $member['tongdao']=="wap美元支付" or $member['tongdao']=="wap港币汇款" or $member['tongdao']=="wap欧元汇款" or $member['tongdao']=="wap转账付款" or $member['tongdao']=="wap日元汇款" or $member['tongdao']=="wap韩元汇款" or $member['tongdao']=="wap英镑汇款" or $member['tongdao']=="wap澳元汇款" or $member['tongdao']=="wap加元汇款" or $member['tongdao']=="wap瑞郎汇款" or $member['tongdao']=="wap新西兰元汇款" or $member['tongdao']=="wap新加坡元汇款" or $member['tongdao']=="wap香港币汇款" or $member['tongdao']=="wap比特币汇款" or $member['tongdao']=="wap以太币汇款"}{if $member['is_confrim'] == 1}(<font color='green'>已确认转账</font>){else}(<font color='red'>未确认转账</font>){/if}{/if}</td>
+    </tr> <!--{/loop}--> <!--{if $pages}--> <tr> <td colspan="20">$pages</td> </tr> <!--{/if}--> </table> 
+{template @admin/footer}

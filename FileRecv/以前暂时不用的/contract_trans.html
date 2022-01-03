@@ -1,0 +1,419 @@
+<!--{template @wap/header1}-->
+<title>香港钱包转账</title>
+</head>
+<body style="
+    width: 340px">
+<!--{template @wap/header}-->
+<div class="lanmu" style="
+    width: 335px"><font color="#FFFFFF">匿名钱包转账&nbsp;&nbsp;</font></div>
+<div class="address" style="
+    width: 340px">
+  <div class="llf"><div class="nleftL">
+<p>我的收款地址：<br />
+
+ <script>
+  function copyUrl(a) {
+         var Url = document.getElementById(a);
+		 console.log(Url)
+         Url.select(); // 选择对象
+
+
+       document.execCommand("Copy"); // 执行浏览器复制命令
+       alert("复制成功。");
+    }
+  </script>
+   <input style="width:75%;" id="c" value='{$public}' />
+  
+   <button onClick="copyUrl('c')">复制</button>
+
+</p>
+  <div class="nleftL" class="address_new">
+
+
+</div>
+</div>
+
+
+<form   method="post" action="index.php?mod=me&code=docontracttrans&type=1">
+<h1 style="color:#0E79C2;font-size:15px;">请输入收款人</h1>
+收款人合约地址：<br /><input style="width:75%;" id="tousername" name="tousername" type="text"  />
+<br>
+<p>
+<span>
+金额：<select name='money_a' id='money_a' style='width:80; height:23' onchange='_WBFC.changea();'>
+<!--
+<option value='1'>USD 美元</option>
+<option value='2'>CNY 人民币</option>
+<option value='3'>HKD 港币 </option>
+<option value='4'>EUR 欧元</option>
+<option value='5'>JPY 日元</option>
+<option value='6'>KRW 韩元</option>
+<option value='7'>GBP 英镑</option>
+<option value='8'>AUD 澳元</option>
+<option value='9'>CAD加元</option>
+<option value='10'>CHF瑞郎</option>
+<option value='11'>NZD新西兰元</option>
+<option value='12'>SGD新加坡元</option>-->
+<option  selected="selected" value='13'>HKC香港币</option>
+</select>
+
+<input id="tixiannum" name="tixiannum" type="text"  value="" onKeyUp="onkeyupdone(this)" onafterpaste="this.value=this.value.replace(/\D/g,'')" size="10" />元<br>
+转账金额应小于余额:<span id='mntype'>USD {~user()->get('dollar')}</span>元 
+</span>
+<br>
+<span>
+
+手续费：<span id="sxf"     ></span>
+</span>
+<span>;<br>
+</span>(手续费为<font color=red>{$yanzheng['wrate']}%</font>,{if $yanzheng['wrate']>0 }最低<span style="color:red" id='zdsxf'>USD 1元)</span>，<br>
+实际到账金额为：<span id="dzje" style="color:red"></span> {/if}
+</p>
+
+<h1 style="color:#0E79C2;font-size:15px;">匿名支付密码:<input id="zfpassword" name="zfpassword" type="password" size="10"  /> </h1>
+
+<!--<h1 style="color:#0E79C2;font-size:15px;">付款说明:<input id="mark" name="mark" type="text"  />
+</h1>-->
+<br>
+
+<input   class="button" type="button" id="zhuanzhangbt" onClick="zhuanzhang(this.form)" value=" 提交 " />
+</form>
+
+
+
+
+
+
+</div>
+<style>
+#zhuanzhangbt {
+    background: url("templates/tpl_4/images/btn_r2_c1.png") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #FFFFFF;
+    height: 26px;
+    width: 90px;
+}
+</style>
+<script>
+function showfuwsm()
+{
+	var sffwsm = document.getElementById("sffwsm");
+
+	
+	if(sffwsm.style.display=="none")
+	{
+		sffwsm.style.display="";
+		}else
+
+		{
+			sffwsm.style.display="none";
+			}
+}
+function zhuanzhang(obj)
+{
+	//alert(obj.yinhangkaid.value);
+	var money="{~user()->get('money')}";
+    var dollar="{~user()->get('dollar')}";
+	var hkdollar="{~user()->get('hkdollar')}";
+	var euro="{~user()->get('euro')}";
+	var jpy="{~user()->get('jpy')}";
+	var krw="{~user()->get('krw')}";
+	var gbp="{~user()->get('gbp')}";
+	var aud="{~user()->get('aud')}";
+	var cad="{~user()->get('cad')}";
+	var chf="{~user()->get('chf')}";
+	var nzd="{~user()->get('nzd')}";
+	var sgd="{~user()->get('sgd')}";
+	var hkc="{~user()->get('hkc')}";
+	var money_a = $('#money_a').val();
+		if(obj.tousername.value.length==0)
+	{
+		alert("请输入收款人");
+		return false;
+	}
+	if(obj.tixiannum.value.length==0)
+	{
+		alert("请输入提现金额");
+		return false;
+	}
+	var sxf;
+	if($yanzheng['wrate']==0)
+	{
+		sxf=0;
+	}else
+	{
+		sxf = obj.value*{eval echo $sxf=$yanzheng['wrate']/100.0;};
+		sxf = sxf.toFixed(2);
+		if(sxf<1)
+		{
+			sxf =1;
+		}
+	}
+	if (money_a==1){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>dollar)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==2){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>money)
+		{
+
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==3){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>hkdollar)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==4){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>euro)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+   if (money_a==5){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>jpy)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==6){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>krw)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==7){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>gbp)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==8){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>aud)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==9){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>cad)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==10){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>chf)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==11){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>nzd)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==12){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>sgd)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==13){
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>hkc)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+
+	if(obj.zfpassword.value.length<1)
+	{
+		alert("请填写支付密码");
+		return false;
+	}
+
+	if(confirm("请您认真审核并确定进行站内转账，转账后，资金将直接进入对方账户，无法退款，南雅不介入双方纠纷处理。"))
+	{
+	obj.submit();
+	}
+	return true;
+	
+}
+
+function onkeyupdone(obj)
+{
+	var money_a = $('#money_a').val();
+	obj.value = obj.value.replace(/[^\d.]/g,"");  //清除“数字”和“.”以外的字符
+    obj.value = obj.value.replace(/^\./g,"");  //验证第一个字符是数字而不是.
+    obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个. 清除多余的.
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+    if(obj.value.indexOf(".") !=-1)
+    {
+    obj.value  = obj.value.substring(0,obj.value.indexOf(".") + 3);; 
+    }
+	var sxf;
+	if($yanzheng['wrate']==0)
+	{
+		sxf=0;
+	}else
+	{
+	 sxf = obj.value*{eval echo $sxf=$yanzheng['wrate']/100.0;};
+	 sxf = sxf.toFixed(2); 
+	 if(sxf<1)
+	 {
+		 sxf =1;
+		 }
+	}
+	if(obj.value=="" || obj.value==0)
+	{
+		document.getElementById('sxf').innerHTML='';
+		document.getElementById('dzje').innerHTML='';
+	}else
+	{
+		 var sxffff=parseFloat((parseFloat(obj.value,2)),2);
+		sxffff=sxffff.toFixed(2);
+		if (money_a==1){
+			
+			document.getElementById('sxf').innerHTML='USD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='USD'+sxffff+'元';
+		}else if (money_a==2){
+			
+			document.getElementById('sxf').innerHTML='CNY'+sxf+'元';
+			document.getElementById('dzje').innerHTML='CNY'+sxffff+'元';
+		} else if (money_a==3){
+		
+			document.getElementById('sxf').innerHTML='HKD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='HKD'+sxffff+'元';
+		} else if (money_a==5){
+			
+			document.getElementById('sxf').innerHTML='JPY'+sxf+'元';
+			document.getElementById('dzje').innerHTML='JPY'+sxffff+'元';
+		} else if (money_a==6){
+			
+			document.getElementById('sxf').innerHTML='KRW'+sxf+'元';
+			document.getElementById('dzje').innerHTML='KRW'+sxffff+'元';
+        } else if (money_a==7){
+        	
+			document.getElementById('sxf').innerHTML='GBP'+sxf+'元';
+			document.getElementById('dzje').innerHTML='GBP'+sxffff+'元';
+       } else if (money_a==8){
+       		
+			document.getElementById('sxf').innerHTML='AUD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='AUD'+sxffff+'元';
+		} else if (money_a==9){
+			
+			document.getElementById('sxf').innerHTML='CAD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='CAD'+sxffff+'元';
+		} else if (money_a==10){
+			
+			document.getElementById('sxf').innerHTML='CHF'+sxf+'元';
+			document.getElementById('dzje').innerHTML='CHF'+sxffff+'元';
+		} else if (money_a==11){
+			
+			document.getElementById('sxf').innerHTML='NZD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='NZD'+sxffff+'元';
+		} else if (money_a==12){
+			
+			document.getElementById('sxf').innerHTML='SGD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='SGD'+sxffff+'元';
+		} else if (money_a==13){
+			
+			document.getElementById('sxf').innerHTML='HKC'+sxf+'元';
+			document.getElementById('dzje').innerHTML='HKC'+sxffff+'元';
+		} else {
+			
+			document.getElementById('sxf').innerHTML='EUR'+sxf+'元';
+			document.getElementById('dzje').innerHTML='EUR'+sxffff+'元';
+		}
+	}
+}
+</script>
+<script>
+	var _WBFC = {};
+ _WBFC.ERR_TIPID = 'error_tip';
+ _WBFC.flag = true;
+ _WBFC.changea = function(){
+ 	 var wrate="{$yanzheng['wrate']}";
+	 var sffwsm = $('#zdsxf');
+	 var mntype = $('#mntype');
+	 var money_a = $('#money_a').val();
+	 var money="{~user()->get('money')}";
+    var dollar="{~user()->get('dollar')}";
+	var hkdollar="{~user()->get('hkdollar')}";
+	var euro="{~user()->get('euro')}";
+	var jpy="{~user()->get('jpy')}";
+	var krw="{~user()->get('krw')}";
+	var gbp="{~user()->get('gbp')}";
+	var aud="{~user()->get('aud')}";
+	var cad="{~user()->get('cad')}";
+	var chf="{~user()->get('chf')}";
+	var nzd="{~user()->get('nzd')}";
+	var sgd="{~user()->get('sgd')}";
+	var hkc="{~user()->get('hkc')}";
+	 if(money_a == 1){
+	 	 mntype.html('USD '+dollar);
+		 sffwsm.html("USD 1元");
+	 }else if (money_a==2){
+	 	 mntype.html('CNY '+money);
+		 sffwsm.html("CNY 1元");
+	}else if (money_a==3){
+		mntype.html('HKD '+hkdollar);
+		sffwsm.html("HKD 1元");
+	}else if (money_a==5){
+		mntype.html('JPY '+jpy);
+		sffwsm.html("JPY 1元");
+	}else if (money_a==6){
+		mntype.html('KRW '+krw);
+		sffwsm.html("KRW 1元");
+   }else if (money_a==7){
+   	    mntype.html('GBP '+gbp);
+		sffwsm.html("GBP 1元");
+   }else if (money_a==8){
+   		mntype.html('AUD '+aud);
+		sffwsm.html("AUD 1元");
+   }else if (money_a==9){
+   		mntype.html('CAD '+cad);
+		sffwsm.html("CAD 1元");
+    }else if (money_a==10){
+    	mntype.html('CHF '+chf);
+		sffwsm.html("CHF 1元");
+	 }else if (money_a==11){
+	 	mntype.html('NZD '+nzd);
+		sffwsm.html("NZD 1元");
+	 }else if (money_a==12){
+	 	mntype.html('SGD '+sgd);
+		sffwsm.html("SGD 1元");
+	 }else if (money_a==13){
+	 	mntype.html('HKC '+hkc);
+		sffwsm.html("HKC 1元");
+	 }else{
+	 	mntype.html('EUR '+euro);
+		sffwsm.html("EUR 1元");
+	 }
+	 onkeyupdone(document.getElementById('tixiannum'));
+ }
+ _WBFC.changea();
+</script>
+</div>
+{~ui('loader')->css('@jquery.validationEngine')}
+{~ui('loader')->js('@jquery.validationEngine')}
+{~ui('loader')->js('@jquery.validationEngine.cn')}
+{~ui('loader')->js('@jquery.form')}
+</div>
+<!--{template @wap/footer}-->

@@ -1,0 +1,69 @@
+<!--{template @wap/header1}-->
+<title>南雅充值方式选择</title>
+</head>
+<body style="
+    width: 340px">
+<!--{template @wap/header}-->
+
+<div class="lanmu" style="
+    width: 335px"><font color="#FFFFFF">选择充值方式</font></div>
+	<span style=" display:block; padding-top:5px;">订单编号：{$order['orderid']}</span><br />
+	<span style=" display:block; padding-top:5px;">充值金额：{$order['money']}</span><br />
+	<form action="?mod=wapcz&code=payment&op=save&id={$order['orderid']}" method="post">
+		
+		<input class="rid" checked="checked" name="payment_id" value="5" type="radio">
+		<img src="static/images/pay/bank.gif">支持人民币充值<br><hr>
+        
+        <input class="rid" checked="checked" name="payment_id" value="41" type="radio">
+		<img src="static/images/pay/bank2.gif"><br><hr>
+
+		<input class="rid" checked="checked" name="payment_id" value="49" type="radio">
+		<img src="static/images/pay/bank3.gif"><br><hr>
+        
+        <input class="rid" checked="checked" name="payment_id" value="50" type="radio">
+		<img src="static/images/pay/bank4.gif"><br><hr>
+        
+        <input class="rid" checked="checked" name="payment_id" value="52" type="radio">
+		<img src="static/images/pay/bank5.gif"><br><hr>
+        
+        <input class="rid" checked="checked" name="payment_id" value="53" type="radio">
+		<img src="static/images/pay/bank6.gif"><br><hr>
+
+        <input class="rid" checked="checked" name="payment_id" value="54" type="radio">
+		<img src="static/images/pay/bank7.gif"><br><hr>
+        
+        <input class="rid" checked="checked" name="payment_id" value="55" type="radio">
+		<img src="static/images/pay/bank8.gif"><br><hr>
+		
+		<input class="rid" checked="checked" name="payment_id" value="56" type="radio">
+		<img src="static/images/pay/bank9.gif"><br><hr>
+		
+		<input class="rid" checked="checked" name="payment_id" value="57" type="radio">
+		<img src="static/images/pay/bank10.gif"><br><hr>
+		
+		<input class="rid" checked="checked" name="payment_id" value="58" type="radio">
+		<img src="static/images/pay/bank11.gif"><br><hr>
+		
+		<input class="rid" checked="checked" name="payment_id" value="59" type="radio">
+		<img src="static/images/pay/bank12.gif"><br><hr>
+		
+		<input class="rid" checked="checked" name="payment_id" value="35" type="radio">
+		<img src="static/images/pay/paypal.gif"><br>支持VISA,MC,jcb,ChinaUP等信用卡的美元USD充值<br><hr>
+		
+		<input class="rid" checked="checked" name="payment_id" value="48" type="radio">
+		<img src="static/images/pay/weixin.gif">支持人民币充值<br><hr>
+        
+        <input class="rid" checked="checked" name="payment_id" value="51" type="radio">
+		<img src="static/images/pay/wx.gif">支持人民币充值<br><hr>
+		
+        <input class="rid" checked="checked" name="payment_id" value="60" type="radio">
+		<img src="static/images/pay/btc.gif"><br><hr>
+  
+        <input class="rid" checked="checked" name="payment_id" value="61" type="radio">
+		<img src="static/images/pay/eth.gif"><br><hr>
+
+		</div>
+
+		<input class="bu" type="submit" value="下一步" />
+	</form>
+	<hr color="#008000">

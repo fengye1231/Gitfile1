@@ -1,0 +1,59 @@
+﻿<!--{template @wap/header1}-->
+<title>设置账号密码</title>
+</head>
+
+<body>
+<div style="text-align:center;">
+	<div class="lanmu">设置账号登录和支付密码</div>
+	
+	{~ui('loader')->css('@account.register')}
+	{~ui('loader')->js('@account.register')}
+
+	<p style="color:red;">{$msg}</p>
+
+	<form action="/?mod=me&code=createcontractpwd" method="POST">
+
+		<p>合约账号：<input type="text" readonly="readonly" value="{$public}" name="public" style="border:none;" /></p>
+<!--		<p>私钥：<input type="text"  readonly="readonly" value="{$d['encrypt_private']}" name="private" style="border:none;" /></p>-->
+
+
+
+		<p>填写登录密码：<input type="text" value="{$pwd}" name="password" id="password_nm"/></p>
+		<font id="password_nm_result"></font>
+		<span class="hint" style="color:#AAAAAA;">(8位以上包含大小写字母和数字)</span> 
+		
+		
+		
+		<p>确认登录密码：<input type="text" value="{$pwd}" name="pwd" id="repassword_nm" /></p>
+		<font id="repassword_nm_result"></font>
+	
+		<p>支付密码：<input type="text" value="{$pin}" name="pin" id="zfpassword_nm" /></p>
+		<font id="zfpassword_nm_result"></font>
+		<span class="hint"  style="color:#AAAAAA;">(8位以上数字)</span> 
+		
+		<p>确认支付密码：<input type="text" value="{$pin}" name="pin" id="rezfpassword_nm"  /></p>
+		<font id="rezfpassword_nm_result"></font>
+		
+		<p>登录助记词：<input type="text" value="{$words}" name="words" id="zjwords_nm"/></p>
+		<font id="zjwords_nm_result"></font>
+		<span class="hint"  style="color:#AAAAAA;">(8位以上拼音或者英文字符)</span> 
+		
+		
+		<p align="center" style="padding:10px 0;">
+			<input type="submit" value="注册" />
+		</p>
+	</form>
+	
+	
+<script  type="text/javascript">
+
+$('#password_nm').bind('blur', CheckPassword_nm);
+$('#repassword_nm').bind('blur', CheckRepassword_nm);
+$('#zfpassword_nm').bind('blur', CheckzfPassword_nm);
+$('#rezfpassword_nm').bind('blur', CheckRezfPassword_nm);
+$('#zjwords_nm').bind('blur', Checkzjwords_nm);
+
+
+</script>
+</div>
+<!--{template @wap/footer}-->

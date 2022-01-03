@@ -1,0 +1,41 @@
+
+	<div class="lanmu" style="
+    width: 335px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FFFFFF"  size="5">HKCW</font><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font  size="3" color="#FFFFF0">--Hong Kong Crypto Currency</font></div>
+		{if MEMBER_ID}
+		
+		{eval echo substr(MEMBER_IDNAME,0,($t=strpos(MEMBER_IDNAME,"@"))?$t:12);}:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="?mod=wap&code=account&op=logout">退出</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="translateLink" href="javascript:translatePage();">繁體</a>
+
+
+<hr color="#008000">
+	 <table border="0" width="335px">
+		<tr>
+			<td align="center">
+			<a href="?mod=me&code=wapsp1">我的钱包</a></td>
+			<td align="center">
+			<a href="?mod=me&code=wapxykhk">钱包转账</a></td>
+			<td align="center">
+			<a href="?mod=me&code=wapwbsk1">兑换法币</a></td>
+			<td align="center">
+			<a href="?mod=me&code=wapbill2">交易明细</a></td>
+		</tr>
+		
+		<tr>
+			<td align="center">
+			<a href="?mod=me&code=wapsetting2">账户设置</a></td>
+			<td align="center">
+			</td>
+			<td align="center">
+			</td>
+			<td align="center">
+			</td>
+		</tr>
+		</table>
+	</div>
+	
+        
+	{else}
+	<a href="?mod=wap&code=account&op=login">用户登录</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="translateLink" href="javascript:translatePage();">繁體</a>
+	{/if}
+	</div>

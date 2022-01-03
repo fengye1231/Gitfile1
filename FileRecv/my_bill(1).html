@@ -1,0 +1,109 @@
+<!--{template @wap/header1}-->
+<title>南雅账户交易明细</title>
+</head>
+<body style=width="100%">
+<!--{template @wap/header}-->
+<script type="text/javascript">  
+$(document).ready(function(){
+$("#report tr:odd").addClass("odd");
+$("#report tr:not(.odd)").hide();
+$("#report tr:first-child").show();
+$("#report tr.odd").click(function(){
+$(this).next("tr").toggle();
+$(this).find(".arrow").toggleClass("up");
+});
+});
+//jquery 模拟点击打开新窗口
+$("a[rel=external]").attr('target', '_blank');
+</script>
+<div class="lanmu" style=width="50%"></div>
+<!--{template @wap/header6}-->  
+<div class="lanmu" style=width="50%"><font color="#FFFFFF">交易明细</font></div>  
+<div class="lanmu"</div>
+<table border="0" id="report" width="70%" background="/tp/dollor4.jpg">
+<tr>
+<th colspan="4">
+<table border="0" width="70%">
+	<tr>
+		<td></td>
+	</tr>
+</table>
+</th>
+</tr>
+
+<tr>
+<th>摘要</th>
+<th>日期</th>
+<th>金额（元）</th>
+<th></th>
+</tr>
+{if empty($usermoney)}
+<tr><td colspan="7">您暂时还没有账户信息，您充值购买产品的信息都会在这里显示哦！</td></tr>
+{/if}
+{loop $usermoney $i $value}
+<tr class="Bor">
+<td width="33%"><span class="R">{eval  echo $value['name']=='zz'?"钱包转出":($value['name']=='zn'?"钱包转入":$value['name'])}</span></td>
+<td width="35%">{eval echo date('Y-m-d H:i:s',$value['time'])}</td>
+<td width="35%" align='left' class='tdalign'>
+{if $value['money']==0}
+<font color="#FF6600" size="3" title="0元团！">{$value['money']}</font>
+{elseif $value['type']=='minus' && $value['money']<0}
+<font color="#009999" size="4" title="购物返利！"><b>+</b></font> {echo abs($value['money'])}
+{elseif $value['type']=='minus'}
+
+<font color="#FF3333" size="4" title="支出">-&nbsp;</font>{if $value['is_dollar']==1}USD {elseif $value['is_hkdollar']}HKD {elseif $value['is_euro']}EUR {elseif $value['is_jpy']}JPY {elseif $value['is_krw']}KRW {elseif $value['is_gbp']}GBP {elseif $value['is_aud']}AUD{elseif $value['is_cad']}CAD {elseif $value['is_chf']}CHF{elseif $value['is_nzd']}NZD{elseif $value['is_sgd']} SGD{elseif $value['is_hkc']}HKC{elseif $value['is_btc']}BTC{elseif $value['is_eth']}ETH{else} CNY{/if} {$value['money']}
+
+{else}
+<font color="#009900" size="4" title="收入">+</font>{if $value['is_dollar']==1}USD {elseif $value['is_hkdollar']}HKD {elseif $value['is_euro']}EUR {elseif $value['is_jpy']}JPY {elseif $value['is_krw']}KRW {elseif $value['is_gbp']} GBP {elseif $value['is_aud']} AUD{elseif $value['is_cad']}CAD {elseif $value['is_chf']}CHF {elseif $value['is_nzd']}NZD{elseif $value['is_sgd']}SGD{elseif $value['is_hkc']}HKC{elseif $value['is_btc']}BTC{elseif $value['is_eth']}ETH{else}CNY {/if} {$value['money']}
+{/if}
+</td>
+<td width="1%"><div class="arrow"></div></td>
+</tr>
+<tr class="Bor">
+<td colspan="4" ><span >
+<h4 style="text-align:center;">摘要详情</h4>
+<p style="text-align:left;">
+{if $value['name']=='zn' or $value['name']=='zz'}
+{$value['info']}
+{elseif $value['name']!='zz'}
+{$value['intro']}
+{else}
+{eval $zhanzhuanginfo = logic('zhuanzhanglist')->GetOne($value['intro']);}
+<b>申请时间:</b>{eval echo date("Y-m-d:H:i:s",$zhanzhuanginfo[addtime]);}
+<b>开户行:</b>{eval echo $zhanzhuanginfo[yhkinfo];}
+<b>卡号:</b>{eval echo $zhanzhuanginfo[yhkkh];}
+<b>姓名:</b>{eval echo $zhanzhuanginfo[yhkname];}
+<br>
+<b>状态:</b>
+<b style="color:red">
+		{if $zhanzhuanginfo[statue]==1}
+		转账中
+		{elseif $zhanzhuanginfo[statue]==2}
+		{if $zhanzhuanginfo['sxfl']==0 }
+	   	  {eval $sxf = 0;}
+	   	  {else} 
+	   	  {eval  $sxf = $zhanzhuanginfo['sxfl'];}
+	   	   {eval  $sxf = round($sxf,2);}
+	    {/if}   	  
+	
+		成功;操作时间:{eval echo date("Y-m-d:H:i:s",$zhanzhuanginfo[cztime]);}手续费率:$zhanzhuanginfo['sxfl']%:手续费:{$sxf}实际到账:{eval echo $zhanzhuanginfo[value]-$sxf;} 
+		备注:{$zhanzhuanginfo[mark]}
+		{elseif $zhanzhuanginfo[statue]==3}
+		转账失败;操作时间:{eval echo date("Y-m-d:H:i:s",$zhanzhuanginfo[cztime])."原因:".$zhanzhuanginfo[mark];};</b>
+		{/if}
+
+{/if}</p>
+</span> </td>
+</tr>
+{/loop}
+<tr class="Bor">
+<td colspan="4" ><br>{~page_moyo()}
+</div>
+</div>
+</div>
+</div>
+<div class="t_r">
+{~ui('widget')->load()}
+　</td>
+</tr>
+</table>

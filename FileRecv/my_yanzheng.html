@@ -1,0 +1,189 @@
+<!--{template @wap/header1}-->
+<title>南雅注册手机确认</title>
+</head>
+<body>
+<!--{template @wap/header3}-->
+<div class="lanmu" style="
+    width: 100%"><font color="#FFFFFF">注册页面</font></div>
+
+<div class="m960">
+<div class="t_l">
+
+<div class="t_area_out">
+<p class="cur_title">身份验证</p>
+<p align="center">
+<a target="_blank" href="yz/rz.htm"><font size="5">身份验证提交标准</font></a></p>
+<div class="t_area_in">
+<style>
+.field label{
+line-height:20px;
+}
+</style>
+<script language="javascript">
+function checkpwd(){
+if($('#truename').val()==''){
+alert('用户名不可以为空哦');
+return false;
+}	
+if($('#newpwd').val() != $('#confirmpwd').val()){
+alert('两次密码输入不一致');
+return false;
+}
+return true;
+}
+
+function typeselect(n)
+{
+	if(n==1)
+	{
+		document.getElementById("xingming").innerHTML="姓名";
+		document.getElementById("shenfenzheng").innerHTML="身份证号";
+		document.getElementById("shenfenzhengimg").innerHTML="身份证正面";
+		document.getElementById("shenfenzhengimgb").innerHTML="身份证反面";
+		document.getElementById("shenfenzhengimgc").innerHTML="手持身份证头照";
+		//document.getElementById("idimagebtxt").style.display="none";
+		document.getElementById("idimageb").type="file";
+		
+	}else
+	{
+		document.getElementById("xingming").innerHTML="企业名称";
+		document.getElementById("shenfenzheng").innerHTML="注册号";
+		document.getElementById("shenfenzhengimg").innerHTML="企业营业执照";
+		document.getElementById("shenfenzhengimgb").innerHTML="经办身份证反面";
+		document.getElementById("shenfenzhengimgc").innerHTML="手持身份正面头照";
+		//document.getElementById("idimageb").type="text";
+		document.getElementById("idimageb").type="file";
+		
+	}
+}
+</script>
+<div class="nleftL">
+
+{if $userid['id']}
+<div class="field">
+<label>申请状态</label>
+
+{if $userid['statue']==1}
+正在审核中......
+
+{elseif $userid['statue']==2}
+审核通过
+{elseif $userid['statue']==3}
+审核失败，请按照验证标准重新提交你的资料&nbsp; {if $userid['mark']!=''}<br/>备注：$userid['mark']{/if}
+{/if}
+
+
+</div>
+{/if}
+
+
+
+{if $userid['statue']==2}
+
+
+ {if $userid['xingzhi']==1}
+<div class="field">
+<label>性质:</label>
+
+{if $userid['xingzhi']==1}个人{/if}
+{if $userid['xingzhi']==2}企业{/if}
+</div>
+<div class="field">
+<label>姓名:</label>
+
+{$userid['idname']}
+
+</div>
+<div class="field">
+<label>身份证号:</label>
+{$userid['idno']}
+</div>
+
+{else}
+
+<div class="field">
+<label>性质:</label>
+
+{if $userid['xingzhi']==1}个人{/if}
+{if $userid['xingzhi']==2}企业{/if}
+</div>
+<div class="field">
+<label>企业名称:</label>
+
+{$userid['idname']}
+
+</div>
+<div class="field">
+<label>注册号:</label>
+{$userid['idno']}
+</div>
+
+{/if}
+
+
+{else}
+<form method="post" action="?mod=me&code=doyanzheng" onSubmit="return checkpwd()" encType="multipart/form-data">
+
+<div class="field">
+<label>性质</label>
+
+<input type="radio" name="xingzhi" value="1" onclick="typeselect(1)"  style="padding:4px;margin-top:5px;" {if $userid['xingzhi']==1 || $userid['xingzhi'] ==0}checked{/if}   >个人
+<input type="radio" name="xingzhi" value="2" onClick="typeselect(2)" style="padding:4px;margin-top:5px;"    {if $userid['xingzhi']==2}checked{/if}   >企业
+</div>
+<div class="field">
+<label id="xingming">姓名</label>
+
+<input type="text" name="name" value="{$userid['idname']}" class="f_input"  size="30">
+
+</div>
+<div class="field">
+<label id="shenfenzheng">身份证号</label>
+<input type="text" name="idcard" id="idcard" value="{$userid['idno']}" class="f_input"  size="30">
+</div>
+<div class="field">
+<label id="shenfenzhengimg">身份证正面图</label>
+<input type="file" name="idimagea" id="idimagea"  >
+{if $userid['idimageb']}
+<br>
+<img src="{$userid['idimagea']}" style="width:400px">
+{/if}
+</div>
+<div class="field">
+<label id="shenfenzhengimgb">身份证反面</label>
+<input type="file" name="idimageb" id="idimageb"  >
+{if $userid['idimageb']}
+<br>
+<img id="idimagebimg" src="{$userid['idimageb']}" style="width:400px;display:block">
+
+{/if}
+</div>
+<div class="field">
+<label id="shenfenzhengimgc">手持身份证头照</label>
+<input type="file" name="idimagec" id="idimagec"  >
+{if $userid['idimageb']}
+<br>
+<img id="idimagecimg" src="{$userid['idimagec']}" style="width:400px;display:block">
+
+{/if}
+</div>
+<div class="clear"></div>
+<div class="act">
+<input type="hidden" name="y_id" value="{$userid['id']}">
+<p align="center">
+<input type="submit" class="formbutton formbutton_invite"  value="提 交"></div>
+</form>
+{/if}
+</div>
+</div>
+</div>
+</div>
+<script>
+typeselect({eval echo $userid['xingzhi']?$userid['xingzhi']:1});
+</script>
+
+<div class="t_r">
+{if $userid['statue']==2}
+{~ui('widget')->load()}
+{/if}
+</div>
+</div>

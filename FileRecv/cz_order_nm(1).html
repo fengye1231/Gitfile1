@@ -1,0 +1,23 @@
+<!--{template @wap/header1}-->
+<title>南雅充值方式选择</title>
+</head>
+<body style="
+    width: 340px">
+<!--{template @wap/header2_nm}-->
+<div class="lanmu" style="
+    width: 335px">选择充值方式</div>
+	<span style=" display:block; padding-top:5px;">订单编号：{$order['orderid']}</span><br />
+	<span style=" display:block; padding-top:5px;">充值金额：{$order['money']}</span><br />
+	<form action="?mod=wapcz&code=payment&op=save&id={$order['orderid']}" method="post">
+
+        <input class="rid" checked="checked" name="payment_id" value="60" type="radio">
+		<img src="static/images/pay/btc.gif"><br><hr>
+  
+        <input class="rid" checked="checked" name="payment_id" value="61" type="radio">
+		<img src="static/images/pay/eth.gif"><br><hr>
+
+		</div>
+
+		<input class="bu" type="submit" value="下一步" />
+	</form>
+	<hr color="#008000">

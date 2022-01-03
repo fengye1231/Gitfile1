@@ -1,0 +1,290 @@
+<!--{template @wap/header1}-->
+<title>钱包主页</title>
+</head>
+
+<body style="
+    width: 340px">
+<!--{template @wap/header1}-->
+<title>钱包主页</title>
+</head>
+
+<body style="
+    width: 340px">
+<!--{template @wap/header}-->
+
+<div class="m960">
+	<div class="t_l">
+    
+		<div class="t_area_out">
+			<div class="t_area_in">
+				<div class="nleftL">
+                <div class="lanmu" style="
+    width: 335px"><font color="#FFFFFF">香港币HKC和主流货币最新价</font></div>
+					<div style="font-size:20px">
+						<table border="1" width="100%" bordercolor="#008000" background="/tp/dollor4.jpg">
+	<tr>
+		<td align="center"><font color="#FF0000"><b>人民币CNH</b></font></td>
+		<td align="center"><b><font color="#FF0000">买入价</font></b></td>
+		<td align="center"><b><font color="#FF0000">卖出价</font></b></td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        香港币HKC:</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        美元USD：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        港币HKD：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_hkd_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_hkd_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        欧元EUR：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_eur_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_eur_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        日元JPY：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_jpy_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+
+
+        {~ini('product.default_jpy_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center" height="21">
+										<font size="4">
+        韩元KRW：</td>
+		<td align="center" height="21">
+										<font size="4">
+        {~ini('product.default_krw_purchase_cash')}</td>
+		<td align="center" height="21">
+										<font size="4">
+        {~ini('product.default_krw_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        英镑GBP：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_gbp_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_gbp_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        澳元AUD：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_aud_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_aud_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        加元CAD：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_cad_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_cad_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        瑞郎CHF：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_chf_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_chf_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        新西兰NZD:</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_nzd_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_nzd_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        新加坡SGD:</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_sgd_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_sgd_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center"><font color="#FF0000"><b>香港币HKC</b></font></td>
+		<td align="center"><b><font color="#FF0000">买入价</font></b></td>
+		<td align="center"><b><font color="#FF0000">卖出价</font></b></td>
+	</tr>
+	<tr>
+		<td align="center">
+								<font size="4">
+    	美元USD：</td>
+		<td align="center">{~ini('product.usa_hkc_purchase_cash')}</td>
+		<td align="center">
+								<font size="4">
+    	{~ini('product.usa_hkc_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        人民币DCEP:</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.default_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        港币HKD：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_hkd_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_hkd_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        欧元EUR：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_eur_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_eur_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        日元JPY：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_jpy_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_jpy_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        英镑GBP：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_gbp_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_gbp_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        澳元AUD：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_aud_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_aud_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        加元CAD：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_cad_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_cad_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center"><font size="4">
+        瑞郎CHF：</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_chf_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_chf_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        新西兰NZD:</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_nzd_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_nzd_spot_selling_rate')}</td>
+	</tr>
+	<tr>
+		<td align="center">
+										<font size="4">
+        新加坡SGD:</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_sgd_purchase_cash')}</td>
+		<td align="center">
+										<font size="4">
+        {~ini('product.usa_sgd_spot_selling_rate')}</td>
+	</tr>
+	</table>
+	 <hr color="#008000">
+          </div>
+</div>

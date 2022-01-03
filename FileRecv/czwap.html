@@ -1,0 +1,69 @@
+<!--{template @wap/header1}-->
+<title>南雅账户充值</title>
+</head>
+<body style="
+    width: 340px">
+<!--{template @wap/header}-->
+<script type="text/javascript">
+	function checkRecharge()
+	{
+		var money = Math.round($('#recharge_money').val()*100)/100;
+		if (isNaN(money))
+		{
+			foundError('充值金额必须是一个有效数字！');
+			return false;
+		}
+		if (money <= 0)
+		{
+			foundError('充值金额必须大于0！');
+			return false;
+		}
+		return true;
+	}
+	function foundError(msg)
+	{
+		$('#error_msg').html(msg).css('color', 'red');
+		setTimeout(function(){$('#error_msg').css('color', '')}, 2000);
+	}
+</script>
+<div class="lanmu" style="
+    width: 335px">账户充值</div>
+<form action="?mod=wapcz&code=order&op=save" method="post" onSubmit="return checkRecharge();" >
+{if  $yanzheng['statue']==2}
+<p>请输入充值金额</p>
+<div id="error_msg"></div>
+<input id="recharge_money" name="money" type="text" class="f_input l_input" />&nbsp;
+<input type="submit" class="bu"  value="下一步" />
+</form><br>
+<div class="lanmu"></div>
+<table border="0" width="100%" class="ke-zeroborder" id="cen">
+<tr>
+  <td>
+	<b>本系统支持12种主流货币通过银行转账和使用下列国际信用卡和借记卡对账号充值:</b></td>
+</tr>
+<tr><td>
+	<a href="https://www.visa.com.hk/" target="_blank"><img border="0" src="/yh/a1.jpg" width="79" height="28" /></a> 	<a href="https://specials.priceless.com/zh-hk/homePage" target="_blank"><img border="0" src="/yh/a2.jpg" width="79" height="28" /></a> 	<a href="http://discovermagazine.com/" target="_blank"><img border="0" src="/yh/a3.jpg" width="80" height="28" /></a> 	<a href="https://www.americanexpress.com/hk/ch/?page=pr&amp;inav=NavLogo" target="_blank"><img border="0" src="/yh/a4.jpg" width="80" height="28" /></a> 	<a href="http://www.jcbcard.cn/cs/" target="_blank"><img border="0" src="/yh/a5.jpg" width="79" height="28" /></a> 	<a href="http://cn.unionpay.com/" target="_blank"><img border="0" src="/yh/a6.jpg" width="80" height="28" /></a> 	<a href="https://www.dinersclub.com/about-us/overview" target="_blank"><img border="0" src="/yh/a7.jpg" width="80" height="28" /></a><a target="_blank" href="https://www.paypal.com/signin?returnUri=https://www.paypal.com/cgi-bin/webscr?cmd=_account"><img src="http://www.cne.hk/uploads/2019-07-05/41fb0da61f9c77b09c48c4d5dccfd9bc.gif" alt="" border="0" /></a></td>
+</tr>
+</table>
+
+{elseif $yanzheng['statue']==1}
+<h1 style="font-size:16px;">
+您的个人信息正在审核中.... 审核通过后就可以转账
+<a href="?mod=me&code=yanzheng" style="margin-left:20px;color:red">>>修改个人资料</a>
+</h1>
+<div>
+{elseif $yanzheng['statue']==0}
+
+<h1 style="font-size:16px;">
+您还未提交个人资料，审核通过后才可以转账
+</h1><a href="?mod=me&code=yanzheng" style="margin-left:20px;color:red">>>提交个人资料</a>
+<div>
+{elseif $yanzheng['statue']==3}
+
+<h1 style="font-size:16px;">
+您的资料没有审核通过，请重新提交
+</h1><a href="?mod=me&code=yanzheng" style="margin-left:20px;color:red">>>重新提交个人资料</a>
+<div>
+{/if}
+
+<!--{template @wap/footer}-->

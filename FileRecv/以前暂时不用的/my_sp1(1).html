@@ -1,0 +1,493 @@
+<!--{template @wap/header1}-->
+<title>钱包首页</title>
+</head>
+<body style="
+    width: 340px">
+<!--{template @wap/header2}-->
+<div>
+		<div class="lanmu" style="
+    width: 335px"><font color="#FFFFFF">我的钱包</font></div>
+			<table border="0" width="50%" background="/tp/dollor4.jpg">
+	<tr>
+		<td width="821" height="36" align="center">
+
+<table style='margin-left:20px;display:none;' id='formtable' width="270">
+ <form method='post' action="index.php?mod=me&code=wbsk&op=save&type=1" onsubmit='return _WBSK.checkFun()'>
+    <tr>
+        <td><span id='errorTip' style='color:red'></span></td>
+    </tr>
+    <tr>
+        <td width="732">
+		<p align="center"><span id="dqye">&nbsp;&nbsp;&nbsp;&nbsp; HKC香港币:{~user()->get('hkc')}元</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		<select name='money_a' id='money_a' style='width:100; height:50' onchange='_WBSK.changea();'><option value='1'>
+		HKC香港币</option><option value='2'>CNY人民币</option><option value='3'>HKD 港币 </option><option value='4'>
+		EUR 欧元</option><option value='5'>JPY 日元</option><option value='6'>KRW 韩元</option><option value='7'>
+		GBP 英镑</option><option value='8'>AUD 澳元</option><option value='9'>CAD加元</option><option value='10'>
+		CHF瑞郎</option><option value='11'>NZD新西兰元</option><option value='12'>
+		SGD新加坡元</option><option value='13'>USD 美元</option></select><br>
+　</td>
+    </tr>
+    <tr>
+        <td width="1132">
+		<p></p>
+		<p></td>
+    </tr>
+    <tr>
+        <td width="1132">　</td>
+    </tr>
+    <tr>
+        <td width="1132">　</td>
+    </tr>
+    <tr>
+        <td width="1132">　</td>
+    </tr>
+    <tr>
+        <td width="1132">　</td>
+    </tr>
+    <tr>
+        <td width="1132">　</td>
+    </tr>
+    </form>
+</table>                                               
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var _WBSK = {};
+        _WBSK.default_purchase_cash = "{~ini('product.default_purchase_cash')}";
+        _WBSK.default_spot_selling_rate = "{~ini('product.default_spot_selling_rate')}";
+        _WBSK.default_hkd_purchase_cash = "{~ini('product.default_hkd_purchase_cash')}";
+        _WBSK.default_hkd_spot_selling_rate = "{~ini('product.default_hkd_spot_selling_rate')}";
+        _WBSK.default_eur_purchase_cash = "{~ini('product.default_eur_purchase_cash')}";
+        _WBSK.default_eur_spot_selling_rate = "{~ini('product.default_eur_spot_selling_rate')}";
+		_WBSK.default_jpy_purchase_cash = "{~ini('product.default_jpy_purchase_cash')}";
+        _WBSK.default_jpy_spot_selling_rate = "{~ini('product.default_jpy_spot_selling_rate')}";
+		_WBSK.default_krw_purchase_cash = "{~ini('product.default_krw_purchase_cash')}";
+        _WBSK.default_krw_spot_selling_rate = "{~ini('product.default_krw_spot_selling_rate')}";
+		_WBSK.default_gbp_purchase_cash = "{~ini('product.default_gbp_purchase_cash')}";
+        _WBSK.default_gbp_spot_selling_rate = "{~ini('product.default_gbp_spot_selling_rate')}";
+		_WBSK.default_aud_purchase_cash = "{~ini('product.default_aud_purchase_cash')}";
+        _WBSK.default_aud_spot_selling_rate = "{~ini('product.default_aud_spot_selling_rate')}";
+		_WBSK.default_cad_purchase_cash = "{~ini('product.default_cad_purchase_cash')}";
+        _WBSK.default_cad_spot_selling_rate = "{~ini('product.default_cad_spot_selling_rate')}";
+		_WBSK.default_chf_purchase_cash = "{~ini('product.default_chf_purchase_cash')}";
+        _WBSK.default_chf_spot_selling_rate = "{~ini('product.default_chf_spot_selling_rate')}";
+		_WBSK.default_nzd_purchase_cash = "{~ini('product.default_nzd_purchase_cash')}";
+        _WBSK.default_nzd_spot_selling_rate = "{~ini('product.default_nzd_spot_selling_rate')}";
+		_WBSK.default_sgd_purchase_cash = "{~ini('product.default_sgd_purchase_cash')}";
+        _WBSK.default_sgd_spot_selling_rate = "{~ini('product.default_sgd_spot_selling_rate')}";
+		_WBSK.default_hkc_purchase_cash = "{~ini('product.default_hkc_purchase_cash')}";
+        _WBSK.default_hkc_spot_selling_rate = "{~ini('product.default_hkc_spot_selling_rate')}";
+        _WBSK.foreign_rate = "{~ini('product.foreign_rate')}";
+
+        _WBSK.flag=true;
+        _WBSK.money=0.00;
+
+        _WBSK.checkMoney = function(money){
+            var reg=/^[1-9]{1}\d*(\.\d{1,2})?$/;
+            return reg.test(money);
+        }
+
+        _WBSK.checkFun = function() {
+            var money_a = $('#money_a').val();
+            var money_b = $('#money_b').val();
+            var exchange_money = $('input[name=exchange_money]').val();
+            if ( money_a == 1){
+                _WBSK.money= "{~user()->get('dollar')}";
+            }else if (money_a == 3){
+                _WBSK.money= "{~user()->get('hkdollar')}";
+            }else if (money_a == 4){
+                _WBSK.money= "{~user()->get('euro')}";
+			}else if (money_a == 5){
+                _WBSK.money= "{~user()->get('jpy')}";
+			}else if (money_a == 6){
+                _WBSK.money= "{~user()->get('krw')}";
+			}else if (money_a == 7){
+                _WBSK.money= "{~user()->get('gbp')}";
+			}else if (money_a == 8){
+                _WBSK.money= "{~user()->get('aud')}";
+			}else if (money_a == 9){
+                _WBSK.money= "{~user()->get('cad')}";
+			}else if (money_a == 10){
+                _WBSK.money= "{~user()->get('chf')}";
+			}else if (money_a == 11){
+                _WBSK.money= "{~user()->get('nzd')}";
+			}else if (money_a == 12){
+                _WBSK.money= "{~user()->get('sgd')}";
+			}else if (money_a == 13){
+                _WBSK.money= "{~user()->get('hkc')}";
+            } else{
+                _WBSK.money= "{~user()->get('money')}";
+            }
+
+
+			var sxfval = _WBSK.foreign_rate != 0  ? parseFloat((exchange_money * (_WBSK.foreign_rate/100))) : 0.00;
+
+            if(money_a == money_b) {
+                _WBSK.setError('持有货币和兑换货币不能重复!');
+                _WBSK.flag=false;
+            }else if(exchange_money == '' || exchange_money == 0) {
+                _WBSK.setError('请输入兑换金额!');
+                _WBSK.flag=false;
+            }else if(!_WBSK.checkMoney(exchange_money)) {
+                _WBSK.setError('您输入兑换金额不合法!');
+                _WBSK.flag=false;
+
+            }else if(_WBSK.money < (parseFloat(exchange_money)+sxfval)){
+                _WBSK.setError('持有货币金额不足!');
+                _WBSK.flag=false;
+            }
+            
+            return _WBSK.flag;
+        }
+        _WBSK.setError = function(html) {
+            $('#errorTip').html(html);
+        }
+
+        
+
+        _WBSK.poundage = function() {
+            var exchange_money = $('input[name=exchange_money]').val();
+            var foreign_rate_tip = $('#foreign_rate_tip');
+            var money_val = $('input[name=money_val]');
+            var money_a = $('#money_a').val();
+            var money_b = $('#money_b').val();
+			var sxffh = money_a == 1 ? 'USD' : 'CNY';
+			var dhhbfh = money_a == 1 ? '美元' : '人民币';
+			var sjdhjefh = money_a == 1 ? '人民币' : '美元';
+			var cash_tip = money_a == 1 ? ('现汇买入价：'+_WBSK.default_purchase_cash) : ('现汇卖出价：'+_WBSK.default_spot_selling_rate);
+            if ( money_a==1){
+                sxffh='USD';
+                dhhbfh='美元';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_purchase_cash);
+            }
+            if ( money_a==2){
+                sxffh='￥';
+                dhhbfh='人民币';
+                if (money_b==1){
+                    sjdhjefh= '美元';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_spot_selling_rate);
+                }
+                if (money_b==3){
+                    sjdhjefh= '港币';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_hkd_spot_selling_rate);
+                }
+                if (money_b==4){
+                    sjdhjefh= '欧元';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_eur_spot_selling_rate);
+                }
+               if (money_b==5){
+                    sjdhjefh= '日元';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_jpy_spot_selling_rate);
+                }
+               if (money_b==6){
+                    sjdhjefh= '韩元';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_krw_spot_selling_rate);
+                }
+			   if (money_b==7){
+                    sjdhjefh= '英镑';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_gbp_spot_selling_rate);
+                }
+			   if (money_b==8){
+                    sjdhjefh= '澳元';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_aud_spot_selling_rate);
+                }
+			   if (money_b==9){
+                    sjdhjefh= '加元';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_cad_spot_selling_rate);
+                }
+			   if (money_b==10){
+                    sjdhjefh= '瑞郎';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_chf_spot_selling_rate);
+                }
+			   if (money_b==11){
+                    sjdhjefh= '新西兰元';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_nzd_spot_selling_rate);
+                }
+			   if (money_b==12){
+                    sjdhjefh= '新加坡元';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_sgd_spot_selling_rate);
+                }
+				if (money_b==13){
+                    sjdhjefh= '香港币';
+                    cash_tip= ('现汇卖出价：'+_WBSK.default_hkc_spot_selling_rate);
+                }
+            }
+            if ( money_a==3){
+                sxffh='HKD';
+                dhhbfh='港币';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_hkd_purchase_cash);
+            }
+            if ( money_a==4){
+                sxffh='EUR';
+                dhhbfh='欧元';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_eur_purchase_cash);
+            }
+            if ( money_a==5){
+                sxffh='JPY';
+                dhhbfh='日元';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_jpy_purchase_cash);
+            }
+            if ( money_a==6){
+                sxffh='KRW';
+                dhhbfh='韩元';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_krw_purchase_cash);
+            }
+			if ( money_a==7){
+                sxffh='GBP';
+                dhhbfh='英镑';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_gbp_purchase_cash);
+            }
+			if ( money_a==8){
+                sxffh='AUD';
+                dhhbfh='澳元';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_aud_purchase_cash);
+            }
+			if ( money_a==9){
+                sxffh='CAD';
+                dhhbfh='加元';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_cad_purchase_cash);
+            }
+			if ( money_a==10){
+                sxffh='CHF';
+                dhhbfh='瑞郎';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_chf_purchase_cash);
+            }
+			if ( money_a==11){
+                sxffh='NZD';
+                dhhbfh='新西兰元';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_nzd_purchase_cash);
+            }
+			if ( money_a==12){
+                sxffh='SGD';
+                dhhbfh='新加坡元';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_sgd_purchase_cash);
+            }
+			if ( money_a==13){
+                sxffh='HKC';
+                dhhbfh='香港币';
+                sjdhjefh= '人民币';
+                cash_tip= ('现汇买入价：'+_WBSK.default_hkc_purchase_cash);
+            }
+			var sxfval = _WBSK.foreign_rate != 0  ? parseFloat((exchange_money * (_WBSK.foreign_rate/100))) : 0;
+
+            if ( money_a == 1){
+                _WBSK.money= "{~user()->get('dollar')}";
+            }else if (money_a == 3){
+                _WBSK.money= "{~user()->get('hkdollar')}";
+            }else if (money_a == 4){
+                _WBSK.money= "{~user()->get('euro')}";
+			}else if (money_a == 5){
+                _WBSK.money= "{~user()->get('jpy')}";
+			}else if (money_a == 6){
+                _WBSK.money= "{~user()->get('krw')}";
+			}else if (money_a == 7){
+                _WBSK.money= "{~user()->get('gbp')}";
+			}else if (money_a == 8){
+                _WBSK.money= "{~user()->get('aud')}";
+			}else if (money_a == 9){
+                _WBSK.money= "{~user()->get('cad')}";
+			}else if (money_a == 10){
+                _WBSK.money= "{~user()->get('chf')}";
+			}else if (money_a == 11){
+                _WBSK.money= "{~user()->get('nzd')}";
+			}else if (money_a == 12){
+                _WBSK.money= "{~user()->get('sgd')}";
+			}else if (money_a == 13){
+                _WBSK.money= "{~user()->get('hkc')}";
+            } else{
+                _WBSK.money= "{~user()->get('money')}";
+            }
+			
+			$('#exchange_money_tip').html(dhhbfh);
+			$('#money_val_tip').html(sjdhjefh);
+			$('#cash_tip').html(cash_tip);
+
+            if(money_a == money_b) {
+                _WBSK.setError('持有货币和兑换货币不能重复!');
+                foreign_rate_tip.html('');
+                money_val.val(0.00);
+            }else if(exchange_money == '' || exchange_money == 0) {
+                _WBSK.setError('请输入兑换金额!');
+                foreign_rate_tip.html('');
+                money_val.val(0.00);
+            }else if(!_WBSK.checkMoney(exchange_money)) {
+                _WBSK.setError('');
+                foreign_rate_tip.html('');
+                money_val.val(0.00);
+            }else if(_WBSK.money < parseFloat(exchange_money)+sxfval){
+                _WBSK.setError('持有货币金额不足!');
+                foreign_rate_tip.html('');
+                money_val.val(0.00);
+            }else{
+                _WBSK.setError('');
+				_WBSK.flag=true;
+				if(sxfval != '') {
+					foreign_rate_tip.html('实收手续费：'+sxffh+(exchange_money*(_WBSK.foreign_rate/100)).toFixed(2));
+				}
+                if(money_a == 1) {
+                    money_val.val((exchange_money * (_WBSK.default_purchase_cash/100)).toFixed(2));
+                }else
+                if(money_a == 3) {
+                    money_val.val((exchange_money * (_WBSK.default_hkd_purchase_cash/100)).toFixed(2));
+                }
+                if(money_a == 4) {
+                    money_val.val((exchange_money * (_WBSK.default_eur_purchase_cash/100)).toFixed(2));
+                }
+				if(money_a == 5) {
+                    money_val.val((exchange_money * (_WBSK.default_jpy_purchase_cash/100)).toFixed(2));
+                }
+				if(money_a == 6) {
+                    money_val.val((exchange_money * (_WBSK.default_krw_purchase_cash/100)).toFixed(2));
+                }
+				if(money_a == 7) {
+                    money_val.val((exchange_money * (_WBSK.default_gbp_purchase_cash/100)).toFixed(2));
+                }
+				if(money_a == 8) {
+                    money_val.val((exchange_money * (_WBSK.default_aud_purchase_cash/100)).toFixed(2));
+                }
+				if(money_a == 9) {
+                    money_val.val((exchange_money * (_WBSK.default_cad_purchase_cash/100)).toFixed(2));
+                }
+				if(money_a == 10) {
+                    money_val.val((exchange_money * (_WBSK.default_chf_purchase_cash/100)).toFixed(2));
+                }
+				if(money_a == 11) {
+                    money_val.val((exchange_money * (_WBSK.default_nzd_purchase_cash/100)).toFixed(2));
+                }
+				if(money_a == 12) {
+                    money_val.val((exchange_money * (_WBSK.default_sgd_purchase_cash/100)).toFixed(2));
+                }
+				if(money_a == 13) {
+                    money_val.val((exchange_money * (_WBSK.default_hkc_purchase_cash/100)).toFixed(2));
+                }
+                else {
+                   if (money_b==1){
+                       money_val.val((exchange_money / (_WBSK.default_spot_selling_rate/100)).toFixed(2));
+                   }
+                    if (money_b==3){
+                        money_val.val((exchange_money / (_WBSK.default_hkd_spot_selling_rate/100)).toFixed(2));
+                    }
+                    if (money_b==4){
+                        money_val.val((exchange_money / (_WBSK.default_eur_spot_selling_rate/100)).toFixed(2));
+                    }
+                   if (money_b==5){
+                        money_val.val((exchange_money / (_WBSK.default_jpy_spot_selling_rate/100)).toFixed(2));
+                    }
+					if (money_b==6){
+                        money_val.val((exchange_money / (_WBSK.default_krw_spot_selling_rate/100)).toFixed(2));
+                    }
+					if (money_b==7){
+                        money_val.val((exchange_money / (_WBSK.default_gbp_spot_selling_rate/100)).toFixed(2));
+                    }
+					if (money_b==8){
+                        money_val.val((exchange_money / (_WBSK.default_aud_spot_selling_rate/100)).toFixed(2));
+                    }
+					if (money_b==9){
+                        money_val.val((exchange_money / (_WBSK.default_cad_spot_selling_rate/100)).toFixed(2));
+                    }
+					if (money_b==10){
+                        money_val.val((exchange_money / (_WBSK.default_chf_spot_selling_rate/100)).toFixed(2));
+                    }
+					if (money_b==11){
+                        money_val.val((exchange_money / (_WBSK.default_nzd_spot_selling_rate/100)).toFixed(2));
+                    }
+					if (money_b==12){
+                        money_val.val((exchange_money / (_WBSK.default_sgd_spot_selling_rate/100)).toFixed(2));
+                    }
+					if (money_b==13){
+                        money_val.val((exchange_money / (_WBSK.default_hkc_spot_selling_rate/100)).toFixed(2));
+                    }
+                }
+            }
+        }
+		_WBSK.changea = function(){
+			var money_a = $('#money_a').val();
+			var money_b = $('#money_b');
+            var dqye= $('#dqye');
+            if ( money_a == 1){
+                dqye.html("香港币HKC:{~user()->get('hkc')}元");
+            }else if (money_a == 3){
+                dqye.html("港币HKD:{~user()->get('hkdollar')}元");
+            }else if (money_a == 4){
+                dqye.html("欧元EUR:{~user()->get('euro')}元");
+			}else if (money_a == 5){
+                dqye.html("日元JPY:{~user()->get('jpy')}元");
+			}else if (money_a == 6){
+                dqye.html("韩元KRW:{~user()->get('krw')}元");
+			}else if (money_a == 7){
+                dqye.html("英镑GBP:{~user()->get('gbp')}元");
+			}else if (money_a == 8){
+                dqye.html("澳元AUD:{~user()->get('aud')}元");
+			}else if (money_a == 9){
+                dqye.html("加元CAD:{~user()->get('cad')}元");
+			}else if (money_a == 10){
+                dqye.html("瑞郎CHF:{~user()->get('chf')}元");
+			}else if (money_a == 11){
+                dqye.html("新西兰元NZD:{~user()->get('nzd')}元");
+			}else if (money_a == 12){
+                dqye.html("新加坡元SGD:{~user()->get('sgd')}元");
+			}else if (money_a == 13){
+                 dqye.html("美元USD:{~user()->get('dollar')}元");
+            } else{
+                dqye.html("人民币CNH:{~user()->get('money')}元");
+            }
+			if(money_a == 2){
+                $("#money_b option").remove();
+                $("#money_b").prepend("<option value='1'>USD   美元</option><option value='3'>HKD 港币 </option><option value='4'>EUR 欧元</option><option value='5'>JPY 日元</option><option value='6'>KRW 韩元</option><option value='7'>GBP 英镑</option><option value='8'>AUD 澳元</option><option value='9'>CAD加元</option><option value='10'>CHF瑞郎</option><option value='11'>NZD新西兰元</option><option value='12'>SGD新加坡元</option><option value='13'>HKC香港币</option>");
+				money_b.val(1);
+			}else{
+                $("#money_b option").remove();
+                $("#money_b").prepend("<option value='2'>CNY人民币</option>");
+				money_b.val(2);
+			}
+		}
+
+		_WBSK.changeb = function(){
+            /*
+			var money_b = $('#money_b').val();
+			var money_a = $('#money_a');
+			if(money_b == 2){
+                $("#money_a option").remove();
+                $("#money_a").prepend("<option value='1'>USD美元</option><option value='3'>HKD 港币 </option><option value='4'>EUR 欧元</option><option value='5'>JPY 日元</option><option value='6'>KRW 韩元</option><option value='7'>GBP 英镑</option><option value='8'>AUD 澳元</option><option value='9'>CAD加元</option><option value='10'>CHF瑞郎</option><option value='11'>NZD新西兰元</option><option value='12'>SGD新加坡元</option><option value='13'>HKC香港币</option>");
+				money_a.val(1);
+			}else{
+                $("#money_a option").remove();
+                $("#money_a").prepend("<option value='2'>CNY人民币</option>");
+				money_a.val(2);
+			}
+			*/
+		}
+
+        $(function(){
+            $('#formtable').show();
+            $("input[name=exchange_money]").bind("keyup", _WBSK.poundage);
+            $('#money_a').bind('change', _WBSK.poundage);
+			$('#money_b').bind('change', _WBSK.poundage);
+        });
+
+
+    </script>
+</div></td>
+	</tr>
+		</table>
+
+</div>
+</div>
+<!--{template @wap/footer2}-->

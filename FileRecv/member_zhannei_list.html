@@ -1,0 +1,61 @@
+<!--{template @admin/header}--> 
+<table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> 
+<tr class="header"> <td>技巧提示</td> </tr> 
+<tr bgcolor="#F4F8FC"> <td> <ul> <li>系统角色为<b>粗体</b>显示，自定义角色为普通。</li> </ul> </td> </tr>
+ </table> <br> 
+ 
+ <table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> 
+<tr class=""> <td style="padding-left:0" colspan="4">
+  {if $_GET['money_type']==1}
+  <div class="is_button"><a href="?mod=member&code=zhannei&show=1&money_type=1">转账成功</a></div>
+<div class="is_button"><a href="?mod=member&code=zhannei&show=2&money_type=1">转账失败</a></div>
+<div class="is_button"><a href="?mod=member&code=zhannei&show=3&money_type=1">所有</a></div>
+  {else}
+  <div class="is_button"><a href="?mod=member&code=zhannei&show=1">转账成功</a></div>
+<div class="is_button"><a href="?mod=member&code=zhannei&show=2">转账失败</a></div>
+<div class="is_button"><a href="?mod=member&code=zhannei&show=3">所有</a></div>
+  {/if}
+ </td> </tr>
+ <tr align="center" class="header"> 
+
+ <td>申请用户名</td> 
+ <td>转入用户名</td> 
+ <td>金额</td>
+ <td>到账金额</td>
+ <td>操作日期</td> 
+ <td>备注</td> 
+ <td>状态</td> </tr>
+ <!--{loop $member_list $member}-->
+  <tr onmouseover="this.className='tr_hover'" onmouseout="this.className='tr_normal'"> 
+  <td>
+   <!--
+   {if $member['is_private']!=1}
+  <a href="admin.php?mod=member&code=modify&id={$member[uid]}"> {$member['username']}</a>
+  {else}
+   {$member['username']}
+  {/if}
+  -->
+   <a href="admin.php?mod=member&code=modify&id={$member[uid]}"> {$member['username']}</a>
+  </td>
+   <td>
+    <!--
+   {if $member['is_private']!=1}
+   <a href="admin.php?mod=member&code=modify&id={$member[touid]}"> {$member['tousername']} </a>
+    {else}
+   {$member['tousername']}
+  {/if}
+    -->
+    <a href="admin.php?mod=member&code=modify&id={$member[touid]}"> {$member['tousername']} </a>
+   </td> <td>{$member[prefix]}&nbsp;{$member[value]}
+   
+   </td><td>{$member[prefix]}&nbsp;{$member[tovalue]}</td> <td>{eval echo date("Y-m-d H:i",$member[addtime]);}</td>
+   <td>{$member[mark]}</td>
+    <td> {if $member[statue]==1} 
+    {elseif  $member[statue]==2}
+    转账成功
+    {elseif  $member[statue]==3}
+    转账失败
+    {/if}
+    </td> 
+    </tr> <!--{/loop}--> <!--{if $pages}--> <tr> <td colspan="20">$pages</td> </tr> <!--{/if}--> </table> 
+{template @admin/footer}

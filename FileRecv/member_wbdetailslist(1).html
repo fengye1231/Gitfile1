@@ -1,0 +1,46 @@
+<!--{template @admin/header}--> 
+<table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> 
+<tr class="header"> <td>技巧提示</td> </tr> 
+<tr bgcolor="#F4F8FC"> <td> <ul> <li>系统角色为<b>粗体</b>显示，自定义角色为普通。</li> </ul> </td> </tr>
+ </table> <br> 
+ 
+ <table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> 
+ <tr align="center" class="header"> 
+ <td>用户名</td> 
+ <td>类型</td> 
+ <td>余额变动</td>
+ <td>日期</td>
+ <td>操作</td> </tr>
+ <!--{loop $member_list $member}-->
+  <tr onmouseover="this.className='tr_hover'" onmouseout="this.className='tr_normal'"> 
+  <td>
+   <!--
+    {if $member['is_private']!=1}
+   <a href="admin.php?mod=member&code=modify&id={$member[uid]}"> {$member['username']}</a>
+   {else}
+    {$member['username']}
+   {/if}
+   -->
+   {$member['username']}
+
+  </td>
+    <td>{$member['name']}</td>
+    <td>
+    {if $member['money']==0}
+ <font color="#FF6600" size="3" title="0元团！">{$member['money']}</font>
+ {elseif $member['type']=='minus' && $member['money']<0}
+ <font color="#009999" size="4" title="购物返利！"><b>+</b></font>  {echo abs($member['money'])}
+ {elseif $member['type']=='minus'}
+
+ <font color="#FF3333" size="4" title="支出">-&nbsp;</font>{if $member['is_dollar']==1}USD {elseif $member['is_hkdollar']}HKD {elseif
+ $member['is_euro']}EUR{elseif $member['is_jpy']}JPY {elseif $member['is_krw']}KRW{elseif $member['is_gbp']}GBP{elseif $member['is_aud']}AUD{elseif $member['is_cad']}CAD{elseif $member['is_chf']}CHF{elseif $member['is_nzd']}NZD{elseif $member['is_sgd']}SGD{elseif $member['is_hkc']}HKC{elseif $member['is_btc']}BTC{elseif $member['is_eth']}ETH{else}￥{/if} {$member['money']}
+
+ {else}
+ <font color="#009900" size="4" title="收入">+</font> {if $member['is_dollar']==1}USD {elseif $member['is_hkdollar']}HKD {elseif $member['is_euro']}EUR {elseif $member['is_jpy']}JPY {elseif $member['is_krw']}KRW{elseif $member['is_gbp']}GBP{elseif $member['is_aud']}AUD{elseif $member['is_cad']}CAD{elseif $member['is_chf']}CHF{elseif $member['is_nzd']}NZD{elseif $member['is_sgd']}SGD{elseif $member['is_hkc']}HKC{elseif $member['is_btc']}BTC{elseif $member['is_eth']}ETH{else}￥{/if} {$member['money']}
+ {/if}
+ </td>
+    <td>{eval echo date("Y-m-d H:i",$member[time]);}</td>
+     <td> <a href="admin.php?mod=member&code=showbill&id={$member[id]}">查看详情</a>
+     </td>
+     </tr> <!--{/loop}--> <!--{if $pages}--> <tr> <td colspan="20">$pages</td> </tr> <!--{/if}--> </table>
+{template @admin/footer}

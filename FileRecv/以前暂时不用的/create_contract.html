@@ -1,0 +1,21 @@
+<!--{template @wap/header1}-->
+<title>确认创建账号</title>
+</head>
+<body>
+
+<div style="text-align:center;">
+	<div class="lanmu">确认创建账号</div>
+	
+	
+	<form action="/?mod=me&code=createcontract" method="POST">
+	
+		<p>账号：<input type="text" readonly="readonly" value="{$public}" name="public" style="border:none;" /></p>
+		<p>私钥：<input type="text"  readonly="readonly" value="{$private}" name="private" style="border:none;" /></p>
+		<p align="center" style="padding:10px 0;">
+			<input type="submit" value="确认创建账号？" />
+		</p>
+	</form>
+	
+</div>
+</div>
+<!--{template @wap/footer2}-->

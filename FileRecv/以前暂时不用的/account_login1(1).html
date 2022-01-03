@@ -1,0 +1,39 @@
+<!--{template @wap/header1}-->
+<title>用户登录</title>
+
+<body style="
+    width: 340px">
+<!--{template @wap/header3}-->
+
+<div class="lanmu" style="
+    width: 335px"><font color="#FFFFFF">欢迎来到香港链（HKB）的世界！</font></div>
+<form method="POST" action="?mod=wap&code=account&op=logcheck&to={$_GET['to']}" >
+<div class="field ">
+<p align="center">链端匿名登录</p>
+<p align="center">
+<label>账号:</label>
+<input name="username" type="text" class="f_input l_input"   style="width:145px">
+</div>
+<div class="field">
+<p align="center">
+<label>密码：</label>
+<input name="password" type="password" class="f_input l_input"  style="width:145px">
+<span class="lostpassword"><a href="?mod=get_password"></a></span></div>
+<div class="field">
+<p align="center">
+<input name="keeplogin" type="checkbox" checked="checked" id="check_remember"><label id="remember" for="check_remember">记住登录状态</label>
+&nbsp;&nbsp;<span class="lostpassword">
+<a href="?mod=wap&code=get&op=password" style="text-decoration: none">
+<font color="#000000" size="3">忘记密码</font></a></span></div>
+<font color="#000000" size="3">
+<font color="#000000">
+<div class="clear">
+	<p align="center"></div>
+<div class="act" id="l_act">
+<p align="center">
+<input type="submit" class="formbutton formbutton_invite" value="链端登录">&nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" onClick="window.location='?mod=me&code=account&op=wapsm2'"  class="formbutton formbutton_invite"  value="创建账号" />
+<!--<input type="submit" class="formbutton formbutton_invite" value="链端登录">&nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" onClick="window.location='?mod=me&amp;code=wapsm2'"  class="formbutton formbutton_invite"  value="创建账号" />&nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" onClick="window.location.href='/?mod=me&code=createcontract'"  class="formbutton formbutton_invite"  value="确定账号" />-->
+</div>
+</form>
+<hr color="#008000">
+

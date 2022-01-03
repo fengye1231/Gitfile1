@@ -1,0 +1,137 @@
+<script type='text/javascript'>
+    (function(a, b, c, d, e, j, s) {
+        a[d] = a[d] || function() {
+            (a[d].a = a[d].a || []).push(arguments)
+        };
+        j = b.createElement(c),
+            s = b.getElementsByTagName(c)[0];
+        j.async = true;
+        j.charset = 'UTF-8';
+        j.src = 'https://static.laigukf.com/widget/loader.js';
+        s.parentNode.insertBefore(j, s);
+    })(window, document, 'script', '_LAIGU');
+    _LAIGU('entId', 'ebc734764b8f122a6421c04e3ddd96d5');
+
+
+</script>
+	{~ui('loader')->js('@jquery')}
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=0.85, user-scalable=yes" />
+	<div class="lanmu" style=width="100%"></div>
+	{if MEMBER_ID}
+	<table border="0" width="115%">
+	<tr>
+		<td width="44" align="center"><a href="?mod=wap&amp;code=account&amp;op=logout_nm1">退出</a></td>
+		<td align="center">
+		<font size="5" align="center"><font size="5" align="center">{eval echo MEMBER_IDNAME;}</font></td>
+		<td width="45" align="center">
+		<a id="translateLink" href="javascript:translatePage();">繁體</a></td>
+	</tr>
+</table>
+<div class="lanmu" style=width="100%"></div>
+	 <table border="0" width="115%" bordercolor="#89B4D4">
+		<tr>
+			<td align="center">
+			<a href="?mod=me&code=wapsp1">钱包余额</a></td>
+			<td align="center">
+			<a href="?mod=me&code=contracttrans_nm">钱包转账</a></td>
+			<td align="center">
+			<a href="?mod=wapcz">钱包充值</a></td>
+			<td align="center">
+			<a href="?mod=me&code=wapbill_nm">交易明细</a></td>
+
+		
+		</tr>
+		
+		<tr>
+			<td align="center">
+			<a href="?mod=me&code=waplcb_nm">存币生息</a></td>
+			<td align="center">
+			<a href="?mod=me&code=wapjl_nm">货币行情</a></td>
+			<td align="center">
+			<a href="?mod=me&code=wapsetting_nm">账户设置</a></td>
+			<td align="center">
+			<a href="javascript:void(0);" onclick="js_method()">兑换法币</a></td>
+		</tr>
+		
+		<tr>
+			<td align="center">
+			<a href="?mod=me&code=wapjl_nm">提数字币</a></td>
+			<td align="center">
+			　</td>
+			<td align="center">
+			　</td>
+			<td align="center">
+			　</td>
+		</tr>
+		
+		</table>
+	</div>
+	
+        
+	{else}
+	<a href="?mod=wap&code=account&op=login">用户登录</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="translateLink" href="javascript:translatePage();">繁體</a>
+	{/if}
+	<script type="text/javascript" src="http://www.cne.hk/templates/wap/tw_cn.js"></script>
+
+
+
+<script type="text/javascript">
+
+	function js_method() {
+
+
+		if (confirm("将退出此账号并转到实名账号登录页面")) {
+
+			//window.location.href = "?mod=wap&code=account&op=logout";
+
+
+
+			var newWin = window.open("?mod=wap&code=account&op=logout_nm","_blank");
+			window.open('','_self');
+			window.opener=null;
+			window.close();
+			newWin.focus();
+			location.reload();
+			//window.open('?mod=wap&code=account&op=login','_blank');
+
+
+
+
+
+
+			//(function(){setTimeout(window.location.href = "?mod=wap&code=account&op=login", 3000);}());
+
+			//$(function (){
+				//setTimeout(window.location.href = "?mod=wap&code=account&op=login", 3000); //延迟1秒
+			//})
+			//setTimeout($(document).ready(window.location.href = "?mod=wap&code=account&op=login"),3000);
+			//onload=window.location.href = "?mod=wap&code=account&op=login";
+		}
+		//$(document).ready(window.location.href = "?mod=wap&code=account&op=login");
+		//window.setTimeout(window.location.href = "?mod=wap&code=account&op=login",3000);
+
+
+
+
+	}
+
+</script>
+
+
+<script type="text/javascript">
+
+
+
+
+
+
+var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+var cookieDomain = "http://www.cne.hk/?mod=wap"; //Cookie地址, 一定要设定, 通常为你的网址
+var msgToTraditionalChinese = "繁體"; //此处可以更改为你想要显示的文字
+var msgToSimplifiedChinese = "简体"; //同上，但两处均不建议更改
+var translateButtonId = "translateLink"; //默认互换id
+translateInitilization();
+</script>
+	</div>

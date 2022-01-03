@@ -1,0 +1,1025 @@
+<!--{template @wap/header1}-->
+<title>香港钱包转账</title>
+</head>
+<body style=width="100%">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=0.85, user-scalable=yes" />
+<!--{template @wap/header2_nm}-->
+<div class="lanmu" style=width="100%"><font color="#FFFFFF">匿名钱包转账&nbsp;&nbsp;</font></div>
+
+<table border="1" width="115%">
+	<tr>
+		<td><form   method="post" action="index.php?mod=me&code=docontracttrans&type=1">
+<h1 style="color:#0E79C2;font-size:15px;">请输入收款人账号</h1>
+收款人账号：<input style="width:55%;" id="tousername" name="tousername" type="text"  />
+<br>
+<p>
+<span>
+金额：<select name='money_a' id='money_a' style='width:100; height:25' onchange='_WBFC.changea();'><option value='13'>HKC香港币</option><option value='14'>BTC比特币</option><option value='15'>ETH以太币</option></select><input id="tixiannum" name="tixiannum" type="text"  value="" onKeyUp="onkeyupdone(this)" onafterpaste="this.value=this.value.replace(/\D/g,'')" size="15" />元<br>
+转账金额应小于余额:<span id='mntype'>USD {~user()->get('dollar')}</span>元 
+</span>
+<br>
+<span>
+
+手续费：<span id="sxf"     ></span>
+</span>
+<span>;<br>
+</span>
+
+	(费率为<font color=red  id="sxf1"> </font>%,{if !empty($yanzheng) }最低
+	<span style="color:red" id='zdsxf'></span>，<br>
+
+实际到账金额为：<span id="dzje" style="color:red"></span> {/if}
+</p>
+
+<h1 style="color:#0E79C2;font-size:15px;">匿名支付密码:<input id="zfpassword" name="zfpassword" type="password" size="15"  /> </h1>
+
+<!--<h1 style="color:#0E79C2;font-size:15px;">付款说明:<input id="mark" name="mark" type="text"  />
+</h1>-->
+<br>
+
+<input   class="button" type="button" id="zhuanzhangbt" onClick="zhuanzhang(this.form)" value=" 提交 " />
+</form>　</td>
+	</tr>
+</table>
+
+
+
+
+
+
+
+</div>
+<style>
+#zhuanzhangbt {
+    background: url("templates/tpl_4/images/btn_r2_c1.png") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #FFFFFF;
+    height: 26px;
+    width: 90px;
+}
+</style>
+<script>
+function showfuwsm()
+{
+	var sffwsm = document.getElementById("sffwsm");
+
+	
+	if(sffwsm.style.display=="none")
+	{
+		sffwsm.style.display="";
+		}else
+
+		{
+			sffwsm.style.display="none";
+			}
+}
+function zhuanzhang(obj)
+{
+	//alert(obj.yinhangkaid.value);
+	var money="{~user()->get('money')}";
+    var dollar="{~user()->get('dollar')}";
+	var hkdollar="{~user()->get('hkdollar')}";
+	var euro="{~user()->get('euro')}";
+	var jpy="{~user()->get('jpy')}";
+	var krw="{~user()->get('krw')}";
+	var gbp="{~user()->get('gbp')}";
+	var aud="{~user()->get('aud')}";
+	var cad="{~user()->get('cad')}";
+	var chf="{~user()->get('chf')}";
+	var nzd="{~user()->get('nzd')}";
+	var sgd="{~user()->get('sgd')}";
+	var hkc="{~user()->get('hkc')}";
+	var btc="{~user()->get('btc')}";
+	var eth="{~user()->get('eth')}";
+	var money_a = $('#money_a').val();
+		if(obj.tousername.value.length==0)
+	{
+		alert("请输入收款人");
+		return false;
+	}
+	if(obj.tixiannum.value.length==0)
+	{
+		alert("请输入提现金额");
+		return false;
+	}
+	var sxf;
+
+
+	if($yanzheng['wrate']==0)
+	{
+		sxf=0;
+	}else
+	{
+		sxf = obj.value*{eval echo $sxf=$yanzheng['wrate']/100.0;};
+		sxf = sxf.toFixed(2);
+		if(sxf<0.01)
+		{
+			sxf =0.01;
+		}
+	}
+
+
+	if (money_a==1){
+		/*
+
+		if($yanzheng['dollar_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['dollar_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+		*/
+
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>dollar)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==2){
+
+		/*
+
+		if($yanzheng['wrate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['wrate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+		*/
+
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>money)
+		{
+
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==3){
+
+		/*
+
+		if($yanzheng['hkdollar_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['hkdollar_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+
+		*/
+
+
+
+
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>hkdollar)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==4){
+
+		/*
+
+		if($yanzheng['euro_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['euro_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+
+		*/
+
+
+
+
+
+
+
+
+
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>euro)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+   if (money_a==5){
+
+   	/*
+
+	   if($yanzheng['jpy_rate']==0)
+	   {
+		   sxf=0;
+	   }else
+	   {
+		   sxf = obj.value*{eval echo $sxf=$yanzheng['jpy_rate']/100.0;};
+		   sxf = sxf.toFixed(2);
+		   if(sxf<0.01)
+		   {
+			   sxf =0.01;
+		   }
+	   }
+
+	   */
+
+
+
+
+
+
+
+
+
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>jpy)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==6){
+
+/*
+
+		if($yanzheng['krw_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['krw_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+
+*/
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>krw)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==7){
+/*
+
+		if($yanzheng['gbp_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['gbp_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+*/
+
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>gbp)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==8){
+
+/*
+		if($yanzheng['aud_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['aud_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+*/
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>aud)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==9){
+
+/*
+		if($yanzheng['cad_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['cad_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+*/
+
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>cad)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==10){
+
+/*
+		if($yanzheng['chf_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['chf_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+*/
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>chf)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==11){
+/*
+
+		if($yanzheng['nzd_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['nzd_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+
+*/
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>nzd)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==12){
+/*
+
+		if($yanzheng['sgd_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['sgd_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+*/
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>sgd)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==13){
+
+/*
+		if($yanzheng['hkc_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['hkc_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+
+
+*/
+
+
+
+
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>hkc)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+    if (money_a==14){
+
+/*
+		if($yanzheng['btc_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['btc_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+*/
+
+
+
+
+
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>btc)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if (money_a==15){
+
+/*
+		if($yanzheng['eth_rate']==0)
+		{
+			sxf=0;
+		}else
+		{
+			sxf = obj.value*{eval echo $sxf=$yanzheng['eth_rate']/100.0;};
+			sxf = sxf.toFixed(2);
+			if(sxf<0.01)
+			{
+				sxf =0.01;
+			}
+		}
+*/
+
+
+
+
+
+
+
+
+		if(parseFloat(obj.tixiannum.value)+parseFloat(sxf)>eth)
+		{
+			alert("转账金额应小于您的账户余额");
+			return false;
+		}
+	}
+	if(obj.zfpassword.value.length<1)
+	{
+		alert("请填写支付密码");
+		return false;
+	}
+
+	if(confirm("请您认真审核并确定进行站内转账，转账后，资金将直接进入对方账户，无法退款，请谨慎"))
+	{
+	obj.submit();
+	}
+	return true;
+	
+}
+
+function onkeyupdone(obj)
+{
+	var money_a = $('#money_a').val();
+	obj.value = obj.value.replace(/[^\d.]/g,"");  //清除“数字”和“.”以外的字符
+    obj.value = obj.value.replace(/^\./g,"");  //验证第一个字符是数字而不是.
+    obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个. 清除多余的.
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+    if(obj.value.indexOf(".") !=-1)
+    {
+    obj.value  = obj.value.substring(0,obj.value.indexOf(".") + 3);; 
+    }
+	var sxf;
+	var sxf1;
+
+	document.getElementById('sxf1').innerHTML={eval echo $sxf=$yanzheng['wrate'];};
+
+
+
+	if($yanzheng['wrate']==0)
+	{
+		sxf=0;
+	}else
+	{
+	 sxf = obj.value*{eval echo $sxf=$yanzheng['wrate']/100.0;};
+	 sxf = sxf.toFixed(2); 
+	 if(sxf<0.01)
+	 {
+		 sxf =0.01;
+		 }
+	}
+
+	if(obj.value=="" || obj.value==0)
+	{
+		document.getElementById('sxf').innerHTML='';
+		document.getElementById('dzje').innerHTML='';
+	}else
+	{
+		 var sxffff=parseFloat((parseFloat(obj.value,2)),2);
+		sxffff=sxffff.toFixed(2);
+		if (money_a==1){
+
+			/*
+			if($yanzheng['dollar_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['dollar_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+*/
+
+
+			document.getElementById('sxf').innerHTML='USD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='USD'+sxffff+'元';
+		}else if (money_a==2){
+
+			/*
+
+			if($yanzheng['wrate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['wrate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+*/
+
+
+
+			document.getElementById('sxf').innerHTML='CNY'+sxf+'元';
+			document.getElementById('dzje').innerHTML='CNY'+sxffff+'元';
+		} else if (money_a==3){
+
+			/*
+
+			if($yanzheng['hkdollar_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['hkdollar_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+*/
+
+
+
+
+
+
+
+
+
+			document.getElementById('sxf').innerHTML='HKD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='HKD'+sxffff+'元';
+		} else if (money_a==5){
+
+
+			/*
+
+			if($yanzheng['jpy_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['jpy_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+*/
+
+
+
+
+
+
+			document.getElementById('sxf').innerHTML='JPY'+sxf+'元';
+			document.getElementById('dzje').innerHTML='JPY'+sxffff+'元';
+		} else if (money_a==6){
+
+			/*
+
+			if($yanzheng['krw_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['krw_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+*/
+
+
+
+
+
+
+
+
+
+
+			document.getElementById('sxf').innerHTML='KRW'+sxf+'元';
+			document.getElementById('dzje').innerHTML='KRW'+sxffff+'元';
+        } else if (money_a==7){
+
+
+			/*
+			if($yanzheng['gbp_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['gbp_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+*/
+
+
+
+
+
+
+			document.getElementById('sxf').innerHTML='GBP'+sxf+'元';
+			document.getElementById('dzje').innerHTML='GBP'+sxffff+'元';
+       } else if (money_a==8){
+
+
+			/*
+			if($yanzheng['aud_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['aud_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+*/
+
+
+
+
+
+			document.getElementById('sxf').innerHTML='AUD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='AUD'+sxffff+'元';
+		} else if (money_a==9){
+
+			/*
+			if($yanzheng['cad_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['cad_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+*/
+
+
+
+
+			document.getElementById('sxf').innerHTML='CAD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='CAD'+sxffff+'元';
+		} else if (money_a==10){
+
+
+			/*
+			if($yanzheng['chf_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['chf_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+
+			 */
+
+
+
+
+
+
+
+
+
+
+
+			document.getElementById('sxf').innerHTML='CHF'+sxf+'元';
+			document.getElementById('dzje').innerHTML='CHF'+sxffff+'元';
+		} else if (money_a==11){
+
+
+			/*
+			if($yanzheng['nzd_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['nzd_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+
+			 */
+
+
+
+
+
+			document.getElementById('sxf').innerHTML='NZD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='NZD'+sxffff+'元';
+		} else if (money_a==12){
+
+			/*
+			if($yanzheng['sgd_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['sgd_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+
+
+			}
+
+			 */
+
+
+
+
+
+			document.getElementById('sxf').innerHTML='SGD'+sxf+'元';
+			document.getElementById('dzje').innerHTML='SGD'+sxffff+'元';
+		} else if (money_a==13){
+
+
+			/*
+			if($yanzheng['hkc_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['hkc_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+
+			 */
+
+
+
+
+
+			document.getElementById('sxf').innerHTML='HKC'+sxf+'元';
+			document.getElementById('dzje').innerHTML='HKC'+sxffff+'元';
+		} else if (money_a==14){
+
+			/*
+
+			if($yanzheng['btc_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['btc_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+
+			 */
+
+
+
+			document.getElementById('sxf').innerHTML='BTC'+sxf+'元';
+			document.getElementById('dzje').innerHTML='BTC'+sxffff+'元';
+		} else if (money_a==15){
+
+			/*
+			if($yanzheng['eth_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['eth_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+
+			 */
+
+
+
+
+			document.getElementById('sxf').innerHTML='ETH'+sxf+'元';
+			document.getElementById('dzje').innerHTML='ETH'+sxffff+'元';
+		} else {
+			/*
+
+			if($yanzheng['euro_rate']==0)
+			{
+				sxf=0;
+			}else
+			{
+				sxf = obj.value*{eval echo $sxf=$yanzheng['euro_rate']/100.0;};
+				sxf = sxf.toFixed(2);
+				if(sxf<0.01)
+				{
+					sxf =0.01;
+				}
+			}
+
+			 */
+
+			document.getElementById('sxf').innerHTML='EUR'+sxf+'元';
+			document.getElementById('dzje').innerHTML='EUR'+sxffff+'元';
+		}
+	}
+}
+</script>
+<script>
+	var _WBFC = {};
+ _WBFC.ERR_TIPID = 'error_tip';
+ _WBFC.flag = true;
+ _WBFC.changea = function(){
+ 	 var wrate="{$yanzheng['wrate']}";
+	 var sffwsm = $('#zdsxf');
+	 var mntype = $('#mntype');
+	 var money_a = $('#money_a').val();
+	 var money="{~user()->get('money')}";
+    var dollar="{~user()->get('dollar')}";
+	var hkdollar="{~user()->get('hkdollar')}";
+	var euro="{~user()->get('euro')}";
+	var jpy="{~user()->get('jpy')}";
+	var krw="{~user()->get('krw')}";
+	var gbp="{~user()->get('gbp')}";
+	var aud="{~user()->get('aud')}";
+	var cad="{~user()->get('cad')}";
+	var chf="{~user()->get('chf')}";
+	var nzd="{~user()->get('nzd')}";
+	var sgd="{~user()->get('sgd')}";
+	var hkc="{~user()->get('hkc')}";
+	var btc="{~user()->get('btc')}";
+	var eth="{~user()->get('eth')}";
+	 if(money_a == 1){
+	 	 mntype.html('USD '+dollar);
+		 sffwsm.html("USD 0.01元");
+	 }else if (money_a==2){
+	 	 mntype.html('CNY '+money);
+		 sffwsm.html("CNY 0.01元");
+	}else if (money_a==3){
+		mntype.html('HKD '+hkdollar);
+		sffwsm.html("HKD 0.01元");
+	}else if (money_a==5){
+		mntype.html('JPY '+jpy);
+		sffwsm.html("JPY 0.01元");
+	}else if (money_a==6){
+		mntype.html('KRW '+krw);
+		sffwsm.html("KRW 0.01元");
+   }else if (money_a==7){
+   	    mntype.html('GBP '+gbp);
+		sffwsm.html("GBP 0.01元");
+   }else if (money_a==8){
+   		mntype.html('AUD '+aud);
+		sffwsm.html("AUD 0.01元");
+   }else if (money_a==9){
+   		mntype.html('CAD '+cad);
+		sffwsm.html("CAD 0.01元");
+    }else if (money_a==10){
+    	mntype.html('CHF '+chf);
+		sffwsm.html("CHF 0.01元");
+	 }else if (money_a==11){
+	 	mntype.html('NZD '+nzd);
+		sffwsm.html("NZD 0.01元");
+	 }else if (money_a==12){
+	 	mntype.html('SGD '+sgd);
+		sffwsm.html("SGD 0.01元");
+	 }else if (money_a==13){
+	 	mntype.html('HKC '+hkc);
+		sffwsm.html("HKC 0.01元");
+	}else if (money_a==14){
+	 	mntype.html('BTC '+btc);
+		sffwsm.html("BTC 0.01元");
+	 }else if (money_a==15){
+	 	mntype.html('ETH '+eth);
+		sffwsm.html("ETH 0.01元");
+	 }else{
+	 	mntype.html('EUR '+euro);
+		sffwsm.html("EUR 0.01元");
+	 }
+	 onkeyupdone(document.getElementById('tixiannum'));
+ }
+ _WBFC.changea();
+</script>
+</div>
+{~ui('loader')->css('@jquery.validationEngine')}
+{~ui('loader')->js('@jquery.validationEngine')}
+{~ui('loader')->js('@jquery.validationEngine.cn')}
+{~ui('loader')->js('@jquery.form')}
+</div>
+

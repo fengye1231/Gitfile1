@@ -1,0 +1,61 @@
+<!--{template @wap/header1}-->
+<title>恢复密码</title>
+</head>
+<body>
+
+
+
+<div style="text-align:center;">
+    <div class="lanmu">恢复密码</div>
+
+    <form action="/?mod=wap&code=get&op=password_nm" method="POST" onSubmit="return checkpwd()">
+	
+		<p>请输入账号：<input type="text"   name="zhanghao"  id="zhanghao" /></p>
+	
+        <p>输入助记词：<input type="text"   name="zjwords" id="zjwords" /></p>
+
+
+
+        <input type="submit" class="formbutton formbutton_invite" value="找回密码">&nbsp;
+
+        <p>密码是：<input type="text"   name="mima" readonly="readonly" value="{$obvious}" /></p>
+
+        <p align="center" style="padding:10px 0;">
+            <input  type="button" onClick="window.location='/?mod=wap&code=account&op=login1'"  class="formbutton formbutton_invite"  value="返回登录" />
+        </p>
+    </form>
+
+
+	<p style="color:red;">{$msg}</p>
+
+</div>
+
+
+
+<script >
+    function checkpwd(){
+
+        if(document.getElementById("zhanghao") =='') {
+            alert('账号不能为空');
+            return false;
+        }
+
+
+        if(document.getElementById("zjwords") ==''){
+            alert('助记词不能为空');
+            return false;
+        }
+
+
+        if(document.getElementById("zjwords").value.length<8){
+            alert('助记词最少8个字符');
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+
+
+<!--{template @wap/footer}-->

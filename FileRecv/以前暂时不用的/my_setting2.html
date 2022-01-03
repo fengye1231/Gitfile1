@@ -1,0 +1,76 @@
+<!--{template @wap/header1}-->
+<title>账号设置</title>
+</head>
+<body style="
+    width: 335px">
+<!--{template @wap/header2_nm}-->
+<div class="lanmu" style="
+    width: 335px"><font color="#FFFFFF">账号设置-密码修改</font></div>
+<div class="address">
+  <div class="llf"><div class="nleftL">
+
+<div class="t_area_out">
+<div class="t_area_in">
+
+<script language="javascript">
+function checkpwd(){
+
+if($('#newpwd').val() != $('#confirmpwd').val()){
+alert('两次密码输入不一致');
+return false;
+}
+
+if($('#newzfpwd').val() != $('#confirmzfpwd').val()){
+	alert('两次支付密码输入不一致');
+	return false;
+	}
+
+return true;
+}
+</script>
+<div class="nleftL">
+
+  <p style="color:red;">{$msg}</p>
+<form method="post" action="?mod=me&code=doinfo_nm" onSubmit="return checkpwd()">
+<input type="hidden" name="phone" id="phone" value="{$user['phone']}" />
+<input type="hidden" name="email" value="{$user['email']}" />
+<div class="field">
+账号:{$username_nm}
+</div>
+<div class="field">
+请修改登录，支付密码和助记词
+</div>
+<div class="field">
+<label>新登录密码</label>
+<input type="password" name="newpwd" id="newpwd" class="f_input"  size="20"> 
+（必须由大小写字母和数字组成的8位以上字符）</div>
+<div class="field">
+<label>确认新密码</label>
+<input type="password" name="confirmpwd" id="confirmpwd" class="f_input"  size="20">
+</div>
+
+<div class="field">
+<label>新支付密码</label>
+<input type="password" name="newzfpwd" id="newzfpwd" class="f_input"  size="20">&nbsp; 
+（必须是8位以上数字组成的8为字符）</div>
+<div class="field">
+<label>确认新密码</label>
+<input type="password" name="confirmzfpwd" id="confirmzfpwd" class="f_input"  size="20"><br>
+<span class="hint">如果不想修改密码，请保持空白</span>
+</div>
+<div class="field">
+新的助记词
+<input type="text" name="zjwords" id="zjwords" class="f_input"  size="20"> 
+（必须是由英文字母或者拼音组成的8位字符）<br><span class="hint">助记词用于忘记登录密码时恢复之用。</span>
+</div>
+<div class="field">
+<label></label>
+</div>
+<div class="clear"></div>
+<div class="act">
+<input type="submit" class="formbutton formbutton_invite"  value="修 改">
+</div>
+</form>
+</div>
+</div>
+<!--{template @wap/footer2}-->

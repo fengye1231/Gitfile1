@@ -1,0 +1,98 @@
+<!--{template @wap/header1}-->
+<title>南雅帐号余额页面-wap</title>
+</head>
+<body style=width="100%">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=0.85, user-scalable=yes" />
+<!--{template @wap/header}-->
+<div class="lanmu" style=width="100%"><font color="#FFFFFF">账户余额</font></div>
+<div class="address">
+  <div class="llf"><div class="nleftL">
+<table border="1" width="115%" bordercolor="#89B4D4" background="/tp/dollor4.jpg">
+	<tr>
+		<td width="761" height="36">
+		人民币余额CNY：{~user()->get('money')}元<br>
+		DCEP币息宝余额：{if $uid!=347}  {~user()->get('lcb_money')} {/if} {if $uid==347} {$lcb_dcep_total}   {/if}元</td>
+		<td width="597" height="36">
+		在途CNY：{~logic('order')->GetFreezeMoney(0, 0)}元</td>
+	</tr>
+	<tr>
+		<td width="761" height="36">
+		香港币余额HKC：{~user()->get('hkc')}元<br>
+		HKC币息宝余额：{if $uid!=347}  {~user()->get('lcb_hkc_money')}   {/if} {if $uid==347} {$lcb_hkc_total}   {/if}元</td>
+		<td width="597" height="36">
+		在途HKC：{~logic('order')->GetFreezeMoney(0, 12)}元</td>
+	</tr>
+	<tr>
+		<td width="761" height="36">
+		美元余额USD：{~user()->get('dollar')}元</td>
+		<td width="597" height="36">
+		在途USD：{~logic('order')->GetFreezeMoney(0, 1)}元</td>
+	</tr>
+	<tr>
+		<td width="761" height="36">
+		港币余额HKD：{~user()->get('hkdollar')}元</td>
+		<td width="597" height="36">
+		在途HKD：{~logic('order')->GetFreezeMoney(0, 2)}元</td>
+	</tr>
+	<tr>
+		<td width="761" height="36">
+		欧元余额EUR：{~user()->get('euro')}元</td>
+		<td width="597" height="36">
+		在途EUR：{~logic('order')->GetFreezeMoney(0, 3)}元</td>
+	</tr>	
+	<tr>
+		<td width="761" height="36">
+		日元余额JPY：{~user()->get('jpy')}元</td>
+		<td width="597" height="36">
+		在途JPY：{~logic('order')->GetFreezeMoney(0, 4)}元</td>
+	</tr>	
+	<tr>
+		<td width="761" height="36">
+		韩元余额KRW：{~user()->get('krw')}元</td>
+		<td width="597" height="36">
+		在途KRW：{~logic('order')->GetFreezeMoney(0, 5)}元</td>
+	</tr>	
+	<tr>
+		<td width="761" height="36">
+		英镑余额GBP：{~user()->get('gbp')}元</td>
+		<td width="597" height="36">
+		在途GBP：{~logic('order')->GetFreezeMoney(0, 6)}元</td>
+	</tr>
+		<td width="761" height="36">
+		澳元余额AUD：{~user()->get('aud')}元</td>
+		<td width="597" height="36">
+		在途AUD：{~logic('order')->GetFreezeMoney(0, 7)}元</td>
+	</tr>
+	<tr>
+		<td width="761" height="36">
+		加元余额CAD：{~user()->get('cad')}元</td>
+		<td width="597" height="36">
+		在途CAD：{~logic('order')->GetFreezeMoney(0, 8)}元</td>
+	</tr>
+		<td width="761" height="36">
+		瑞郎余额CHF：{~user()->get('chf')}元</td>
+		<td width="597" height="36">
+		在途CHF：{~logic('order')->GetFreezeMoney(0, 9)}元</td>
+	<tr>
+		<td width="761" height="36">
+		新西兰元余额NZD：{~user()->get('nzd')}元</td>
+		<td width="597" height="36">
+		在途NZD：{~logic('order')->GetFreezeMoney(0, 10)}元</td>
+	</tr>
+		<td width="761" height="36">
+		新加坡元余额SGD：{~user()->get('sgd')}元</td>
+		<td width="597" height="36">
+		在途SGD：{~logic('order')->GetFreezeMoney(0, 11)}元</td>
+	</tr>
+		<td width="761" height="36">
+		比特币余额BTC：{~user()->get('btc')}元</td>
+	<td width="597" height="36">
+		在途BTC：{~logic('order')->GetFreezeMoney(0, 13)}元</td>
+	</tr>
+	<td width="761" height="36">
+		以太币余额ETH：{~user()->get('eth')}</td>
+	<td width="597" height="36">
+		在途ETH：{~logic('order')->GetFreezeMoney(0, 14)}</td>
+	</tr>
+	    </table>
+</div>

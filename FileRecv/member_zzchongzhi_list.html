@@ -1,0 +1,57 @@
+<!--{template @admin/header}--> 
+<table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> 
+<tr class="header"> <td>技巧提示&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.pad80.com/doOrder.php">
+<font color="#FF0000">异常订单处理</font></a></td> </tr> 
+<tr bgcolor="#F4F8FC"> <td> <ul> <li>系统角色为<b>粗体</b>显示，自定义角色为普通。</li> </ul> </td> </tr>
+ </table> <br> 
+ <table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> 
+<tr class=""> <td style="padding-left:0" colspan="6">
+<div class="is_button"><a href="?mod=member&code=zzchongzhi&show=1&ttype={$ttype}">待处理</a></div>
+<div class="is_button"><a href="?mod=member&code=zzchongzhi&show=2&ttype={$ttype}">已处理</a></div>
+<div class="is_button"><a href="?mod=member&code=zzchongzhi&show=3&ttype={$ttype}">所有</a></div> 
+
+<div class="is_button"><a href="?mod=member&code=zzchongzhi&ttype=&show={$show}">全部通道</a></div> 
+
+<div class="is_button"><a href="?mod=member&code=zzchongzhi&ttype=无卡支付&show={$show}">无卡支付</a></div> 
+
+<div class="is_button"><a href="?mod=member&code=zzchongzhi&ttype=移动支付&show={$show}">移动支付</a></div> 
+
+<div class="is_button"><a href="?mod=member&code=zzchongzhi&ttype=网银支付&show={$show}">网银支付</a></div> 
+
+<div class="is_button"><a href="?mod=member&code=zzchongzhi&ttype=手机支付&show={$show}">手机支付</a></div> 
+
+<div class="is_button"><a href="?mod=member&code=zzchongzhi&ttype=美元支付&show={$show}" style='display:none;'>美元支付</a></div> 
+
+<div class="is_button"><a href="?mod=member&code=zzchongzhi&ttype=转账付款&show={$show}">转账付款</a></div> 
+
+</td> 
+</tr>
+ <tr align="center" class="header"> 
+
+ <td>申请用户名</td> 
+ <td>姓名</td>
+ <td>流水号</td> 
+ <td>金额</td> 
+ <td>申请日期</td> 
+ <td>操作到账日期</td>
+ <td>操作</td> 
+ <td>通道</td> </tr>
+ <!--{loop $member_list $member}-->
+  <tr onmouseover="this.className='tr_hover'" onmouseout="this.className='tr_normal'"> 
+  <td><a href="admin.php?mod=member&code=modify&id={$member[uid]}"> {$member['username']}</a></td>
+   <td>{$member['yanzheng']['idname']}</td>
+   <td>{$member['orderid']}</td> 
+   <td>{if $member['tongdao']=="美元支付" or $member['tongdao']=="wap美元支付" }${$member['money']} {else}￥{$member['money']}{/if}
+</td> 
+    <td>{eval echo date("Y-m-d H:i",$member[createtime]);}</td>
+   <td>{eval echo $member[paytime]?date("Y-m-d H:i",$member[paytime]):'';}</td>
+    <td> {if $member[statue]==1}<a href="admin.php?mod=member&code=showzzchongzhi&id={$member[orderid]}">到账</a>/<a href="admin.php?mod=member&code=showzzchongzhi&id={$member[orderid]}&de=1" style="color:red">删除</a> 
+    {elseif  $member[statue]==2}
+    已到账
+    {elseif  $member[statue]==3}
+    
+    {/if}
+    </td> 
+	<td>{$member['tongdao']}{if $member['tongdao']=="美元支付" or $member['tongdao']=="转账付款" or $member['tongdao']=="微信支付" or $member['tongdao']=="扫码支付" or  $member['tongdao']=="wap美元支付" or $member['tongdao']=="wap转账付款" or $member['tongdao']=="wap微信支付" or $member['tongdao']=="wap扫码支付" }{if $member['is_confrim'] == 1}(<font color='green'>已确认转账</font>){else}(<font color='red'>未确认转账</font>){/if}{/if}</td>
+    </tr> <!--{/loop}--> <!--{if $pages}--> <tr> <td colspan="20">$pages</td> </tr> <!--{/if}--> </table> 
+{template @admin/footer}

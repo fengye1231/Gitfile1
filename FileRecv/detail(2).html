@@ -1,0 +1,244 @@
+<!--{template header}-->
+{~ui('ad')->load('howdo')}
+{~ui('loader')->js('@time.lesser')}
+<div class="m960">
+<div class="t_l">
+<div class="like_share_this">
+{eval app('bshare')->load('product_detail', array('product'=>$product))}
+
+</div>
+<div class="t_area_out" style="border-width:2px;">
+<div class="t_area_in">
+<table class="at_jrat">
+<tbody>
+<tr>
+<td><span>产品名称：</span>{$product['name']}</td>
+</tr>
+</tbody>
+</table>
+<div  class="t_deal">
+<div class="t_deal_l t_deal_l2">
+<div class="at_buy">
+
+{if $product['time_remain'] < 0}
+<div class="deal_o"></div>
+{else}	
+{if $product['surplus']>0}
+<div class="deal_b"><a id="myid" href="javascript:void(0)" onclick="myfun1()"><img src="templates/default/images/buy_mm.gif"></a></div>
+{else}
+<div class="deal_y"></div>
+{/if} 
+{/if}
+</div>
+<div class="at_shuzi">
+<div  class="price"><span style="font-size:23px;">最新价:<br><span id="mynowprice" style="font-size:23px;"></span><span style="font-size:23px;">HKC</span><span style="font-size:18px;">/枚</span> </div>
+
+<br><br>
+<p><font size="4">可供数量：&nbsp;&nbsp;$product['maxnum']枚</font></p>
+
+</div>
+</div>
+
+<div id="tuanState" style="float: left;" class="t_deal_l mb_0625">
+<div style="text-align: center;">
+<b class="B" >
+{if $product['type'] == 'prize'}
+
+{if $product['time_remain'] < 0}
+{if logic('prize')->PrizeWIN($product['id'])}
+已开奖
+<br/>
+<a href="?mod=prize&code=view&pid={$product['id']}">查看中奖号码</a>
+{else}
+未开奖
+{/if}
+{/if}
+{else}
+{/if}
+</b>
+<br/>
+{if $product['time_remain'] < 0}
+产品销售已结束！
+{else}
+{if $product['surplus']<=0}
+<img src="images/err.gif" />
+<span class="txt12">东西卖光啦，下次请赶早！</span>
+{else}
+<br/>
+{if $product['succ_remain']<=0}
+
+{else}
+达成优惠还需{$product['succ_remain']}人 <br/>
+{if meta('p_ir_'.$product['id'])}<a href="{eval echo $this->Config[site_url]; }/?u={MEMBER_ID}" onclick="copyText(this.href);">邀请朋友一起买，返利{ini:product.default_payfinder}元</a>{/if}
+{/if}
+{/if}
+{/if}
+</div>
+</div>
+</div>
+<div class="t_deal_r">
+<div class="t_deal_r_img">
+{eval ui('iimager')->multis($product['id'], $product['imgs'])}
+</div>
+<div style="margin: 10px 0pt; clear: both;">
+<p>{$product['intro']}</p>
+</div>
+</div>
+<div style="clear: both; height: 0px; overflow:hidden;">　</div>
+</div>
+</div>
+<div class="l_rc_t" ></div>
+<div class="t_area_out rc_t_area_out" style=" background-color:#f5f5f8; width:713px;" >
+<div  class="t_area_in t_padding" style="float:none;">
+<div id="product_detail_area"  class="t_detail_l"{if meta('p_hs_'.$product['id'])} style="width:711px;"{else} style="width:500px; overflow:hidden;"{/if}>
+<h4>本单详情</h4>
+<Script type="text/javascript">
+$("#t_detail_txt img").each(function(){
+if($(this).width() > $(this).parent().width()) {
+$(this).width("100%");
+}});
+</Script>
+<div id="t_detail_txt" class="t_detail_txt">{$product['content']}</div>
+{if $product['cue']}
+<h4>特别提示</h4>
+<div class="t_detail_txt">{$product['cue']}</div>
+{/if}
+{if $product['theysay']}
+<h4>他们说</h4>
+<div class="t_detail_txt">{$product['theysay']}</div>
+{/if}
+{if $product['wesay']}
+<h4>我们说</h4>
+<div class="t_detail_txt"{if meta('p_hs_'.$product['id'])} style="width:670px; "{/if}>
+<p ><span style="font-size:14px;"><span style="font-family: 宋体;">{$product['wesay']}</span></span></p>
+</div>
+<p>{/if}</p>
+
+</div>
+</div>
+{~ui('loader')->js('@product.detail')}
+{if !meta('p_hs_'.$product['id'])}
+<div class="t_detail_r"  style=" background-color:#f5f5f8;" >
+<h1>{$product['sellername']}</h1>
+{eval $sellermap = $product['sellermap']}
+{if $sellermap[0]!=''}
+<script type="text/javascript" src="http://api.go2map.com/maps/js/api_v2.0.js"></script>
+<script type="text/javascript"> 
+var map, marker;
+function map_initialize()
+{
+var location = new sogou.maps.Point('{$sellermap[0]}', '{$sellermap[1]}');
+var mapOptions = {
+zoom: '{$sellermap[2]}',
+center: location,
+mapTypeId: sogou.maps.MapTypeId.ROADMAP,
+mapControl: false
+};
+map = new sogou.maps.Map(document.getElementById("map_canvas"), mapOptions);
+marker = new sogou.maps.Marker({
+map: map,
+position: location,
+title: "{$product['sellername']}"
+});
+}
+</script>
+<div id="map_canvas" style="width:180px; height:280px;">
+<div style="padding:1em; color:gray;">正在载入...</div>
+</div>
+<br/><button id="img1" class="img2"><div class="map_big">查看完整地图</div></button>
+{/if}
+<p style="margin-top:10px; font-size:12px;">
+地址：{$product['selleraddress']}<br/>
+电话：{$product['sellerphone']}<br/>
+<a href="{$product['sellerurl']}" target="_blank">{$product['sellerurl']}</a>
+</p>
+{if $sellermap[0]!=''}
+<script type="text/javascript">
+$(document).ready(function() {
+$("#img1").click(function() {
+window.open('http://map.sogou.com/#c={$sellermap[0]},{$sellermap[1]},{$sellermap[2]}');
+});
+<!--{if $sellermap[0]!=''}-->
+map_initialize();
+<!--{/if}-->
+});
+</script>
+{/if}
+</div>
+{/if}
+<div style="clear: both;"></div>
+</div>
+<div class="l_rc_b"></div>
+</div>
+<div class="t_r">
+<!--{~ui('widget')->load('index_detail')}-->
+</div>
+</div>
+
+
+<script>
+    function myfun(){
+
+        const pricesWs = new WebSocket('wss://ws.coincap.io/prices?assets=bitcoin,ethereum');
+        pricesWs.onmessage = function (msg) {
+            console.log(msg.data);
+            var aaa=msg.data;
+            var bbb=aaa.search("bitcoin");
+            var ccc=aaa.search("ethereum");
+
+
+            console.log("{$product}");
+            console.log("*****************分割线");
+            console.log("{$product['danwei']}");
+
+
+
+            if ("{echo $product['danwei']}"=="BTC"){
+                if(bbb>-1){
+                    var ddd_str=aaa.substring(bbb+10);
+                    var eee=ddd_str.indexOf('"');
+                    var fff_str=aaa.substring(bbb+10,bbb+10+eee);
+                    console.log(fff_str);
+                    document.getElementById('mynowprice').innerHTML=fff_str;
+
+                    //$("#productNowPrice").attr("value",fff_str);
+                }
+            }
+
+            if ("{echo $product['danwei']}"=="ETH"){
+                if(ccc>-1){
+                    var ggg_str=aaa.substring(ccc+11);
+                    var hhh=ggg_str.indexOf('"');
+                    var iii_str=aaa.substring(ccc+11,ccc+11+hhh);
+                    console.log(iii_str);
+                    document.getElementById('mynowprice').innerHTML=iii_str;
+                    //$("#productNowPrice1").attr("value",iii_str);
+                }
+            }
+
+        }
+    }
+    window.onload = myfun;
+
+
+
+    function myfun1(){
+
+
+            //document.getElementById("myId").href = "?mod=buy&code=checkout&id={$product['id']}&nowprice="+document.getElementById('mynowprice').innerText;
+        window.location.href="?mod=buy&code=checkout&id={$product['id']}&nowprice="+document.getElementById('mynowprice').innerText;
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!--{template footer}-->

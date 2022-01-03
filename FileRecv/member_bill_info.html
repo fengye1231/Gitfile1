@@ -1,0 +1,84 @@
+<!--{template @admin/header}--> 
+<table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> 
+<tr class="header"> <td>技巧提示</td> </tr> 
+<tr bgcolor="#F4F8FC"> <td> <ul> <li>系统角色为<b>粗体</b>显示，自定义角色为普通。</li> </ul> </td> </tr>
+ </table> <br> 
+ 
+ <table cellspacing="1" cellpadding="4" width="100%" align="center" class="tableborder"> 
+ <!--{eval $member =  $info;}-->
+
+ <tr align="center" > 
+
+ <td class="header"> 用户名</td>  <td>
+
+     <!--
+     {if $member['is_private'] =='1'}
+        {$member['username']}
+    {else}
+        <a href="admin.php?mod=member&code=modify&id={$member[uid]}"> {$member['username']}</a>
+    {/if}
+    -->
+     <a href="admin.php?mod=member&code=modify&id={$member[uid]}"> {$member['username']}</a>
+
+ </td>
+     </tr>
+     <tr>
+     <td class="header">类型</td>  <td>{$member['name']}</td>
+     </tr>
+      <tr>
+     <td class="header">余额变动</td> <td>
+     {if $member['money']==0}
+    <font color="#FF6600" size="3" title="0元团！">{if $member['is_dollar']==1}${else}￥{/if} {$member['money']}</font>
+    {elseif $member['type']=='minus' && $member['money']<0}
+    <font color="#009999" size="4" title="购物返利！"><b>+</b></font>{if $member['is_dollar']==1}USD{else}￥{/if}  {echo abs($member['money'])}
+    {elseif $member['type']=='minus'}
+
+    <font color="#FF3333" size="4" title="支出">-&nbsp;</font> {if $member['is_dollar']==1}USD {elseif $member['is_hkdollar']}HKD {elseif $member['is_euro']}EUR {elseif $member['is_jpy']}JPY {elseif $member['is_krw']}KRW{elseif $member['is_gbp']}GBP{elseif $member['is_aud']}AUD{elseif $member['is_cad']}CAD{elseif $member['is_chf']}CHF{elseif $member['is_nzd']}NZD{elseif $member['is_sgd']}SGD{elseif $member['is_hkc']}HKC{elseif $member['is_btc']}BTC{elseif $member['is_eth']}ETH{elseif $member['is_money']}CNY{else}￥{/if} {$member['money']}
+
+    {else}
+    <font color="#009900" size="4" title="收入">+</font>{if $member['is_dollar']==1}USD {elseif $member['is_hkdollar']}HKD {elseif $member['is_euro']}EUR {elseif $member['is_jpy']}JPY {elseif $member['is_krw']}KRW{elseif $member['is_gbp']}GBP{elseif $member['is_aud']}AUD{elseif $member['is_cad']}CAD{elseif $member['is_chf']}CHF{elseif $member['is_nzd']}NZD{elseif $member['is_sgd']}SGD{elseif $member['is_hkc']}HKC{elseif $member['is_btc']}BTC{elseif $member['is_eth']}ETH{elseif $member['is_money']}CNY{else}￥{/if} {$member['money']}
+    {/if}
+    </td>
+       </tr>
+      <tr>
+     <td class="header">日期</td> <td>{eval echo date("Y-m-d H:i",$member[time]);}</td>
+      </tr>
+      <tr>
+     <td class="header">详情</td> <td>
+     {eval $value = $member;}
+     {if $value['name']!='zz'}
+    {$value['intro']}
+
+    {else}
+    {eval $zhanzhuanginfo = logic('zhuanzhanglist')->GetOne($value['intro']);}
+    <b>申请时间:</b>{eval echo date("Y-m-d:H:i:s",$zhanzhuanginfo[addtime]);}
+    <b>开户行:</b>{eval echo $zhanzhuanginfo[yhkinfo];}
+    <b>卡号:</b>{eval echo $zhanzhuanginfo[yhkkh];}
+    <b>姓名:</b>{eval echo $zhanzhuanginfo[yhkname];}
+    <br>
+    <b>状态:</b>
+    <b style="color:red">
+            {if $zhanzhuanginfo[statue]==1}
+            转账中
+            {elseif $zhanzhuanginfo[statue]==2}
+            {if $zhanzhuanginfo['sxfl']==0 }
+                 {eval $sxf = 0;}
+                 {else}
+                 {eval  $sxf = $zhanzhuanginfo['sxfl'];}
+                  {eval  $sxf = round($sxf,2);}
+            {/if}
+
+            成功;操作时间:{eval echo date("Y-m-d:H:i:s",$zhanzhuanginfo[cztime]);}手续费率:$zhanzhuanginfo['sxfl']%:手续费:{$sxf}实际到账:{eval echo $zhanzhuanginfo[value]-$sxf;}
+            备注:{$zhanzhuanginfo[mark]}
+            {elseif $zhanzhuanginfo[statue]==3}
+            转账失败;操作时间:{eval echo date("Y-m-d:H:i:s",$zhanzhuanginfo[cztime])."原因:".$zhanzhuanginfo[mark];};</b>
+            {/if}
+
+    {/if}
+
+    </td>
+      </tr>
+
+
+     </table>
+    {template @admin/footer}
