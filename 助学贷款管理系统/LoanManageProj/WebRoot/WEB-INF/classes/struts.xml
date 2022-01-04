@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <package name="loan" namespace="/" extends="struts-default">
+    
+       <action name="loan_*" class="com.loan.action.LoanAction" method="{1}">
+       		<result name="list">/loan/loanList.jsp</result>
+       		<result name="updateInput">/loan/updateLoan.jsp</result>
+       		<result name="updateMyInput">/loan/updateMyLoan.jsp</result>
+       		<result name="searchLoan">/loan/searchLoan.jsp</result>
+       		<result name="singleLoan">/loan/singleLoanList.jsp</result>
+       		<result name="addMyLoan">/loan/addMyLoan.jsp</result>
+       </action>
+       
+       <action name="user_*" class="com.loan.action.UserAction" method="{1}">
+       		<result name="fail">/login.jsp</result>
+       		<result name="stuLogin">/stu_index.jsp</result>
+       		<result name="loanLogin">/loan_index.jsp</result>
+       		<result name="academyLogin">/academy_index.jsp</result>
+       		<result name="adminLogin">/admin_index.jsp</result>
+       		<result name="list">/user/listUser.jsp</result>
+       		<result name="searchUser">/user/searchUser.jsp</result>
+       		<result name="updateInput">/user/updateUser.jsp</result>
+       		<result name="updateUser">/user/loginInfo.jsp</result>
+       		<result name="register">/user/regSuccess.jsp</result>
+       		<result name="regFail">/user/registerUser.jsp</result>
+       		<result name="updateMy">/user/loginInfo.jsp</result>
+       </action>
+       
+       <action name="student_*" class="com.loan.action.StudentAction" method="{1}">
+       		<result name="list">/student/stuList.jsp</result>
+       		<result name="searchStu">/student/searchStuInfo.jsp</result>
+       		<result name="updateInput">/student/updateStu.jsp</result>
+       		<result name="updateInputMy">/student/updateMyInfo.jsp</result>
+       		<result name="myInfoList">/student/myInfoList.jsp</result>
+       		<result name="addMyInfo">/student/addMyInfo.jsp</result>
+       </action>
+       
+       <action name="account_*" class="com.loan.action.AccountAction" method="{1}">
+       		<result name="list">/loan/accountList.jsp</result>
+       		<result name="singleAccount">/loan/singleAccountList.jsp</result>
+       		<result name="addMyAccount">/loan/addMyAccount.jsp</result>
+       		<result name="updateInput">/loan/updateAccount.jsp</result>
+       		<result name="updateMyInput">/loan/updateMyAccount.jsp</result>
+       		<result name="searchAccount">/loan/searchAccount.jsp</result>
+       </action>
+       
+        <action name="apply_*" class="com.loan.action.ApplyAction" method="{1}">
+       		<result name="list">/loan/applyList.jsp</result>
+       		<result name="myApplyList">/loan/stuApplyList.jsp</result>
+       		<result name="updateInput">/loan/updateApply.jsp</result>
+       		<result name="updateMyInput">/loan/updateMyApply.jsp</result>
+       		<result name="addMyApply">/loan/addApply.jsp</result>
+       </action>
+       
+       
+       <action name="approval_*" class="com.loan.action.ApprovalAction" method="{1}">
+       		<result name="list">/loan/approvalList.jsp</result>
+       </action>
+       
+       <action name="news_*" class="com.loan.action.NewsAction" method="{1}">
+       		<result name="list">/info/listNews.jsp</result>
+       		<result name="listStu">/info/listNewsStu.jsp</result>
+       </action>
+    </package>
+    
+</struts>

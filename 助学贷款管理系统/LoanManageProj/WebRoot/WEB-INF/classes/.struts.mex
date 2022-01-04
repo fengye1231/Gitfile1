@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="loan" location="0,0" size="0,0">
+    <action name="loan_*" location="0,0" size="0,0">
+      <result name="list">
+        <resourceEdge source="list" routing="0" target="loanList.jsp" />
+      </result>
+      <result name="updateInput">
+        <resourceEdge source="updateInput" routing="0" target="updateLoan.jsp" />
+      </result>
+      <result name="updateMyInput">
+        <resourceEdge source="updateMyInput" routing="0" target="updateMyLoan.jsp" />
+      </result>
+      <result name="searchLoan">
+        <resourceEdge source="searchLoan" routing="0" target="searchLoan.jsp" />
+      </result>
+      <result name="singleLoan">
+        <resourceEdge source="singleLoan" routing="0" target="singleLoanList.jsp" />
+      </result>
+      <result name="addMyLoan">
+        <resourceEdge source="addMyLoan" routing="0" target="addMyLoan.jsp" />
+      </result>
+    </action>
+    <action name="user_*" location="0,0" size="0,0">
+      <result name="fail">
+        <resourceEdge source="fail" routing="0" target="login.jsp" />
+      </result>
+      <result name="stuLogin">
+        <resourceEdge source="stuLogin" routing="0" target="stu_index.jsp" />
+      </result>
+      <result name="loanLogin">
+        <resourceEdge source="loanLogin" routing="0" target="loan_index.jsp" />
+      </result>
+      <result name="academyLogin">
+        <resourceEdge source="academyLogin" routing="0" target="academy_index.jsp" />
+      </result>
+      <result name="adminLogin">
+        <resourceEdge source="adminLogin" routing="0" target="admin_index.jsp" />
+      </result>
+      <result name="list">
+        <resourceEdge source="list" routing="0" target="listUser.jsp" />
+      </result>
+      <result name="searchUser">
+        <resourceEdge source="searchUser" routing="0" target="searchUser.jsp" />
+      </result>
+      <result name="updateInput">
+        <resourceEdge source="updateInput" routing="0" target="updateUser.jsp" />
+      </result>
+      <result name="updateUser">
+        <resourceEdge source="updateUser" routing="0" target="loginInfo.jsp" />
+      </result>
+      <result name="register">
+        <resourceEdge source="register" routing="0" target="regSuccess.jsp" />
+      </result>
+      <result name="regFail">
+        <resourceEdge source="regFail" routing="0" target="registerUser.jsp" />
+      </result>
+      <result name="updateMy">
+        <resourceEdge source="updateMy" routing="0" target="loginInfo.jsp" />
+      </result>
+    </action>
+    <action name="student_*" location="0,0" size="0,0">
+      <result name="list">
+        <resourceEdge source="list" routing="0" target="stuList.jsp" />
+      </result>
+      <result name="searchStu">
+        <resourceEdge source="searchStu" routing="0" target="searchStuInfo.jsp" />
+      </result>
+      <result name="updateInput">
+        <resourceEdge source="updateInput" routing="0" target="updateStu.jsp" />
+      </result>
+      <result name="updateInputMy">
+        <resourceEdge source="updateInputMy" routing="0" target="updateMyInfo.jsp" />
+      </result>
+      <result name="myInfoList">
+        <resourceEdge source="myInfoList" routing="0" target="myInfoList.jsp" />
+      </result>
+      <result name="addMyInfo">
+        <resourceEdge source="addMyInfo" routing="0" target="addMyInfo.jsp" />
+      </result>
+    </action>
+    <action name="account_*" location="0,0" size="0,0">
+      <result name="list">
+        <resourceEdge source="list" routing="0" target="accountList.jsp" />
+      </result>
+      <result name="singleAccount">
+        <resourceEdge source="singleAccount" routing="0" target="singleAccountList.jsp" />
+      </result>
+      <result name="addMyAccount">
+        <resourceEdge source="addMyAccount" routing="0" target="addMyAccount.jsp" />
+      </result>
+      <result name="updateInput">
+        <resourceEdge source="updateInput" routing="0" target="updateAccount.jsp" />
+      </result>
+      <result name="updateMyInput">
+        <resourceEdge source="updateMyInput" routing="0" target="updateMyAccount.jsp" />
+      </result>
+      <result name="searchAccount">
+        <resourceEdge source="searchAccount" routing="0" target="searchAccount.jsp" />
+      </result>
+    </action>
+    <action name="apply_*" location="0,0" size="0,0">
+      <result name="list">
+        <resourceEdge source="list" routing="0" target="applyList.jsp" />
+      </result>
+      <result name="myApplyList">
+        <resourceEdge source="myApplyList" routing="0" target="stuApplyList.jsp" />
+      </result>
+      <result name="updateInput">
+        <resourceEdge source="updateInput" routing="0" target="updateApply.jsp" />
+      </result>
+      <result name="updateMyInput">
+        <resourceEdge source="updateMyInput" routing="0" target="updateMyApply.jsp" />
+      </result>
+      <result name="addMyApply">
+        <resourceEdge source="addMyApply" routing="0" target="addApply.jsp" />
+      </result>
+    </action>
+    <action name="approval_*" location="0,0" size="0,0">
+      <result name="list">
+        <resourceEdge source="list" routing="0" target="approvalList.jsp" />
+      </result>
+    </action>
+    <action name="news_*" location="0,0" size="0,0">
+      <result name="list">
+        <resourceEdge source="list" routing="0" target="approvalList.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="loanList.jsp" path="/loan/loanList.jsp" location="0,0" size="0,0" />
+  <webResource name="login.jsp" path="/login.jsp" location="0,0" size="0,0" />
+  <webResource name="index.html" path="/index.html" location="0,0" size="0,0" />
+  <webResource name="listUser.jsp" path="/user/listUser.jsp" location="0,0" size="0,0" />
+  <webResource name="searchUser.jsp" path="/user/searchUser.jsp" location="0,0" size="0,0" />
+  <webResource name="updateUser.jsp" path="/user/updateUser.jsp" location="0,0" size="0,0" />
+  <webResource name="stuList.jsp" path="/student/stuList.jsp" location="0,0" size="0,0" />
+  <webResource name="searchStuInfo.jsp" path="/student/searchStuInfo.jsp" location="0,0" size="0,0" />
+  <webResource name="updateStu.jsp" path="/student/updateStu.jsp" location="0,0" size="0,0" />
+  <webResource name="approvalList.jsp" path="/loan/approvalList.jsp" location="0,0" size="0,0" />
+  <webResource name="accountList.jsp" path="/loan/accountList.jsp" location="0,0" size="0,0" />
+  <webResource name="updateAccount.jsp" path="/loan/updateAccount.jsp" location="0,0" size="0,0" />
+  <webResource name="applyList.jsp" path="/loan/applyList.jsp" location="0,0" size="0,0" />
+  <webResource name="updateApply.jsp" path="/loan/updateApply.jsp" location="0,0" size="0,0" />
+  <webResource name="updateLoan.jsp" path="/loan/updateLoan.jsp" location="0,0" size="0,0" />
+  <webResource name="stu_index.jsp" path="/stu_index.jsp" location="0,0" size="0,0" />
+  <webResource name="loan_index.jsp" path="/loan_index.jsp" location="0,0" size="0,0" />
+  <webResource name="academy_index.jsp" path="/academy_index.jsp" location="0,0" size="0,0" />
+  <webResource name="admin_index.jsp" path="/admin_index.jsp" location="0,0" size="0,0" />
+  <webResource name="registerUser.jsp" path="/user/registerUser.jsp" location="0,0" size="0,0" />
+  <webResource name="singleAccountList.jsp" path="/loan/singleAccountList.jsp" location="0,0" size="0,0" />
+  <webResource name="searchMyInfo.jsp" path="/student/searchMyInfo.jsp" location="0,0" size="0,0" />
+  <webResource name="stuApplyList.jsp" path="/loan/stuApplyList.jsp" location="0,0" size="0,0" />
+  <webResource name="regSuccess.jsp" path="/user/regSuccess.jsp" location="0,0" size="0,0" />
+  <webResource name="searchLoan.jsp" path="/loan/searchLoan.jsp" location="0,0" size="0,0" />
+  <webResource name="searchAccount.jsp" path="/loan/searchAccount.jsp" location="0,0" size="0,0" />
+  <webResource name="singleLoanList.jsp" path="/loan/singleLoanList.jsp" location="0,0" size="0,0" />
+  <webResource name="updateMyInfo.jsp" path="/student/updateMyInfo.jsp" location="0,0" size="0,0" />
+  <webResource name="myInfoList.jsp" path="/student/myInfoList.jsp" location="0,0" size="0,0" />
+  <webResource name="updateMyLoan.jsp" path="/loan/updateMyLoan.jsp" location="0,0" size="0,0" />
+  <webResource name="loginInfo.jsp" path="/user/loginInfo.jsp" location="0,0" size="0,0" />
+  <webResource name="updateMyAccount.jsp" path="/loan/updateMyAccount.jsp" location="0,0" size="0,0" />
+  <webResource name="updateMyApply.jsp" path="/loan/updateMyApply.jsp" location="0,0" size="0,0" />
+  <webResource name="addMyLoan.jsp" path="/loan/addMyLoan.jsp" location="0,0" size="0,0" />
+  <webResource name="addMyInfo.jsp" path="/student/addMyInfo.jsp" location="0,0" size="0,0" />
+  <webResource name="addMyAccount.jsp" path="/loan/addMyAccount.jsp" location="0,0" size="0,0" />
+  <webResource name="addApply.jsp" path="/loan/addApply.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+

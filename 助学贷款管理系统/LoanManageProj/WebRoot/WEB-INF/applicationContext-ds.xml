@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property>
+		<property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=Loandb"></property>
+		<property name="username" value="sa"></property>
+		<property name="password" value="920520"></property>		
+	</bean>
+	
+	<!-- 配置sessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- hibernate映射 -->
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:/com/loan/entity/hbm/User.hbm.xml</value>
+				<value>classpath*:/com/loan/entity/hbm/Loan.hbm.xml</value>
+				<value>classpath*:/com/loan/entity/hbm/Student.hbm.xml</value>
+				<value>classpath*:/com/loan/entity/hbm/Account.hbm.xml</value>
+				<value>classpath*:/com/loan/entity/hbm/Approval.hbm.xml</value>
+				<value>classpath*:/com/loan/entity/hbm/Apply.hbm.xml</value>
+				<value>classpath*:/com/loan/entity/hbm/News.hbm.xml</value>
+			</list>
+		</property>
+		<!-- hibernate属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+		
+	</bean>
+	
+	<!-- 事务控制 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 说明具体要执行的方法 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="del*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="*" read-only="true"/>			
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* com.loan.service.impl.*.*(..))" id="allMethods"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods"/>
+	</aop:config>
+	
+	
+	
+	
+	<!-- JavaBean配置 -->
+	<!-- LOAN -->
+	<bean id="loanAction" class="com.loan.action.LoanAction">
+		<property name="loanService" ref="loanService"/>
+	</bean>
+	<bean id="loanService" class="com.loan.service.impl.LoanServiceImpl">
+		<property name="loanDao" ref="loanDao"/>
+	</bean>
+	<bean id="loanDao" class="com.loan.dao.impl.LoanDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- USER -->
+	<bean id="userAction" class="com.loan.action.UserAction">
+		<property name="userService" ref="userService"/>
+	</bean>
+	<bean id="userService" class="com.loan.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"/>
+	</bean>
+	<bean id="userDao" class="com.loan.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- STUDENT -->
+	<bean id="studentAction" class="com.loan.action.StudentAction">
+		<property name="studentService" ref="studentService"/>
+	</bean>
+	<bean id="studentService" class="com.loan.service.impl.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"/>
+	</bean>
+	<bean id="studentDao" class="com.loan.dao.impl.StudentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- APPROVAL -->
+	<bean id="approvalAction" class="com.loan.action.ApprovalAction">
+		<property name="approvalService" ref="approvalService" />
+	</bean>
+	<bean id="approvalService" class="com.loan.service.impl.ApprovalServiceImpl">
+		<property name="approvalDao" ref="approvalDao" />
+	</bean>
+	<bean id="approvalDao" class="com.loan.dao.impl.ApprovalDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- ACCOUNT -->
+	<bean id="accountAction" class="com.loan.action.AccountAction">
+		<property name="accountService" ref="accountService" />
+	</bean>
+	<bean id="accountService" class="com.loan.service.impl.AccountServiceImpl">
+		<property name="accountDao" ref="accountDao" />
+	</bean>
+	<bean id="accountDao" class="com.loan.dao.impl.AccountDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
+	<!-- APPLY -->
+	<bean id="applyAction" class="com.loan.action.ApplyAction">
+		<property name="applyService" ref="applyService" />
+	</bean>
+	<bean id="applyService" class="com.loan.service.impl.ApplyServiceImpl">
+		<property name="applyDao" ref="applyDao" />
+	</bean>
+	<bean id="applyDao" class="com.loan.dao.impl.ApplyDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- NEWS -->
+	<bean id="newsAction" class="com.loan.action.NewsAction">
+		<property name="newsService" ref="newsService" />
+	</bean>
+	<bean id="newsService" class="com.loan.service.impl.NewsServiceImpl">
+		<property name="newsDao" ref="newsDao" />
+	</bean>
+	<bean id="newsDao" class="com.loan.dao.impl.NewsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+</beans>

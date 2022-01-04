@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.loan.entity.Account" table="AccountInfo" schema="dbo" catalog="LoanDB">
+        <id name="accountId" type="java.lang.Integer">
+            <column name="AccountId" not-null="true" />
+            <generator class="native" />
+        </id>
+        <property name="loanAccount" type="java.lang.Double">
+            <column name="LoanAccount" precision="10" not-null="true" />
+        </property>
+        <property name="balance" type="java.lang.Double">
+            <column name="Balance" precision="10" not-null="true" />
+        </property>
+        <property name="paymentAccount" type="java.lang.String">
+            <column name="PaymentAccount" length="50" not-null="true" />
+        </property>
+        <property name="paymentStyle" type="java.lang.String">
+            <column name="PaymentStyle" length="30" not-null="true" />
+        </property>
+        
+        <many-to-one name="loan" class="com.loan.entity.Loan" fetch="select">
+            <column name="LoanId" length="50" not-null="false" />
+        </many-to-one>
+         
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="LoanManageProj"
+  id="myeclipse.1330560718064"
+  context-root="/LoanManageProj"
+  j2ee-spec="5.0"
+  archive="LoanManageProj.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

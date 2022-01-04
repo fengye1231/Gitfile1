@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.loan.entity.Student" table="StudentInfo" lazy="false" schema="dbo" catalog="LoanDB">
+        <id name="stuId" type="java.lang.String">
+            <column name="StuId" length="20" />
+        </id>
+        <property name="stuName" type="java.lang.String">
+            <column name="StuName" length="50" not-null="true" />
+        </property>
+        <property name="stuSex" type="java.lang.String">
+            <column name="StuSex" length="50" not-null="true" />
+        </property>
+        <property name="stuIdentity" type="java.lang.String">
+            <column name="StuIdentity" length="50" not-null="true" />
+        </property>
+        <property name="enterSchoolTime" type="java.lang.String">
+            <column name="EnterSchoolTime" length="30" not-null="true" />
+        </property>
+        <property name="stuNation" type="java.lang.String">
+            <column name="StuNation" length="50" not-null="true" />
+        </property>
+        <property name="stuPolitic" type="java.lang.String">
+            <column name="StuPolitic" length="50" not-null="true" />
+        </property>
+        <property name="stuNative" type="java.lang.String">
+            <column name="StuNative" length="50" not-null="true" />
+        </property>
+        <property name="stuMobileTel" type="java.lang.String">
+            <column name="StuMobileTel" length="50" not-null="true" />
+        </property>
+        <property name="stuFamilyTel" type="java.lang.String">
+            <column name="StuFamilyTel" length="50" not-null="true" />
+        </property>
+        <property name="academy" type="java.lang.String">
+            <column name="Academy" length="50" not-null="true" />
+        </property>
+        <property name="classes" type="java.lang.String">
+            <column name="Classes" length="50" not-null="true" />
+        </property>
+        <property name="major" type="java.lang.String">
+            <column name="Major" length="50" not-null="true" />
+        </property>
+        <property name="stuRemark" type="java.lang.String">
+            <column name="StuRemark" length="100"/>
+        </property>
+        
+        <!-- 关系映射  -->
+        <many-to-one name="user" class="com.loan.entity.User" fetch="select">
+            <column name="UserId" not-null="true" />
+        </many-to-one>
+        
+        
+        <set name="loan" cascade="all-delete-orphan" inverse="true">
+        	<key>
+        		<column name="StuId" not-null="true" />
+        	</key>
+        	<one-to-many class="com.loan.entity.Loan" />
+        </set>
+       
+       
+    </class>
+</hibernate-mapping>

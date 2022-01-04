@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.loan.entity.Loan" table="LoanInfo" schema="dbo" catalog="LoanDB">
+        <id name="loanId" type="java.lang.String">
+            <column name="LoanId" length="50" />
+        </id>
+        <property name="loanAccount" type="java.lang.Double">
+            <column name="LoanAccount" precision="10" not-null="true" />
+        </property>
+        <property name="stuName" type="java.lang.String">
+            <column name="StuName" length="50" not-null="true" />
+        </property>
+        <property name="stuSex" type="java.lang.String">
+            <column name="StuSex" length="50" not-null="true" />
+        </property>
+        <property name="education" type="java.lang.String">
+            <column name="Education" length="50" not-null="true" />
+        </property>
+        <property name="schoolName" type="java.lang.String">
+            <column name="SchoolName" length="50" not-null="true" />
+        </property>
+        <property name="major" type="java.lang.String">
+            <column name="Major" length="50" not-null="true" />
+        </property>
+        <property name="applyLoanTime" type="java.lang.String">
+            <column name="ApplyLoanTime" length="30" not-null="true" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="Address" length="100" not-null="true" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="Remark" length="100"/>
+        </property>
+        
+        <!-- 关系映射 -->
+         <!-- student与loan一对一关联 -->
+        <many-to-one name="student" class="com.loan.entity.Student" fetch="select">
+            <column name="StuId" not-null="false" />
+        </many-to-one>
+        
+        <set name="account" cascade="all-delete-orphan" inverse="true">
+            <key>
+                <column name="LoanId" length="50" not-null="true" />
+            </key>
+            <one-to-many class="com.loan.entity.Account" />
+        </set>
+        
+        <set name="apply" inverse="true">
+            <key>
+                <column name="LoanId" length="50" not-null="true" />
+            </key>
+            <one-to-many class="com.loan.entity.Apply" />
+        </set>
+    </class>
+</hibernate-mapping>

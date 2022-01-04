@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.loan.entity.Apply" table="ApplyInfo" schema="dbo" catalog="LoanDB">
+        <id name="applyId" type="java.lang.Integer">
+            <column name="ApplyId" />
+            <generator class="native" />
+        </id>
+        <property name="stuName" type="java.lang.String">
+            <column name="StuName" length="20" not-null="true" />
+        </property>
+        <property name="stuIdentity" type="java.lang.String">
+            <column name="StuIdentity" length="50" not-null="true" />
+        </property>
+        <property name="stuMobileTel" type="java.lang.String">
+            <column name="StuMobileTel" length="50" not-null="true" />
+        </property>
+        <property name="stuFamilyTel" type="java.lang.String">
+            <column name="StuFamilyTel" length="50" not-null="true" />
+        </property>
+        <property name="paymentAccount" type="java.lang.String">
+            <column name="PaymentAccount" length="50" not-null="true" />
+        </property>
+        <property name="paymentStyle" type="java.lang.String">
+            <column name="PaymentStyle" length="30" not-null="true" />
+        </property>
+        <property name="paymentMoney" type="java.lang.Integer">
+            <column name="PaymentMoney" />
+        </property>
+        
+        <many-to-one name="loan" class="com.loan.entity.Loan" fetch="select">
+            <column name="LoanId" length="50" not-null="true" />
+        </many-to-one>
+        
+        
+        <many-to-one name="approval" class="com.loan.entity.Approval" fetch="select">
+            <column name="ApprovalId" not-null="false" />
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>

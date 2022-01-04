@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.loan.entity.News" table="NewsInfo" schema="dbo" catalog="LoanDB">
+        <id name="nid" type="java.lang.Integer">
+            <column name="nid" />
+            <generator class="native" />
+        </id>
+        <property name="Ntitle" type="java.lang.String">
+            <column name="Ntitle" length="200" not-null="true" />
+        </property>
+        <property name="Ntime" type="java.lang.String">
+            <column name="Ntime" length="30" not-null="true" />
+        </property>
+        <property name="Nfromto" type="java.lang.String">
+            <column name="Nfromto" length="100" not-null="true" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

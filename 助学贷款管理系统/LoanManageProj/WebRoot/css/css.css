@@ -1,0 +1,153 @@
+<STYLE type=text/css>
+<!--
+A. { 
+	font: "??"; cursor: hand; color:#ffffff; text-decoration: none 
+}
+A:hover{ font: "??"; cursor: hand; color: #FF0000 ; text-decoration:underline;}
+.delink{
+	COLOR: #000000; TEXT-DECORATION: none
+}
+.tophover A:hover{ font: "??"; cursor: hand; text-decoration:underline;}
+.whilelink{
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.top{
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+BODY {
+	FONT-SIZE: 12px; MARGIN: 0px; COLOR: #000000; FONT-FAMILY: Tahoma; TEXT-ALIGN: center;margin-left: 0px;	margin-top: 0px;margin-right: 0px;	margin-bottom: 0px;
+}
+FONT {
+	LINE-HEIGHT: normal
+}
+TD {
+	FONT-SIZE: 12px; LINE-HEIGHT: 24px; FONT-FAMILY: Tahoma
+}
+TD.TableTitle1 {
+	COLOR: #ffffff; BACKGROUND-COLOR:#FF9933;
+}
+TD.TableTitle2 {
+	BACKGROUND-COLOR: #FF6600
+}
+TD.TableBody1 {
+	LINE-HEIGHT: normal; BACKGROUND-COLOR: #ffffff
+}
+TD.TableBody2 {
+	LINE-HEIGHT: normal; BACKGROUND-COLOR: #e4e8ef
+}
+TD.TableBody3 {
+	BACKGROUND-COLOR: #6595d6
+}
+TD.TopLighNav2 {
+	BACKGROUND-COLOR: #ffffff
+}
+.tableBorder1 {
+	BORDER-RIGHT: 1px; BORDER-TOP: 1px; BORDER-LEFT: 1px; WIDTH: 98%; BORDER-BOTTOM: 1px; BACKGROUND-COLOR: #6595d6
+}
+.tableBorder2 {
+	BORDER-RIGHT: #dedede 1px solid; BORDER-TOP: #dedede 1px solid; BORDER-LEFT: #dedede 1px solid;BORDER-BOTTOM: #dedede 1px solid; BACKGROUND-COLOR: #efefef
+}
+.tableBorder3 {
+	BORDER-RIGHT: #6595d6 1px solid; BORDER-TOP: 0px; BORDER-LEFT: #6595d6 1px solid; BORDER-BOTTOM: #6595d6 0px solid; BACKGROUND-COLOR: #efefef
+}
+.tableBorder4 {
+	BORDER-RIGHT: #6595d6 1px solid; BORDER-TOP: #6595d6 1px solid; BORDER-LEFT: #6595d6 1px solid;BORDER-BOTTOM: #6595d6 1px solid
+}
+.tableBorder5 {
+	BORDER-RIGHT: #6595d6 1px solid; BORDER-TOP: #6595d6 1px solid; BORDER-LEFT: #6595d6 1px solid; BORDER-BOTTOM: #6595d6 1px solid; BACKGROUND-COLOR: #d6e0ef
+}
+.tableBorder6 {
+	FONT-SIZE: 12px; MARGIN: 0px; COLOR: #000000; FONT-FAMILY: Tahoma; TEXT-ALIGN: center; border:1px solid;
+}
+.singleborder {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 0px; PADDING-BOTTOM: 0px; LINE-HEIGHT: 1px; PADDING-TOP: 0px; BACKGROUND-COLOR: #6595d6
+}
+#nobold {
+	FONT-WEIGHT: normal
+}
+INPUT {
+	FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Tahoma,Verdana,"宋体"
+}
+SELECT {
+	FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Tahoma,Verdana,"宋体"
+}
+TEXTAREA {
+	FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Tahoma,Verdana,"宋体"
+}
+OPTION {
+	FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 15px; FONT-FAMILY: Tahoma,Verdana,"宋体"
+}
+.normalTextSmall {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.menuskin A {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 25px; COLOR: black; TEXT-DECORATION: none
+}
+.menuitems {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; MARGIN: 2px; WORD-BREAK: keep-all; LINE-HEIGHT: 14pt; PADDING-TOP: 1px; TEXT-ALIGN: left
+}
+.BrightClass {
+	BACKGROUND-COLOR: #d7d7d7
+}
+.Redfont {
+	COLOR: red
+}
+.BlueFont {
+	COLOR: #6595d6
+}
+.ImgOnclick {
+	CURSOR: pointer
+}
+.Menu_popup {
+	DISPLAY: none
+}
+.iTableBorder {
+	WIDTH: 98%; LINE-HEIGHT: 15pt
+}
+HR {
+	WIDTH: 100%; COLOR: #6595d6; HEIGHT: 1px
+}
+DIV.quote {
+	BORDER-RIGHT: #cccccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #cccccc 1px solid; PADDING-LEFT: 5px; BACKGROUND: #f3f3f3; PADDING-BOTTOM: 5px; MARGIN: 5px 20px; BORDER-LEFT: #cccccc 1px solid; LINE-HEIGHT: normal; PADDING-TOP: 5px; BORDER-BOTTOM: #cccccc 1px solid
+}
+DIV.HtmlCode {
+	BORDER-RIGHT: #cccccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #cccccc 1px solid; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: 14px; BACKGROUND: #fdfddf; PADDING-BOTTOM: 5px; MARGIN: 5px 20px; BORDER-LEFT: #cccccc 1px solid; LINE-HEIGHT: normal; PADDING-TOP: 5px; BORDER-BOTTOM: #cccccc 1px solid; FONT-STYLE: oblique; FONT-FAMILY: Tahoma
+}
+DIV.info {
+	PADDING-RIGHT: 5px; BORDER-TOP: #cccccc 1px dotted; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; WIDTH: 100%; COLOR: #c5c5c5; LINE-HEIGHT: normal; PADDING-TOP: 5px
+}
+FONT.ShowTools {
+	COLOR: white; BACKGROUND-COLOR: #b88ffc
+}
+.magicframe {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid
+}
+.PageInput {
+	BORDER-RIGHT: #d6e0ef 1px solid; BORDER-TOP: #d6e0ef 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #d6e0ef 1px solid; BORDER-BOTTOM: #d6e0ef 1px solid; FONT-FAMILY: Arial; HEIGHT: 18px; BACKGROUND-COLOR: #fafafa
+}
+.topline {
+	font-size: 9pt;
+	color: #333333;
+	border-top-style: none;
+	border-right-style: none;
+	border-top-style: solid;
+	border-left-style: none;
+	border-right-width: 1px;
+	border-top-width: 1px;
+	border-right-color: #999999;
+	border-top-color: #999999;
+}
+.bottomline {
+	font-size: 9pt;
+	color: #333333; 
+	border-bottom-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+}
+-->
+</STYLE>

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+		<property name="dialect">
+			org.hibernate.dialect.SQLServerDialect
+		</property>
+		<property name="url">
+			jdbc:sqlserver://localhost:1433;databaseName=Loandb
+		</property>
+		<property name="username">sa</property>
+		<property name="password">920520</property>
+		<property name="driver_class">
+			com.microsoft.sqlserver.jdbc.SQLServerDriver
+		</property>
+		<property name="myeclipse.connection.profile">sql2005</property>		
+		
+		<mapping resource="com/loan/entity/hbm/User.hbm.xml" />
+		<mapping resource="com/loan/entity/hbm/Loan.hbm.xml" />
+		<mapping resource="com/loan/entity/hbm/Student.hbm.xml" />
+		<mapping resource="com/loan/entity/hbm/Approval.hbm.xml" />
+		<mapping resource="com/loan/entity/hbm/Account.hbm.xml" />
+		<mapping resource="com/loan/entity/hbm/Apply.hbm.xml" />
+		<mapping resource="com/loan/entity/hbm/News.hbm.xml" />
+
+	</session-factory>
+
+</hibernate-configuration>
