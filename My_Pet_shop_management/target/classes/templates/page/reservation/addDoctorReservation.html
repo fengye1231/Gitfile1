@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/jquery-easyui-1.7.0/themes/metro-blue/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/static/jquery-easyui-1.7.0/themes/icon.css">
+    <script type="text/javascript" src="/static/jquery-easyui-1.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/static/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+
+
+    <script type="text/javascript">
+        var url;
+
+        function searchReservation() {
+            $("#dg").datagrid('load', {
+                "bSaleDate": $("#s_bSaleDate").val(),
+                "eSaleDate": $("#s_eSaleDate").val()
+            });
+        }
+
+        function formatCustomer(val, row) {
+            return val.contact;
+        }
+
+        function formatPet(val, row) {
+            return val.name;
+        }
+
+        function formatStatus(val, row) {
+            if (val == 0) {
+                return "可以预约";
+            }
+        }
+
+        function formatReserveDate(val, row) {
+            return val.substring(0, 4) + "年" + val.substring(5, 7) + "月" + val.substring(8, 10) + "日 " + val.substring(11, 13) + val.substring(13, 16);
+        }
+
+    </script>
+
+</head>
+<body>
+<div id="b">
+    <div id="all" style="padding-top: 20px">
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- breadcrumb-->
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <i class="fa fa-eye" style="padding-top: 2px"></i>当前位置:&nbsp;&nbsp;
+                                <li class="breadcrumb-item"><a href="/">主页</a></li>
+                                <li class="breadcrumb-item"><span>预约医生</span></li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card sidebar-menu mb-4">
+                            <div class="card-header">
+                                <h3 class="h4 panel-title">预约分类</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul class="nav flex-column nav-pills">
+                                    <li>
+                                        <a href="/reservation/doctorCanReserve" class="nav-link">预约医生</a>
+                                    </li>
+                                    <li>
+                                        <a href="/reservation/beauticianCanReserve" class="nav-link">预约美容师</a>
+                                    </li>
+                                    <li>
+                                        <a href="/reservation/myReservation/list/1" class="nav-link">返回我的预约记录</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.col-lg-3-->
+                    </div>
+                    <div id="blog-post" class="col-lg-9">
+                        <div class="box">
+                            <h1 style="text-align: center">预约医生</h1>
+                            <form action="/reservation/save" method="post">
+                                <div class="form-group form-inline">
+                                    <label>宠物名称:</label>&nbsp;
+                                    <select id="petId" name="petId" required="required" class="form-control">
+                                        <option value="">选择您的宠物...</option>
+                                        <div th:each="pet:${petList}">
+                                            <option th:text="${pet.name}" th:value="${pet.id}"></option>
+                                        </div>
+                                    </select>
+                                </div>
+                                <div class="form-group form-inline">
+                                    <label>预约时间:</label>&nbsp;
+
+
+                                    <div id="tb">
+                                        <div>
+                                            &nbsp;
+                                            <input id="s_bSaleDate1" name="reserveDate" class="easyui-datetimebox" editable=false style="width:180px"/>
+                                        </div>
+                                    </div>
+
+                                    <!--
+                                    <select id="id" name="id" required="required" class="form-control">
+                                        <option value="">选择预约时间...</option>
+                                        <div th:each="reservation:${reservationList}">
+                                            <option th:text="${#dates.format(reservation.reserveDate,'yyyy年MM月dd日 HH:mm')}" th:value="${reservation.id}"></option>
+                                        </div>
+                                    </select>
+                                    -->
+                                </div>
+                                <div class="form-group">
+                                    <label>预约描述:</label>
+                                    <textarea id="description" name="description" class="form-control" rows="5" required="required" placeholder="请填写您的宠物病况..."></textarea>
+                                    <input name="type" type="hidden" class="form-control" required="required" value="预约医生" placeholder="必填">
+                                    <input name="user" type="hidden" class="form-control" required="required" value="${userId1}" placeholder="必填">
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">立即预约</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.box-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
