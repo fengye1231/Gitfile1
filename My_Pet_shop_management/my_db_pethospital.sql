@@ -977,6 +977,7 @@ CREATE TABLE `t_vaccine` (
 
 insert  into `t_vaccine`(`id`,`createDate`,`customerName`,`petName`,`content`) values (1,'2020-03-19 15:02:33','邹腾龙','小e','1111111111'),(2,'2020-03-19 23:31:06','邹腾龙','小y','5555555'),(3,'2020-03-19 23:32:04','邹腾龙','小y','99999999'),(4,'2020-03-19 23:32:14','邹腾龙','小a','66666676767676风格化法国'),(5,'2020-03-19 23:32:24','邹腾龙','小e','法国的说法是11');
 
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
