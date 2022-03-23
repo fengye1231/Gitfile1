@@ -14,7 +14,7 @@ MySQL - 5.6.24 : Database - db_pethospital
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
+use my_db_pethospital;
 
 /*Table structure for table `t_article` */
 
@@ -981,3 +981,30 @@ insert  into `t_vaccine`(`id`,`createDate`,`customerName`,`petName`,`content`) v
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+
+
+DROP TABLE IF EXISTS `standard`;
+CREATE TABLE `standard`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `age_min` int(10) DEFAULT NULL,
+  `age_max` int(10) DEFAULT NULL,
+  `temp_min` double(10, 2) DEFAULT NULL,
+  `temp_max` double(10, 2) DEFAULT NULL,
+  `weight_min` double(10, 2) DEFAULT NULL,
+  `weight_max` double(10, 2) DEFAULT NULL,
+  `height_min` double(10, 2) DEFAULT NULL,
+  `height_max` double(10, 2) DEFAULT NULL,
+  `appetite_min` double(10, 2) DEFAULT NULL,
+  `appetite_max` double(10, 2) DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `status` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of standard
+-- ----------------------------
+INSERT INTO `standard` VALUES (2, 1, 10, 30.00, 50.00, 10.00, 50.00, 5.00, 70.00, 10.00, 40.00, '1', 1);
+INSERT INTO `standard` VALUES (3, 5, 20, 15.00, 40.00, 10.00, 50.00, 12.00, 70.00, 10.00, 30.00, '2', 1);
+INSERT INTO `standard` VALUES (4, 1, 10, 10.00, 10.00, 20.00, 30.00, 40.00, 50.00, 10.00, 10.00, '2', 1);

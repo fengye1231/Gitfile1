@@ -1,7 +1,6 @@
-package com.pet_shop.controller.user;
+package com.pet_shop.controller;
 
 import com.pet_shop.entity.Standard;
-import com.pet_shop.entity.User;
 import com.pet_shop.service.StandardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Date;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 健康标准
@@ -27,16 +25,33 @@ public class UserStandardController {
     /**
      * 医生列表页面user/standardListDoctor.html
      */
+
+
+
+
+
     @RequestMapping("/standardListDoctor")
-    public String standardListDoctor() {
-        return "user/standardListDoctor";
+    public ModelAndView standardListDoctor() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("title", "健康标准界面");
+        mav.addObject("mainPage", "page/user/standardListDoctor");
+        mav.addObject("mainPageKey", "#b");
+        mav.setViewName("index");
+        return mav;
+
     }
     /**
      * 普通用户页面user/standardList.html
      */
     @RequestMapping("/standardList")
-    public String standardList() {
-        return "user/standardList";
+    public ModelAndView standardList() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("title", "健康标准界面");
+        mav.addObject("mainPage", "page/user/standardList");
+        mav.addObject("mainPageKey", "#b");
+        mav.setViewName("index");
+        return mav;
+
     }
     /**
      * 普通用户返回查询数据

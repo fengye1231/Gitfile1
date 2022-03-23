@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>宠物管理</title>
+<title>管理</title>
 <link type="text/css" rel="stylesheet" th:href="@{/static/css/page.css}"/>
 <script type="text/javascript" th:src="@{/static/js/jquery/jquery-3.3.1.js}"></script>
 <!-- mmGrid -->
@@ -24,8 +24,6 @@
 
 </head>
 <body>
-<div id="b">
-
 <div  lay-allowclose="true" style="margin-left:15px; width: 98%">
 <div class="first_div" style="border:none;">
 	<table class="param_table" style="margin-left:10px;" >
@@ -41,7 +39,6 @@
 			<td style="">
 			<div class="layui-btn-group">
 			  <button class="layui-btn" onclick="search()">查询</button>
-				<button class="layui-btn" onclick="addRow()">增加</button>
 			</div>
 			</td>
 		</tr>
@@ -52,19 +49,17 @@
 	<div id="paginator11-1" align="right" style="margin-right:10px;" ></div>
 </div>
 </div>
-
-</div>
-
 </body>
 </html>
 
 <script type="text/javascript">
 
+
 $(function(){	
 	//表格
 	$('#exampleTableUser').mmGrid({
     	root:'rows',// 和后台数据保存列一致,对应MMGridPageVoBean rows
-		url:"/user/standard/getAllByLimitDoctor",
+		url:"/user/standard/getAllByLimit",
     	width: 'auto',
     	height: 'auto',
     	//checkCol: true,
@@ -78,19 +73,18 @@ $(function(){
         	return param;
         },
         cols: [{title: 'ID', name: 'id', width:60, hidden:true},
-			{title: '开始年龄', name: 'ageMin', width:40},
-			{title: '结束年龄', name: 'ageMax', width:40},
-			{title: '体温最小值', name: 'tempMin', width:40},
-			{title: '体温最大值', name: 'tempMax', width:30},
-			{title: '体重最小值', name: 'weightMin', width:30},
-			{title: '体重最大值', name: 'weightMax', width:30},
-			{title: '身高最小值', name: 'heightMin', width:30},
-			{title: '身高最大值', name: 'heightMax', width:30},
-			{title: '饭量最小值', name: 'appetiteMin', width:30},
-			{title: '饭量最大值', name: 'appetiteMax', width:30},
-			{title: '状态', name: 'status', width:20, renderer:function(val, item, rowIndex){
+			   {title: '开始年龄', name: 'ageMin', width:40},
+			   {title: '结束年龄', name: 'ageMax', width:40},
+			   {title: '体温最小值', name: 'tempMin', width:40},
+			   {title: '体温最大值', name: 'tempMax', width:30},
+			   {title: '体重最小值', name: 'weightMin', width:30},
+			   {title: '体重最大值', name: 'weightMax', width:30},
+			   {title: '身高最小值', name: 'heightMin', width:30},
+			   {title: '身高最大值', name: 'heightMax', width:30},
+			   {title: '饭量最小值', name: 'appetiteMin', width:30},
+			   {title: '饭量最大值', name: 'appetiteMax', width:30},
+			  {title: '状态', name: 'status', width:20, renderer:function(val, item, rowIndex){
 					//状态:1申请中,2申请通过,3不通过,4已完成
-					console.log(item);
 					var t = "";
 					switch (val) {
 						case 1: t = "正常";break;
@@ -99,19 +93,16 @@ $(function(){
 					}
 					return t;
 				}},
-			{title: '类型', name: 'type', width:20, renderer:function(val, item, rowIndex){
-					//状态:1申请中,2申请通过,3不通过,4已完成
-					var t = "";
-					switch (val) {
-						case '1': t = "猫科";break;
-						case '2': t = "犬科";break;
-					}
-					return t;
-				}},
-			  {title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
-					var buttonStr ='<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >删除</span>';
-					return "<div class='span_btus' >" + buttonStr + "</div>";
-				}}
+			   {title: '类型', name: 'type', width:20, renderer:function(val, item, rowIndex){
+			   	//状态:1申请中,2申请通过,3不通过,4已完成
+					   console.log(item);
+					   var t = "";
+					   switch (val) {
+						   case '1': t = "猫科";break;
+						   case '2': t = "犬科";break;
+					   }
+					   return t;
+			   }}
            ],
         plugins : [
         	$('#paginator11-1').mmPaginator({
@@ -129,80 +120,4 @@ $(function(){
 function search(){
 	$('#exampleTableUser').mmGrid().load({"page":1});
 }
-
-function passTo(id) {
-	toStatus(id, 2);
-}
-
-function dontPass(id) {
-	var param = new Object();
-	param.id = id;
-	layer.confirm('确认删除吗？', {icon: 3, title:'提示'}, function(index){
-		$.ajax({
-			type:"POST",
-			async:true,  //默认true,异步
-			data:param,
-			url:"/user/standard/del",
-			success:function(data){
-				console.log(data);
-				if(data == "SUCCESS"){
-					layer.alert('操作成功！', {icon: 1}, function(indexOk){
-						search();
-						layer.closeAll();
-					});
-				}else if(data == "LGINOUT"){
-					//重新登录
-					window.location.href = "/logout";
-				}else{
-					layer.alert('操作失败！', {icon: 2}, function(indexNo){
-						layer.closeAll();
-					});
-				}
-			}
-		});
-	});
-}
-
-function finish(id) {
-	toStatus(id, 4);
-}
-
-function toStatus(id, s) {
-	var param = new Object();
-	param.id = id;
-	param.status = s;
-	layer.confirm('确认保存吗？', {icon: 3, title:'提示'}, function(index){
-		$.ajax({
-			type:"POST",
-			async:true,  //默认true,异步
-			data:param,
-			url:"/user/standard/chStatus",
-			success:function(data){
-				console.log(data);
-				if(data == "SUCCESS"){
-					layer.alert('操作成功！', {icon: 1}, function(indexOk){
-						search();
-						layer.closeAll();
-					});
-				}else if(data == "LGINOUT"){
-					//重新登录
-					window.location.href = "/logout";
-				}else{
-					layer.alert('操作失败！', {icon: 2}, function(indexNo){
-						layer.closeAll();
-					});
-				}
-			}
-		});
-	});
-}
-function addRow(){
-	layer.open({
-		type: 2,
-		title: '增加',
-		area: ['60%', '70%'],
-		content: '/user/standard/add' //iframe的url
-	});
-}
-
 </script>
