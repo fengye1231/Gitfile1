@@ -368,6 +368,23 @@ CREATE TABLE `t_goodstype` (
 
 insert  into `t_goodstype`(`id`,`icon`,`name`,`pId`,`state`) values (1,'icon-folderOpen','所有类别',-1,1),(21,'icon-folder','宠物交易',1,1),(22,'icon-folder','狗狗商品',1,1),(23,'icon-folder','猫咪商品',1,1),(24,'icon-folder','小宠商品',1,1),(25,'icon-folder','水族商品',1,1),(26,'icon-folder','萌宠周边',1,1),(33,'icon-folder','狗狗',21,0),(34,'icon-folder','猫咪',21,0),(36,'icon-folder','主粮零食',22,0),(37,'icon-folder','医疗保健',22,0),(38,'icon-folder','美容日用',22,0),(39,'icon-folder','出行',22,0),(40,'icon-folder','玩具',22,0),(41,'icon-folder','主粮零食',23,0),(42,'icon-folder','医疗保健',23,0),(43,'icon-folder','美容日用',23,0),(44,'icon-folder','出行',23,0),(45,'icon-folder','玩具',23,0),(46,'icon-folder','兔子商品',24,0),(47,'icon-folder','仓鼠商品',24,0),(48,'icon-folder','龙猫商品',24,0),(49,'icon-folder','其它',24,0),(50,'icon-folder','鱼食',25,0),(51,'icon-folder','鱼缸',25,0),(52,'icon-folder','其它',25,0),(53,'icon-folder','布艺',26,0),(54,'icon-folder','装饰',26,0),(55,'icon-folder','家具',26,0),(57,'icon-folder','其它',21,0);
 
+/*2022-3-27 lixiang更改 */
+/*
+DROP TABLE IF EXISTS `t_goodstype`;
+
+SET FOREIGN_KEY_CHECKS = 0;     # 临时取消外键约束
+SET FOREIGN_KEY_CHECKS = 1;     # 开启外键约束
+
+insert  into `t_goodstype`(`id`,`icon`,`name`,`pId`,`state`) values (1,'icon-folderOpen','所有类别',-1,1),(21,'icon-folder','宠物交易',1,1),(33,'icon-folder','狗狗',21,0),(34,'icon-folder','猫咪',21,0),(57,'icon-folder','其它',21,0);
+UPDATE t_goodstype SET name='宠物领养' WHERE id=21;
+
+
+*/
+
+
+
+
+
 /*Table structure for table `t_goodsunit` */
 
 DROP TABLE IF EXISTS `t_goodsunit`;
@@ -483,16 +500,25 @@ insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (1,'menu-pl
 
 insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (5103,'menu-595','物资管理',50,1,NULL);
 
-insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (51031,'menu-595','物资管理',5103,0,'/basicData/materiel.html');
-insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (51032,'menu-595','物资管理',5103,0,'/basicData/materiel.html');
-insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (51033,'menu-595','物资管理',5103,0,'/basicData/materiel.html');
-insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (51034,'menu-595','物资管理',5103,0,'/basicData/materiel.html');
+insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (51031,'menu-595','药品管理',5103,0,'/basicData/materiel.html');
+insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (51032,'menu-595','器械管理',5103,0,'/basicData/materiel.html');
+insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (51033,'menu-595','饲料管理',5103,0,'/basicData/materiel.html');
+insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (51034,'menu-595','病床管理',5103,0,'/basicData/materiel.html');
 
+/*
 update t_menu set name='药品管理' WHERE id = 51031;
 update t_menu set name='器械管理' WHERE id = 51032;
 update t_menu set name='饲料管理' WHERE id = 51033;
 update t_menu set name='病床管理' WHERE id = 51034;
 
+DELETE FROM t_menu WHERE id = 5103;
+
+
+update t_menu set state=0 WHERE id=5103;
+
+*/
+
+insert  into `t_menu`(`id`,`icon`,`name`,`pId`,`state`,`url`) values (40100,'menu-44','数据统计',40,0,'/basicData/datas_statistics.html');
 
 
 
@@ -647,6 +673,13 @@ CREATE TABLE `t_reservation` (
 insert  into `t_reservation`(`id`,`type`,`customerId`,`petId`,`userId`,`createDate`,`reserveDate`,`hour`,`minute`,`description`,`status`,`remarks`,`isRemind`) values (808,'预约医生',30,2,8,'2020-05-29 19:47:00','2020-05-30 08:00:00',8,0,'111',3,NULL,1),(813,'预约医生',30,2,8,'2020-05-29 19:47:00','2020-05-30 09:40:00',9,40,'食欲不振',1,NULL,1),(1001,'预约美容师',30,2,15,'2020-05-29 19:47:06','2020-05-30 09:20:00',9,20,'无',3,NULL,1),(1438,'预约美容师',30,65,15,'2020-05-31 00:00:07','2020-06-01 11:00:00',11,0,'无',1,NULL,1);
 
 /*Table structure for table `t_return_apply` */
+/*
+truncate table t_reservation;
+*/
+
+
+
+
 
 DROP TABLE IF EXISTS `t_return_apply`;
 
@@ -776,6 +809,11 @@ insert  into `t_role_menu`(`id`,`menuId`,`roleId`) values (358,51031,1);
 insert  into `t_role_menu`(`id`,`menuId`,`roleId`) values (359,51032,1);
 insert  into `t_role_menu`(`id`,`menuId`,`roleId`) values (360,51033,1);
 insert  into `t_role_menu`(`id`,`menuId`,`roleId`) values (361,51034,1);
+
+
+
+
+insert  into `t_role_menu`(`id`,`menuId`,`roleId`) values (362,40100,1);
 
 /*Table structure for table `t_sale_list` */
 

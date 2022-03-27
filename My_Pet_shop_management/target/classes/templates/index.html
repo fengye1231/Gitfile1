@@ -164,7 +164,7 @@
                 $("#userSuccessInfo").html("");
                 $("#userName").focus();
                 return;
-            }
+            }goodsType
             $.post("/customer/existUserWithUserName", {userName: userName},
                 function (result) {
                     if (result.success) {

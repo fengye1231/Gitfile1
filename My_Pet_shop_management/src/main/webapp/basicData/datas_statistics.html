@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html style="height: 90%; width: 100%" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>图表</title>
+    <!-- layui -->
+
+    <link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/plug/layui/css/layui.css">
+    <script type="text/javascript" src="/static/plug/layui/layui.js" charset="utf-8"></script>
+
+</head>
+<body style="height: 90%;width: 100%; margin: 0">
+
+<script type="text/javascript" src="/static/js/jquery/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/static/js/echarts/echarts.js"></script>
+
+
+
+<div id="container" style="height: 90%;width: 100%"></div>
+</body>
+</html>
+<script type="text/javascript">
+
+    /*
+    var a1 = [[${a1}]];
+    var a2 = [[${a2}]];
+    var a3 = [[${a3}]];
+    var a4 = [[${a4}]];
+*/
+    var a1 = 89;
+    var a2 = 18;
+    var a3 = 16;
+    var a4 = 7;
+    var a5 = 16;
+    var a6 = 20;
+    var a7 = 4;
+    var a8 = 4;
+    var a9 = 16;
+    var a10 = 89;
+    var a11 = 37;
+    var a12 = 4;
+    var a13 = 2;
+
+
+
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+
+    function fulshEchart(a1, a2, a3, a4,a5,a6,a7,a8,a9,a10,a11,a12,a13){
+
+        console.log(a1);
+        console.log(a2);
+        console.log(a3);
+        console.log(a4);
+
+
+        setTimeout(function () {
+            option = {
+                title: {
+                    text: '各类传染病汇总',
+                    subtext: '基于2018-2019年南京某医院2249宠物猫病例进行的调查统计，在此只节选传染病部分,仅统计有性别、年龄、发病时间和品种记录的病例',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c} ({d}%)'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: ['FCV', 'FHV', '支原体', '衣原体','FCV+FHV','FCV+支原体','FHV+支原体','FCV+FHV+支原体','其他上呼吸道混合感染','FCoV','FPV','FIV','FPV和支原体']
+                },
+                series: [
+                    {
+                        name: '类型',
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '60%'],
+                        data: [
+                            {value: a1, name: 'FCV'},
+                            {value: a2, name: 'FHV'},
+                            {value: a3, name: '支原体'},
+                            {value: a4, name: '衣原体'},
+                            {value: a5, name: 'FCV+FHV'},
+                            {value: a6, name: 'FCV+支原体'},
+                            {value: a7, name: 'FHV+支原体'},
+                            {value: a8, name: 'FCV+FHV+支原体'},
+                            {value: a9, name: '其他上呼吸道混合感染'},
+                            {value: a10, name: 'FCoV'},
+                            {value: a11, name: 'FPV'},
+                            {value: a12, name: 'FIV'},
+                            {value: a13, name: 'FPV和支原体'}
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            myChart.on('updateAxisPointer', function (event) {
+                var xAxisInfo = event.axesInfo[0];
+                if (xAxisInfo) {
+                    var dimension = xAxisInfo.value + 1;
+                    myChart.setOption({
+                        series: {
+                            id: 'pie',
+                            label: {
+                                formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                            },
+                            encode: {
+                                value: dimension,
+                                tooltip: dimension
+                            }
+                        }
+                    });
+                }
+            });
+
+            myChart.setOption(option);
+
+        });
+
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    }
+
+    $(function(){
+        fulshEchart( a1, a2, a3, a4,a5,a6,a7,a9,a10,a11,a12,a13);
+    });
+
+</script>

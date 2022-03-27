@@ -64,17 +64,23 @@ public class ReservationController {
             ModelAndView mav = new ModelAndView("redirect:/reservation/reserveSuccess");
             reservation.setCustomer((Customer) session.getAttribute("currentCustomer"));
             reservation.setPet(petService.findById(reservation.getPetId()));
+
+            System.out.println("***********************************");
+            System.out.println(reservation.getUserId());
+
+            reservation.setUser(userService.findById(reservation.getUserId()));
+
+
             reservationService.add(reservation);
+
             return mav;
         } else {
             ModelAndView mav = new ModelAndView("redirect:/reservation/myReservation/list/1");
             reservation.setCustomer((Customer) session.getAttribute("currentCustomer"));
             reservation.setStatus(1);
             reservation.setPet(petService.findById(reservation.getPetId()));
-            //reservation.setUser(reservation.);
 
-
-
+            reservation.setUser(userService.findById(reservation.getUserId()));
 
             reservationService.update(reservation);
             return mav;
@@ -123,8 +129,8 @@ public class ReservationController {
         List<Reservation> reservationList = reservationService.list(map2);
         //mav.addObject("userId",userId);
 
-        Integer userId1=userId;
-
+        //Integer userId1=userId;
+        mav.addObject("userId", userId);
         mav.addObject("reservationList", reservationList);
         mav.addObject("petList", petList);
         mav.addObject("title", "预约医生");

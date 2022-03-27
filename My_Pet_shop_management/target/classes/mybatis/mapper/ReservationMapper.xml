@@ -94,7 +94,7 @@
         </where>
     </select>
     <insert id="add" parameterType="Reservation">
-        insert into t_reservation (type, customerId, petId, createDate, reserveDate, description, status,isRemind) values (#{type},#{customer.id},#{pet.id},now(),#{reserveDate},#{description},0,0);
+        insert into t_reservation (type, customerId, petId, userId,createDate, reserveDate, description, status,isRemind) values (#{type},#{customer.id},#{pet.id},#{user.id},now(),#{reserveDate},#{description},0,0);
     </insert>
     <update id="update" parameterType="Reservation">
         update t_reservation

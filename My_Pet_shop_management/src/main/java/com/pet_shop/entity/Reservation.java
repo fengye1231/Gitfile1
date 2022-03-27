@@ -31,6 +31,8 @@ public class Reservation {
      * 宠物id添加或修改预约单时用到
      */
     private Integer petId;
+
+    private Integer userId;
     /**
      * 传入的日期
      */
@@ -123,6 +125,20 @@ public class Reservation {
     public void setPetId(Integer petId) {
         this.petId = petId;
     }
+
+
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+
+
+
 
     public String getDate() {
         return date;

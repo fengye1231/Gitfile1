@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-6 offer mb-3 mb-lg-0"><a class="ml-1" style="font-size: 16px">欢迎来到pet_shop宠物医院官方网站<span style="color: red">(本系统为个人项目,仅用于展示)</span></a></div>
                 <div class="col-lg-6 text-center text-lg-right">
-                    <ul class="menu list-inline mb-0">
+                    <ul class="list-inline mb-0">
                         <li class="list-inline-item" th:if="${session.currentCustomer==null}"><a href="/login">登录</a></li>
                         <li class="list-inline-item" th:if="${session.currentCustomer==null}"><a href="/register">注册</a></li>
                         <li class="list-inline-item" th:if="${session.currentCustomer!=null}"><span style="color: white">(●'◡'●)</span><span th:text="'欢迎您,'+${session.currentCustomer.getContact()}" style="color: white"></span></li>
